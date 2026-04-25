@@ -25,6 +25,8 @@ This repository starts from design, not from the legacy prototype implementation
 | Control-plane-first plan | [docs/06-control-plane-first-implementation.md](docs/06-control-plane-first-implementation.md) |
 | Pilot governance packet | [docs/pilot/](docs/pilot/) |
 | Evidence UX readiness | [docs/evidence-ux/](docs/evidence-ux/) |
+| Evidence UX app | [app/evidence-ux/index.html](app/evidence-ux/index.html) |
+| Release readiness | [docs/release-readiness.md](docs/release-readiness.md) |
 | Project reset decision | [docs/decisions/ADR-0001-project-reset.md](docs/decisions/ADR-0001-project-reset.md) |
 | Control-plane-first decision | [docs/decisions/ADR-0002-control-plane-first.md](docs/decisions/ADR-0002-control-plane-first.md) |
 | Project management | [PROJECT.md](PROJECT.md) |
@@ -76,6 +78,9 @@ python scripts\run_control_plane.py --json
 python scripts\run_adapter_sample.py
 python scripts\validate_governance.py
 python scripts\validate_evidence_ux.py
+python scripts\export_evidence_ux_data.py
+python scripts\validate_static_ui.py
+python scripts\validate_browser_smoke.py
 python -m unittest discover -s tests
 ```
 

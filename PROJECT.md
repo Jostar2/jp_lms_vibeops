@@ -21,6 +21,8 @@ There is no external GitHub Project or Jira board connected yet. Project state i
 | Pilot gate spec | [specs/governance/pilot-gates.yaml](specs/governance/pilot-gates.yaml) |
 | Evidence UX readiness | [docs/evidence-ux/](docs/evidence-ux/) |
 | Evidence UX route spec | [specs/evidence-ux/routes.yaml](specs/evidence-ux/routes.yaml) |
+| Evidence UX static app | [app/evidence-ux/index.html](app/evidence-ux/index.html) |
+| Release readiness | [docs/release-readiness.md](docs/release-readiness.md) |
 
 ## Git Status
 

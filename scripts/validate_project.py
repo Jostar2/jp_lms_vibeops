@@ -21,6 +21,7 @@ REQUIRED_FILES = [
     "docs/04-governance-and-risk.md",
     "docs/05-build-roadmap.md",
     "docs/06-control-plane-first-implementation.md",
+    "docs/release-readiness.md",
     "docs/decisions/ADR-0001-project-reset.md",
     "docs/decisions/ADR-0002-control-plane-first.md",
     "ops/approval-gates.md",
@@ -51,6 +52,9 @@ REQUIRED_FILES = [
     "scripts/validate_contracts.py",
     "scripts/validate_governance.py",
     "scripts/validate_evidence_ux.py",
+    "scripts/export_evidence_ux_data.py",
+    "scripts/validate_static_ui.py",
+    "scripts/validate_browser_smoke.py",
     "scripts/run_control_plane.py",
     "scripts/run_adapter_sample.py",
     "src/jp_lms_vibeops/__init__.py",
@@ -79,6 +83,10 @@ REQUIRED_FILES = [
     "docs/evidence-ux/readiness-review.md",
     "docs/evidence-ux/information-architecture.md",
     "specs/evidence-ux/routes.yaml",
+    "app/evidence-ux/index.html",
+    "app/evidence-ux/styles.css",
+    "app/evidence-ux/app.js",
+    "app/evidence-ux/data/runtime.js",
 ]
 
 LINK_RE = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
@@ -156,6 +164,9 @@ def run_runtime_checks() -> None:
         [sys.executable, "scripts/run_adapter_sample.py"],
         [sys.executable, "scripts/validate_governance.py"],
         [sys.executable, "scripts/validate_evidence_ux.py"],
+        [sys.executable, "scripts/export_evidence_ux_data.py"],
+        [sys.executable, "scripts/validate_static_ui.py"],
+        [sys.executable, "scripts/validate_browser_smoke.py"],
         [sys.executable, "-m", "unittest", "discover", "-s", "tests"],
     ]
     for command in commands:

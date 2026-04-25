@@ -59,9 +59,11 @@ UI work is downstream of these contracts.
 
 `M4 Integration Boundary` is complete.
 
-`M5 Evidence UX` is in progress.
+`M5 Evidence UX` is complete.
 
-Evidence UX readiness review is complete. Next step: implement the first Evidence UX surface from runtime/exported data.
+Evidence UX browser smoke is complete.
+
+Next milestone: runtime packaging, formal schemas, and CI hardening.
 
 Completed in this pass:
 
@@ -93,12 +95,17 @@ Completed in this pass:
 - CSV fixture to internal event conversion.
 - Evidence UX readiness review.
 - Evidence UX route spec.
+- Evidence UX static app.
+- Runtime data exporter.
+- Static UI validator.
+- Browser smoke validator.
+- Release readiness summary.
 
 ## Immediate Next Step
 
-Implement the first Evidence UX surface:
+Next hardening track:
 
-- export runtime data for the UI
-- build Operations Home, S01 Closed Loop, Evidence Detail, Integration Readiness
-- keep APPI/IRB and native copy review visible as pending gates
-- validate static assets and links
+- package the Python runtime
+- replace schema seeds with formal JSON Schema or Pydantic models
+- add GitHub Actions CI
+- add Evidence UX screenshot snapshots

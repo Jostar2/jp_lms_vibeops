@@ -143,3 +143,18 @@ backlog:
       - "Project validation runs Evidence UX validation."
     validation:
       - "python scripts\\validate_evidence_ux.py"
+
+  - id: "JLV-0012"
+    title: "Implement first Evidence UX static surface"
+    milestone: "M5"
+    status: "completed"
+    type: "evidence_ux"
+    acceptance:
+      - "Evidence UX app renders Operations Home, S01 Closed Loop, Evidence Detail, and Integration Readiness."
+      - "UI data is exported from control-plane fixtures."
+      - "Static UI validation checks runtime payload and required concepts."
+      - "UI keeps APPI/IRB and pilot blockers visible."
+    validation:
+      - "python scripts\\export_evidence_ux_data.py"
+      - "python scripts\\validate_static_ui.py"
+      - "python scripts\\validate_browser_smoke.py"
