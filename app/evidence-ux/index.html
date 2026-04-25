@@ -3,65 +3,80 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>JP LMS VibeOps AI Learning Studio</title>
+    <title>JP LMS VibeOps Course Room</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="app-shell">
-      <aside class="rail">
-        <div class="brand">
-          <div class="mark">JP</div>
+    <div class="product-shell">
+      <header class="app-bar">
+        <div class="brand-lockup">
+          <div class="brand-mark">JP</div>
           <div>
             <h1>JP LMS VibeOps</h1>
-            <p>AI-assisted LMS</p>
+            <p>AI course room for university learning</p>
           </div>
         </div>
 
-        <nav class="nav" aria-label="Product routes">
-          <button class="nav-item active" data-route="student">
-            <span>01</span>
-            학습자 홈
-          </button>
-          <button class="nav-item" data-route="instructor">
-            <span>02</span>
-            교수자 스튜디오
-          </button>
-          <button class="nav-item" data-route="evidence">
-            <span>03</span>
-            AI 근거
-          </button>
-          <button class="nav-item" data-route="course">
-            <span>04</span>
-            수업 설정
-          </button>
-        </nav>
-
-        <div class="rail-note">
-          <strong>수업 맥락</strong>
-          <span>데이터 마이닝 W7</span>
-          <span>NetLearning / manaba embed</span>
-          <span>AI 판단은 설명 가능해야 함</span>
+        <div class="course-switcher" aria-label="Current course">
+          <span>Data Mining</span>
+          <strong>W7 · Decision Trees</strong>
         </div>
-      </aside>
 
-      <main class="workspace">
-        <header class="topbar">
-          <div>
-            <p class="context" id="routeContext">Data Mining · W7 Lecture 2</p>
-            <h2 id="routeTitle">학습자 홈</h2>
+        <div class="persona-switch" aria-label="Workspace routes">
+          <button class="route-pill active" data-route="student">학습</button>
+          <button class="route-pill" data-route="instructor">교수</button>
+          <button class="route-pill" data-route="evidence">근거</button>
+          <button class="route-pill" data-route="course">설정</button>
+        </div>
+      </header>
+
+      <div class="workspace-grid">
+        <aside class="course-nav">
+          <div class="week-card">
+            <span>이번 주</span>
+            <strong>Gini와 Entropy</strong>
+            <p>AI가 강의, 체크포인트, 과제를 같은 흐름으로 묶습니다.</p>
           </div>
-          <div class="top-actions">
-            <div class="ai-presence">
-              <span class="pulse" aria-hidden="true"></span>
-              AI 코치가 근거를 보고 제안 중
+
+          <nav class="nav-list" aria-label="Course navigation">
+            <button class="nav-item active" data-route="student">
+              <span>01</span>
+              <b>학습자 홈</b>
+            </button>
+            <button class="nav-item" data-route="instructor">
+              <span>02</span>
+              <b>교수자 스튜디오</b>
+            </button>
+            <button class="nav-item" data-route="evidence">
+              <span>03</span>
+              <b>AI 근거</b>
+            </button>
+            <button class="nav-item" data-route="course">
+              <span>04</span>
+              <b>수업 설정</b>
+            </button>
+          </nav>
+
+          <div class="privacy-note">
+            <strong>학생 통제</strong>
+            <span>추천 수락, 숨김, 이의제기 가능</span>
+            <span>교수자는 집계 신호만 확인</span>
+          </div>
+        </aside>
+
+        <main class="stage">
+          <div class="stage-header">
+            <div>
+              <p id="routeContext">Learner workspace · AI assisted study</p>
+              <h2 id="routeTitle">학습자 홈</h2>
             </div>
             <div class="status-strip" id="statusStrip"></div>
           </div>
-        </header>
-        <section id="view" class="view" aria-live="polite"></section>
-      </main>
+          <section id="view" class="stage-view" aria-live="polite"></section>
+        </main>
 
-      <aside class="evidence-drawer" id="evidenceDrawer" aria-live="polite"></aside>
+        <aside class="ai-dock" id="aiDock" aria-live="polite"></aside>
+      </div>
     </div>
 
     <script src="./data/runtime.js"></script>

@@ -11,6 +11,7 @@ JP LMS VibeOps is now a repo-managed product foundation with:
 - pilot governance packet
 - LMS adapter boundary
 - learner/instructor AI LMS product UX surface
+- course-room visual system with learning canvas and AI dock
 - project, contract, governance, UI, browser smoke, runtime tests, and GitHub Actions CI
 
 ## Completed Milestones

@@ -119,6 +119,8 @@ Completed in this pass:
 - Dynamic study-time, task completion, draft variant, approval, and Meiwaku feedback interactions.
 - Product UX validators replacing operator-console checks.
 - Updated product UX screenshot snapshot.
+- Course-room visual system with top course bar, compact route switcher, learning canvas, and AI dock.
+- Manual desktop and mobile visual review after UI/UX overhaul.
 
 ## Immediate Next Step
 

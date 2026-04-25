@@ -237,3 +237,19 @@ backlog:
       - "python scripts\\validate_static_ui.py"
       - "python scripts\\validate_browser_smoke.py"
       - "python scripts\\validate_screenshots.py"
+
+  - id: "JLV-0019"
+    title: "Overhaul visual system and LMS interaction layout"
+    milestone: "M7"
+    status: "completed"
+    type: "product_ux"
+    acceptance:
+      - "Replace dashboard-style three-column console with course bar, course navigation, learning canvas, and AI dock."
+      - "First viewport reads as an AI-assisted LMS course room, not an evidence dashboard."
+      - "Learner flow keeps lesson media, AI hint, study plan, and safety controls visible without debug-heavy framing."
+      - "Instructor route keeps co-creation, aggregate signals, approval, rollback, and measurement in a professor-facing studio."
+      - "Desktop and mobile screenshot checks are reviewed manually for visible overlap and horizontal clipping."
+    validation:
+      - "python scripts\\validate_static_ui.py"
+      - "python scripts\\validate_browser_smoke.py"
+      - "python scripts\\validate_screenshots.py"
