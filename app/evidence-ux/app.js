@@ -2,17 +2,29 @@ const data = window.JP_LMS_VIBEOPS_DATA || {};
 const xaiCards = data.xai_cards || [];
 const cardById = Object.fromEntries(xaiCards.map((card) => [card.card_id, card]));
 const initialRoute = routeFromHash();
+const initialCardId = {
+  lecture: 'xai_s01_student_hint_001',
+  instructor: 'xai_s01_instructor_intervention_001',
+  studio: 'xai_s11_cocreation_001',
+  policy: 'xai_s13_counterfactual_001',
+  evidence: 'xai_s01_instructor_intervention_001',
+}[initialRoute] || 'xai_s12_pace_agent_001';
 
 const state = {
   persona: personaFromRoute(initialRoute),
   route: initialRoute,
-  activeCardId: 'xai_s12_pace_agent_001',
+  activeCardId: initialCardId,
   planMinutes: 30,
   completedTaskIds: new Set(['warmup']),
   draftVariant: 'bridge',
   draftApproved: false,
+  publishedToLms: false,
   activeAudience: 'all',
   navCollapsed: false,
+  commandOpen: false,
+  sessionStarted: false,
+  activeCueIdx: 1,
+  selectedDecisionId: 'S01',
   meiwakuStatus: '',
   chat: [
     {
@@ -22,6 +34,125 @@ const state = {
     },
   ],
 };
+
+const lectureCues = [
+  {
+    pct: 0,
+    label: '선수 개념 확인',
+    cardId: 'xai_s12_pace_agent_001',
+    heat: 24,
+    note: '오늘 계획과 연결해 조건부 확률 복습 여부를 먼저 확인합니다.',
+  },
+  {
+    pct: 22,
+    label: 'Gini / Entropy 병목',
+    cardId: 'xai_s01_student_hint_001',
+    heat: 82,
+    note: '멈춤과 반복 시청, 확인 문제 오답이 같은 구간에 모였습니다.',
+  },
+  {
+    pct: 48,
+    label: '과제 연결 구간',
+    cardId: 'xai_s12_pace_agent_001',
+    heat: 51,
+    note: 'Titanic 과제 시작 전 W6 조건부 확률 보강을 권장합니다.',
+  },
+  {
+    pct: 73,
+    label: '교수자 보강 초안',
+    cardId: 'xai_s11_cocreation_001',
+    heat: 64,
+    note: '같은 incident가 Co-Creation Studio의 브리지 초안으로 연결됩니다.',
+  },
+];
+
+const decisionQueue = [
+  {
+    id: 'S01',
+    title: 'W7 18:12 병목 보강',
+    summary: '강의 앞에 3분 브리지와 확인 문제 1개를 추가합니다.',
+    urgency: '높음',
+    due: '오늘 17:00',
+    gate: 'G2',
+    cardId: 'xai_s01_instructor_intervention_001',
+    route: 'instructor',
+  },
+  {
+    id: 'S11',
+    title: 'Entropy 브리지 초안',
+    summary: 'Teaching Profile을 반영한 설명 변형을 검토합니다.',
+    urgency: '중간',
+    due: '내일 09:00',
+    gate: 'G2',
+    cardId: 'xai_s11_cocreation_001',
+    route: 'studio',
+  },
+  {
+    id: 'S13',
+    title: '지원 정책 후보',
+    summary: 'G4 정책 승인 전까지 실행은 잠겨 있습니다.',
+    urgency: '검토',
+    due: '5월 1일',
+    gate: 'G4',
+    cardId: 'xai_s13_counterfactual_001',
+    route: 'policy',
+  },
+];
+
+const commandItems = [
+  {
+    id: 'start-session',
+    title: '학습 세션 시작',
+    detail: '오늘의 학습 플랜으로 이동하고 AI 코치 대화를 엽니다.',
+    persona: 'student',
+    route: 'learning',
+    action: 'start-session',
+    cardId: 'xai_s12_pace_agent_001',
+  },
+  {
+    id: 'short-plan',
+    title: '20분 계획으로 재계산',
+    detail: '남은 시간이 적을 때 핵심 단계만 남깁니다.',
+    persona: 'student',
+    route: 'learning',
+    action: 'adjust',
+    cardId: 'xai_s12_pace_agent_001',
+  },
+  {
+    id: 'lecture-incident',
+    title: '22% 강의 병목 열기',
+    detail: '강의 heatmap과 transcript를 같은 xAI 카드에 연결합니다.',
+    persona: 'student',
+    route: 'lecture',
+    cueIdx: 1,
+    cardId: 'xai_s01_student_hint_001',
+  },
+  {
+    id: 'decision-queue',
+    title: '교수자 의사결정 큐',
+    detail: '집계 신호, 승인 게이트, 측정 계획을 한 화면에서 봅니다.',
+    persona: 'instructor',
+    route: 'instructor',
+    decisionId: 'S01',
+    cardId: 'xai_s01_instructor_intervention_001',
+  },
+  {
+    id: 'studio-approval',
+    title: 'Co-Creation 승인 경로',
+    detail: 'AI 초안의 승인, 게시, 롤백 메모를 점검합니다.',
+    persona: 'instructor',
+    route: 'studio',
+    decisionId: 'S11',
+    cardId: 'xai_s11_cocreation_001',
+  },
+  {
+    id: 'evidence-trace',
+    title: 'xAI 근거 Trace',
+    detail: '판단에 쓰인 이벤트, 모델, 불확실성을 확인합니다.',
+    route: 'evidence',
+    cardId: 'xai_s01_instructor_intervention_001',
+  },
+];
 
 const routeLabels = {
   student: '대시보드',
@@ -132,6 +263,34 @@ function scenarioFor(scenarioId) {
   return (data.scenario_matrix || []).find((scenario) => scenario.scenario_id === scenarioId);
 }
 
+function measurementFor(scenarioId) {
+  return (data.measurements || []).find((measurement) => measurement.scenario_id === scenarioId);
+}
+
+function ledgerFor(scenarioId) {
+  return (data.impact_ledgers || []).find((ledger) => ledger.scenario_id === scenarioId);
+}
+
+function eventById(eventId) {
+  return (data.events || []).find((event) => event.event_id === eventId);
+}
+
+function selectedCue() {
+  return lectureCues[state.activeCueIdx] || lectureCues[1];
+}
+
+function selectedDecision() {
+  return decisionQueue.find((decision) => decision.id === state.selectedDecisionId) || decisionQueue[0];
+}
+
+function gateLabel(scenarioId) {
+  const approval = approvalFor(scenarioId);
+  const scenario = scenarioFor(scenarioId);
+  if (approval?.state === 'approved' || scenario?.approval_state === 'approved') return '승인 완료';
+  if (approval?.state === 'requested' || scenario?.approval_state === 'requested') return '승인 요청';
+  return '검토 필요';
+}
+
 function confidenceLabel(item) {
   return `${Math.round((item.judgment?.confidence || 0) * 100)}%`;
 }
@@ -163,6 +322,107 @@ function tag(text, tone = '') {
 
 function button(label, action, extra = '', tone = '') {
   return `<button class="btn ${tone}" data-action="${esc(action)}" ${extra}>${label}</button>`;
+}
+
+function renderCommandPalette() {
+  if (!state.commandOpen) return '';
+  return `
+    <div class="command-backdrop" data-action="toggle-command"></div>
+    <div class="command-palette" role="dialog" aria-label="Claritas command palette">
+      <div class="command-head">
+        <div>
+          <div class="page-eyebrow">Claritas Command</div>
+          <div class="command-title">AI에게 바로 맡길 작업</div>
+        </div>
+        <button class="btn" data-action="toggle-command">닫기</button>
+      </div>
+      <div class="command-list">
+        ${commandItems.map((item) => `
+          <button class="command-item" data-action="run-command" data-command-id="${esc(item.id)}">
+            <span class="command-glyph">${item.persona === 'instructor' ? 'P' : item.persona === 'student' ? 'S' : 'AI'}</span>
+            <span>
+              <strong>${esc(item.title)}</strong>
+              <small>${esc(item.detail)}</small>
+            </span>
+            <span class="command-route">${esc(item.route || state.route)}</span>
+          </button>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function renderAdaptiveCoach() {
+  const progress = progressPercent();
+  const nextTask = currentPlan().find((task) => !state.completedTaskIds.has(task.id)) || currentPlan()[0];
+  return `
+    <section class="control-plane">
+      <div class="control-copy">
+        <div class="page-eyebrow">Adaptive Study Control</div>
+        <h2>${state.sessionStarted ? '세션 진행 중' : '다음 행동을 바로 시작할 수 있습니다.'}</h2>
+        <p>${esc(nextTask.title)} · ${esc(nextTask.detail)}</p>
+      </div>
+      <div class="control-metrics">
+        <div class="progress-ring" style="--p:${progress}"><span>${progress}%</span></div>
+        <div class="control-actions">
+          ${button(state.sessionStarted ? '세션 계속' : '학습 세션 시작', 'start-session', '', 'btn-student')}
+          ${button('명령 열기', 'toggle-command', '', 'btn-ghost')}
+        </div>
+      </div>
+    </section>
+    ${state.sessionStarted ? renderSessionRail() : ''}
+  `;
+}
+
+function renderSessionRail() {
+  const plan = currentPlan();
+  return `
+    <div class="session-rail">
+      ${plan.map((task, index) => {
+        const done = state.completedTaskIds.has(task.id);
+        const active = !done && index === plan.findIndex((candidate) => !state.completedTaskIds.has(candidate.id));
+        return `
+          <button class="session-step ${done ? 'done' : ''} ${active ? 'active' : ''}" data-action="toggle-task" data-task-id="${esc(task.id)}" data-card-id="${esc(task.cardId)}">
+            <span>${done ? '완료' : `${task.minutes}분`}</span>
+            <strong>${esc(task.title)}</strong>
+            <small>${esc(task.detail)}</small>
+          </button>
+        `;
+      }).join('')}
+    </div>
+  `;
+}
+
+function renderExecutionPath(scenarioId) {
+  const scenario = scenarioFor(scenarioId);
+  const approval = approvalFor(scenarioId);
+  const measurement = measurementFor(scenarioId);
+  const result = resultFor(scenarioId);
+  const ledger = ledgerFor(scenarioId);
+  const steps = [
+    ['감지', scenario ? '완료' : '대기', true],
+    ['초안', approval ? '작성됨' : '대기', Boolean(approval)],
+    ['승인', gateLabel(scenarioId), approval?.state === 'approved' || state.draftApproved],
+    ['게시', state.publishedToLms || scenario?.executable ? '실행 가능' : '잠김', state.publishedToLms || Boolean(scenario?.executable)],
+    ['측정', result ? '결과 있음' : measurement ? '예약됨' : '대기', Boolean(result || measurement)],
+  ];
+  return `
+    <div class="execution-path">
+      ${steps.map(([label, sub, done], index) => `
+        <div class="execution-step ${done ? 'done' : ''}">
+          <span>${index + 1}</span>
+          <strong>${esc(label)}</strong>
+          <small>${esc(sub)}</small>
+        </div>
+      `).join('')}
+    </div>
+    ${ledger ? `<div class="path-rationale"><span class="ai-dot"></span>${esc(ledger.summary)}</div>` : ''}
+  `;
+}
+
+function renderCohortHeatmap() {
+  const cells = [1, 2, 1, 3, 2, 4, 5, 4, 3, 2, 4, 5, 3, 2, 1, 2, 3, 4, 4, 5, 3, 2, 2, 3, 5, 4, 2, 1];
+  return `<div class="heatmap" aria-label="course signal heatmap">${cells.map((level) => `<span class="heat-cell l${level}"></span>`).join('')}</div>`;
 }
 
 function renderNav() {
@@ -246,6 +506,8 @@ function renderStudentDashboard() {
       </div>
     </section>
 
+    ${renderAdaptiveCoach()}
+
     <div class="stats-grid">
       ${stat('오늘 AI가 남긴 실행', '3개', '강의 · 과제 · 복습')}
       ${stat('가장 큰 병목', 'W6', '조건부 확률 → 트리')}
@@ -293,7 +555,7 @@ function renderLearning() {
     <div class="section-head"><h3>오늘의 학습 플랜</h3>${tag(`학습 ${progress}%`, 'tag-student')}</div>
     <section class="card">
       <div class="card-head">
-        <div><div class="card-title">남은 시간에 맞춘 계획</div><div class="card-sub">set-minutes · toggle-task · challenge 흐름이 실제 상태를 바꿉니다.</div></div>
+        <div><div class="card-title">남은 시간에 맞춘 계획</div><div class="card-sub">남은 시간, 마감, 이해도 신호에 맞춰 오늘 할 일을 다시 정렬합니다.</div></div>
         <div class="hero-tags">
           ${[20, 30, 45].map((minutes) => `<button class="tag ${state.planMinutes === minutes ? 'tag-student' : 'tag-line'}" data-action="set-minutes" data-minutes="${minutes}">${minutes}분</button>`).join('')}
         </div>
@@ -322,32 +584,121 @@ function renderLearning() {
 }
 
 function renderLecture() {
+  const cue = selectedCue();
   return `
     <section class="card">
       <div class="card-head">
-        <div><div class="card-title">Lecture 2 · Tree Split Criteria</div><div class="card-sub">18:12 / 52:08 — 지니와 엔트로피 정의</div></div>
-        ${tag('동료 정지/반복 42%', 'tag-claude')}
+        <div><div class="card-title">Lecture 2 · Tree Split Criteria</div><div class="card-sub">${cue.pct}% 구간 — ${esc(cue.label)}</div></div>
+        ${tag(`신호 강도 ${cue.heat}%`, cue.heat > 70 ? 'tag-claude' : 'tag-line')}
       </div>
       <div class="lecture-player">
         <div class="lecture-canvas">
           <div class="play-button">▶</div>
           <div>
-            <div class="page-eyebrow">AI marker · 22%</div>
-            <h2 class="page-title" style="font-size:24px">이 구간에서 학생들이 멈췄습니다.</h2>
-            <p class="page-sub">Claritas는 개인을 낙인찍지 않고, 집계된 멈춤/반복과 확인 문제 흔들림을 근거로 선수 개념 힌트를 제안합니다.</p>
+            <div class="page-eyebrow">AI marker · ${cue.pct}%</div>
+            <h2 class="page-title" style="font-size:24px">${esc(cue.label)}</h2>
+            <p class="page-sub">${esc(cue.note)} Claritas는 개인을 낙인찍지 않고, 집계 신호와 학생 통제권을 함께 유지합니다.</p>
           </div>
         </div>
         <div class="chapter-line">
-          <button data-action="select-card" data-card-id="xai_s01_student_hint_001">0%</button>
-          <button data-action="select-card" data-card-id="xai_s01_student_hint_001" class="hot">22% · AI</button>
-          <button data-action="select-card" data-card-id="xai_s12_pace_agent_001">48%</button>
-          <button data-action="select-card" data-card-id="xai_s11_cocreation_001">73%</button>
+          ${lectureCues.map((item, index) => `
+            <button data-action="jump-cue" data-cue-idx="${index}" class="${index === state.activeCueIdx ? 'hot' : ''}">
+              ${item.pct}% · ${esc(item.label)}
+            </button>
+          `).join('')}
+        </div>
+      </div>
+    </section>
+    <section class="lecture-signal-grid">
+      <div class="card">
+        <div class="card-head"><div><div class="card-title">구간별 학습 신호</div><div class="card-sub">멈춤, 반복, 확인 문제 흔들림을 한 타임라인에서 봅니다.</div></div>${tag('aggregate', 'tag-ok')}</div>
+        <div class="cue-heatmap">
+          ${lectureCues.map((item, index) => `
+            <button class="cue-cell ${index === state.activeCueIdx ? 'active' : ''}" style="--heat:${item.heat}" data-action="jump-cue" data-cue-idx="${index}">
+              <span>${item.pct}%</span><strong>${item.heat}</strong>
+            </button>
+          `).join('')}
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div><div class="card-title">같은 incident</div><div class="card-sub">학습자 화면의 병목이 교수자 집계 의사결정으로 이어집니다.</div></div>${tag('S01', 'tag-xai')}</div>
+        <div class="xai-panel">
+          <div class="xai-panel-body">${esc(card(cue.cardId).judgment.summary)}</div>
+        </div>
+        <div class="hero-tags">
+          ${button('교수자 큐에서 보기', 'run-command', 'data-command-id="decision-queue"', 'btn-instructor')}
+          ${button('힌트만 줘', 'ask-ai', 'data-prompt="quiz"', 'btn-ghost')}
         </div>
       </div>
     </section>
     <section class="card" style="margin-top:14px">
-      <div class="card-head"><div><div class="card-title">Transcript + Checkpoint</div><div class="card-sub">힌트는 요청할 때만 열립니다.</div></div>${button('힌트만 줘', 'ask-ai', 'data-prompt="quiz"', 'btn-ghost')}</div>
-      <div class="xai-panel"><div class="xai-panel-head"><span class="spark">AI</span> 왜 이 추천인가요?</div><div class="xai-panel-body">${esc(card('xai_s01_student_hint_001').judgment.summary)}</div></div>
+      <div class="card-head"><div><div class="card-title">Transcript + Checkpoint</div><div class="card-sub">학생이 요청할 때만 힌트가 열리고, 정답 생성은 하지 않습니다.</div></div>${button('체크포인트 시작', 'ask-ai', 'data-prompt="quiz"', 'btn-ghost')}</div>
+      <div class="transcript-list">
+        ${lectureCues.map((item, index) => `
+          <button class="transcript-row ${index === state.activeCueIdx ? 'active' : ''}" data-action="jump-cue" data-cue-idx="${index}">
+            <span>${String(Math.round(item.pct * 0.52)).padStart(2, '0')}:12</span>
+            <strong>${esc(item.label)}</strong>
+            <small>${esc(item.note)}</small>
+          </button>
+        `).join('')}
+      </div>
+    </section>
+    <section class="card" style="margin-top:14px">
+      <div class="card-head"><div><div class="card-title">Pilot Gate Checklist</div><div class="card-sub">운영 전 승인 문서와 통합 준비 상태를 한 번에 점검합니다.</div></div>${tag('readiness', 'tag-xai')}</div>
+      <div class="gate-grid">
+        ${(data.pilot_gates || []).map((gate, index) => `
+          <div class="gate-card">
+            <span>${String(index + 1).padStart(2, '0')}</span>
+            <strong>${esc(gate.split('/').pop().replace('.md', '').replaceAll('-', ' '))}</strong>
+            <small>${index < 4 ? 'ready' : 'review'}</small>
+          </div>
+        `).join('')}
+      </div>
+    </section>
+  `;
+}
+
+function renderDecisionQueue() {
+  const decision = selectedDecision();
+  const cardItem = card(decision.cardId);
+  const result = resultFor(decision.id);
+  return `
+    <section class="decision-board">
+      <div class="decision-list">
+        <div class="section-mini-title">Decision Queue</div>
+        ${decisionQueue.map((item) => `
+          <button class="decision-item ${item.id === decision.id ? 'active' : ''}" data-action="select-decision" data-decision-id="${esc(item.id)}">
+            <span class="decision-code">${esc(item.gate)}</span>
+            <span>
+              <strong>${esc(item.title)}</strong>
+              <small>${esc(item.summary)}</small>
+            </span>
+            <em>${esc(item.urgency)}</em>
+          </button>
+        `).join('')}
+      </div>
+      <div class="decision-detail">
+        <div class="card-head">
+          <div>
+            <div class="card-title">${esc(decision.title)}</div>
+            <div class="card-sub">${esc(decision.due)} · ${gateLabel(decision.id)} · ${esc(cardItem.model.version)}</div>
+          </div>
+          ${tag(decision.gate, decision.gate === 'G4' ? 'tag-warn' : 'tag-instructor')}
+        </div>
+        <div class="xai-panel">
+          <div class="xai-panel-head"><span class="spark">AI</span> 판단 요약</div>
+          <div class="xai-panel-body">${esc(cardItem.judgment.summary)}</div>
+        </div>
+        ${renderExecutionPath(decision.id)}
+        <div class="decision-metrics">
+          ${metric('효과', result ? formatPercent(result.observed.segment_rewatch_rate_delta ?? result.observed.checkpoint_correct_rate_delta ?? result.observed.expected_uplift) : '대기', 'measurement')}
+          ${metric('불확실성', cardItem.uncertainty?.interval_or_reason || 'not available', 'xAI interval')}
+        </div>
+        <div class="hero-tags">
+          ${button(decision.route === 'studio' ? '초안 검토' : '상세 열기', 'set-route', `data-route="${esc(decision.route)}"`, 'btn-instructor')}
+          ${button('근거 보기', 'select-card', `data-card-id="${esc(decision.cardId)}"`, 'btn-ghost')}
+        </div>
+      </div>
     </section>
   `;
 }
@@ -366,6 +717,7 @@ function renderInstructorDashboard() {
       ${stat('개입 필요', '6', '집계 신호 기반')}
       ${stat('효과 측정', result ? formatPercent(result.observed.segment_rewatch_rate_delta) : 'N/A', '재시청률')}
     </div>
+    ${renderDecisionQueue()}
     <div class="split-2">
       <section class="card">
         <div class="card-head"><div><div class="card-title">수업 신호</div><div class="card-sub">같은 incident를 교수자 화면에서는 반 단위로 봅니다.</div></div>${tag('aggregate only', 'tag-ok')}</div>
@@ -374,6 +726,7 @@ function renderInstructorDashboard() {
           ${source('26:50 예시 계산', '46%', 'var(--student)')}
           ${source('34:10 과제 안내', '28%', 'var(--ink-4)')}
         </div>
+        ${renderCohortHeatmap()}
       </section>
       <section class="card">
         <div class="card-head"><div><div class="card-title">승인 대기</div><div class="card-sub">학생에게 공개되기 전 교수자 승인과 롤백 메모가 필요합니다.</div></div>${tag('G2', 'tag-instructor')}</div>
@@ -405,12 +758,15 @@ function renderStudio() {
       <section class="card">
         <div class="card-head"><div><div class="card-title">선택된 초안</div><div class="card-sub">${esc(selected.title)}</div></div>${tag('approval · measurement · impact', 'tag-xai')}</div>
         <div class="xai-panel"><div class="xai-panel-head"><span class="spark">AI</span> 학생 반응 예측</div><div class="xai-panel-body">Variant 적용 시 반복 재시청률 ${esc(selected.uplift)} 예상. 승인 후 2주 내 측정하며, 부적합하면 원본 Lecture 2 구성으로 되돌립니다.</div></div>
+        ${renderExecutionPath('S11')}
         <div class="hero-tags">
           ${button(state.draftApproved ? '승인 상태 유지' : '승인하고 게시 예약', 'approve-draft', '', 'btn-instructor')}
+          ${button(state.publishedToLms ? 'LMS 게시됨' : 'LMS에 게시', 'publish-draft', '', state.draftApproved ? 'btn-instructor' : 'btn-ghost')}
           ${button('대안 초안', 'ask-ai', 'data-prompt="draft"', 'btn-ghost')}
           ${button('초안 근거', 'select-card', 'data-card-id="xai_s11_cocreation_001"', 'btn-ghost')}
+          ${state.publishedToLms ? button('롤백', 'rollback-draft', '', 'btn-ghost') : ''}
         </div>
-        ${state.draftApproved ? `<div class="xai-panel" style="margin-top:12px"><div class="xai-panel-body">게시 예약됨. 롤백 메모: ${esc(approval?.rollback_note || '원본 자료로 되돌릴 수 있습니다.')}</div></div>` : ''}
+        ${state.draftApproved ? `<div class="xai-panel" style="margin-top:12px"><div class="xai-panel-body">${state.publishedToLms ? 'LMS에 게시되어 학생 강의 흐름에 반영됐습니다.' : '게시 예약됨.'} 롤백 메모: ${esc(approval?.rollback_note || '원본 자료로 되돌릴 수 있습니다.')}</div></div>` : ''}
       </section>
     </div>
   `;
@@ -497,6 +853,25 @@ function source(label, value, color) {
   return `<div class="source-item"><span class="mini-dot" style="background:${color}"></span><span>${esc(label)}</span><span class="source-weight">${esc(value)}</span></div>`;
 }
 
+function renderProvenance(item) {
+  return `
+    <div class="provenance-list">
+      ${item.evidence.map((evidence, index) => {
+        const event = eventById(evidence.source_event);
+        return `
+          <div class="trace-row">
+            <span>${index + 1}</span>
+            <div>
+              <strong>${esc(evidence.source_event)}</strong>
+              <small>${esc(event?.event_type || 'evidence')} · ${esc(event?.privacy_level || item.governance?.privacy_level || 'aggregate')}</small>
+            </div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+}
+
 function renderAside() {
   const item = activeCard();
   const result = resultFor(item.scenario_id);
@@ -520,6 +895,11 @@ function renderAside() {
     <div class="source-list">
       ${item.evidence.map((evidence) => source(evidence.claim, `w ${evidence.weight}`, 'var(--xai)')).join('')}
     </div>
+    <div class="aside-head">
+      <div><div class="aside-title">Provenance Trace</div><div class="aside-sub">event → model → action</div></div>
+      ${tag(item.governance?.approval_gate || 'G?', 'tag-line')}
+    </div>
+    ${renderProvenance(item)}
     <div class="aside-head">
       <div><div class="aside-title">${companionTitle}</div><div class="aside-sub">${companionSub}</div></div>
       ${tag('Claritas', 'tag-claude')}
@@ -556,6 +936,12 @@ function setPersona(persona) {
 
 function setRoute(route) {
   state.route = route || 'student';
+  if (['student', 'learning', 'lecture'].includes(state.route)) state.persona = 'student';
+  if (['instructor', 'studio', 'policy'].includes(state.route)) state.persona = 'instructor';
+  if (state.route === 'lecture') state.activeCardId = selectedCue().cardId;
+  if (state.route === 'instructor') state.activeCardId = selectedDecision().cardId;
+  if (state.route === 'studio') state.activeCardId = 'xai_s11_cocreation_001';
+  if (state.route === 'policy') state.activeCardId = 'xai_s13_counterfactual_001';
   window.history.replaceState(null, '', `#${state.route}`);
 }
 
@@ -566,6 +952,14 @@ function pushChat(who, text, cite = '') {
 
 function askAi(prompt) {
   const item = activeCard();
+  if (prompt === 'start') {
+    state.sessionStarted = true;
+    state.route = 'learning';
+    state.activeCardId = 'xai_s12_pace_agent_001';
+    pushChat('Student', '오늘 계획으로 바로 시작할게.', 'session start');
+    pushChat('Claritas', '첫 단계는 3분 복습입니다. 완료하면 다음 단계와 오른쪽 근거 패널이 같이 갱신됩니다.', 'xai_s12_pace_agent_001');
+    return;
+  }
   if (prompt === 'adjust') {
     state.planMinutes = 20;
     state.activeCardId = 'xai_s12_pace_agent_001';
@@ -597,6 +991,19 @@ function askAi(prompt) {
   pushChat('Claritas', `${item.evidence?.[0]?.claim || '선택된 xAI 카드의 근거'} 판단입니다. 다만 ${item.uncertainty?.summary || '불확실성이 있어 조정할 수 있습니다.'}`, item.card_id);
 }
 
+function runCommand(commandId) {
+  const command = commandItems.find((item) => item.id === commandId);
+  if (!command) return;
+  if (command.persona) state.persona = command.persona;
+  if (command.route) setRoute(command.route);
+  if (typeof command.cueIdx === 'number') state.activeCueIdx = command.cueIdx;
+  if (command.decisionId) state.selectedDecisionId = command.decisionId;
+  if (command.cardId) state.activeCardId = command.cardId;
+  if (command.action === 'start-session') askAi('start');
+  if (command.action === 'adjust') askAi('adjust');
+  state.commandOpen = false;
+}
+
 function handleAction(buttonEl) {
   const action = buttonEl.dataset.action;
   if (action === 'set-persona') {
@@ -605,6 +1012,18 @@ function handleAction(buttonEl) {
     setRoute(buttonEl.dataset.route || 'student');
   } else if (action === 'toggle-focus') {
     state.navCollapsed = !state.navCollapsed;
+  } else if (action === 'toggle-command') {
+    state.commandOpen = !state.commandOpen;
+  } else if (action === 'run-command') {
+    runCommand(buttonEl.dataset.commandId || '');
+  } else if (action === 'start-session') {
+    askAi('start');
+  } else if (action === 'jump-cue') {
+    state.activeCueIdx = Number(buttonEl.dataset.cueIdx) || 0;
+    state.activeCardId = selectedCue().cardId;
+  } else if (action === 'select-decision') {
+    state.selectedDecisionId = buttonEl.dataset.decisionId || state.selectedDecisionId;
+    state.activeCardId = selectedDecision().cardId;
   } else if (action === 'select-card') {
     state.activeCardId = buttonEl.dataset.cardId || state.activeCardId;
   } else if (action === 'set-minutes') {
@@ -622,6 +1041,19 @@ function handleAction(buttonEl) {
     state.draftApproved = true;
     state.activeCardId = 'xai_s11_cocreation_001';
     pushChat('Claritas', '교수자 승인 상태로 전환했습니다. 게시 예약과 롤백 메모가 함께 남습니다.', 'approval_s11_bridge_variant_001');
+  } else if (action === 'publish-draft') {
+    if (!state.draftApproved) {
+      pushChat('Claritas', '게시 전에 교수자 승인이 필요합니다. 먼저 승인 상태로 전환해 주세요.', 'approval required');
+    } else {
+      state.publishedToLms = true;
+      state.activeCardId = 'xai_s11_cocreation_001';
+      pushChat('Claritas', 'LMS 게시 큐에 반영했습니다. 측정 계획과 롤백 기준도 함께 저장됩니다.', 'act_s11_publish_bridge_variant');
+    }
+  } else if (action === 'rollback-draft') {
+    state.publishedToLms = false;
+    state.activeCardId = 'xai_s11_cocreation_001';
+    pushChat('Professor', '이번 초안은 원본 자료로 되돌려줘.', 'rollback request');
+    pushChat('Claritas', '게시 상태를 되돌렸습니다. impact ledger에는 롤백 사유가 남습니다.', 'impact_s11_bridge_variant_001');
   } else if (action === 'set-filter') {
     state.activeAudience = buttonEl.dataset.filter || 'all';
     const visible = xaiCards.find((item) => state.activeAudience === 'all' || item.audience === state.activeAudience);
@@ -636,10 +1068,12 @@ function handleAction(buttonEl) {
 
 function render() {
   document.getElementById('app').classList.toggle('nav-collapsed', state.navCollapsed);
+  document.getElementById('app').classList.toggle('command-open', state.commandOpen);
   setPersona(state.persona);
   renderNav();
   document.getElementById('mainContent').innerHTML = renderMain();
   renderAside();
+  document.getElementById('commandLayer').innerHTML = renderCommandPalette();
 }
 
 document.addEventListener('click', (event) => {
@@ -647,6 +1081,19 @@ document.addEventListener('click', (event) => {
   if (!buttonEl) return;
   handleAction(buttonEl);
   render();
+});
+
+document.addEventListener('keydown', (event) => {
+  const key = event.key.toLowerCase();
+  if ((event.metaKey || event.ctrlKey) && key === 'k') {
+    event.preventDefault();
+    state.commandOpen = !state.commandOpen;
+    render();
+  }
+  if (event.key === 'Escape' && state.commandOpen) {
+    state.commandOpen = false;
+    render();
+  }
 });
 
 window.addEventListener('hashchange', () => {

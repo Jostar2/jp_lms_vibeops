@@ -917,6 +917,15 @@ button {
   color: rgba(255, 255, 255, .74);
 }
 
+.lecture-canvas .page-eyebrow,
+.lecture-canvas .page-title {
+  color: rgba(255, 255, 255, .92);
+}
+
+.lecture-canvas .page-title em {
+  color: #f0b28c;
+}
+
 .play-button {
   width: 68px;
   height: 68px;
@@ -1182,6 +1191,514 @@ button {
   color: var(--ink-3);
 }
 
+.command-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: rgba(31, 30, 28, .18);
+  backdrop-filter: blur(2px);
+}
+
+.command-palette {
+  position: fixed;
+  top: 72px;
+  left: 50%;
+  z-index: 31;
+  width: min(720px, calc(100vw - 32px));
+  transform: translateX(-50%);
+  overflow: hidden;
+  border: 1px solid var(--line-2);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .98);
+  box-shadow: var(--shadow-3);
+}
+
+.command-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(180deg, #fff, var(--surface-2));
+}
+
+.command-title {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 820;
+}
+
+.command-list {
+  display: grid;
+  gap: 2px;
+  padding: 8px;
+}
+
+.command-item {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: left;
+}
+
+.command-item:hover {
+  background: var(--surface-2);
+}
+
+.command-glyph {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--claude-soft);
+  color: var(--claude-ink);
+  font-weight: 850;
+}
+
+.command-item strong,
+.command-item small {
+  display: block;
+}
+
+.command-item strong {
+  color: var(--ink);
+  font-size: 13.5px;
+}
+
+.command-item small {
+  margin-top: 2px;
+  color: var(--ink-3);
+  font-size: 12px;
+}
+
+.command-route {
+  padding: 3px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink-3);
+  font-size: 10.5px;
+  font-weight: 750;
+}
+
+.control-plane {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 18px;
+  padding: 20px;
+  border: 1px solid rgba(47, 122, 90, .18);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, #f7fbf8, #fff);
+  box-shadow: var(--shadow-1);
+}
+
+.control-copy h2 {
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: 20px;
+  line-height: 1.28;
+  word-break: keep-all;
+}
+
+.control-copy {
+  min-width: 0;
+}
+
+.control-copy p {
+  margin-top: 6px;
+  color: var(--ink-3);
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  word-break: keep-all;
+}
+
+.control-metrics {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.control-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.progress-ring {
+  width: 72px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: conic-gradient(var(--student) calc(var(--p) * 1%), var(--surface-3) 0);
+}
+
+.progress-ring span {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--student-ink);
+  font-weight: 850;
+}
+
+.session-rail {
+  display: grid;
+  gap: 10px;
+  margin: -4px 0 18px;
+}
+
+.session-step {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  text-align: left;
+}
+
+.session-step.active {
+  border-color: rgba(47, 122, 90, .28);
+  background: linear-gradient(180deg, #f5fbf7, #fff);
+}
+
+.session-step.done {
+  opacity: .72;
+}
+
+.session-step span {
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: var(--student-soft);
+  color: var(--student-ink);
+  font-size: 11px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.session-step strong,
+.session-step small {
+  display: block;
+}
+
+.session-step small {
+  margin-top: 2px;
+  color: var(--ink-3);
+  font-size: 12px;
+}
+
+.lecture-signal-grid,
+.decision-board {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, .76fr);
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.cue-heatmap {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.cue-cell {
+  min-height: 82px;
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--claude) calc(var(--heat) * .7%), #fff);
+  color: var(--ink);
+  text-align: left;
+}
+
+.cue-cell.active {
+  border-color: var(--claude);
+  box-shadow: 0 0 0 2px rgba(193, 95, 60, .12);
+}
+
+.cue-cell span {
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.cue-cell strong {
+  font-family: var(--font-serif);
+  font-size: 24px;
+}
+
+.transcript-list {
+  display: grid;
+  gap: 8px;
+}
+
+.transcript-row {
+  display: grid;
+  grid-template-columns: 56px minmax(0, .8fr) minmax(0, 1.4fr);
+  gap: 10px;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  text-align: left;
+}
+
+.transcript-row.active {
+  border-color: rgba(47, 122, 90, .28);
+  background: var(--student-soft);
+}
+
+.transcript-row span {
+  color: var(--student);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.transcript-row small {
+  color: var(--ink-3);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.decision-board {
+  margin: 22px 0 18px;
+}
+
+.decision-list,
+.decision-detail {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-1);
+}
+
+.decision-list {
+  padding: 12px;
+}
+
+.section-mini-title {
+  margin: 2px 4px 10px;
+  color: var(--ink-4);
+  font-size: 10.5px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.decision-item {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: left;
+}
+
+.decision-item.active,
+.decision-item:hover {
+  background: var(--instructor-soft);
+}
+
+.decision-code {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: var(--surface-2);
+  color: var(--instructor-ink);
+  font-size: 11px;
+  font-weight: 850;
+}
+
+.decision-item strong,
+.decision-item small {
+  display: block;
+}
+
+.decision-item small {
+  margin-top: 2px;
+  color: var(--ink-3);
+  font-size: 11.5px;
+  line-height: 1.4;
+}
+
+.decision-item em {
+  color: var(--ink-4);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.decision-detail {
+  padding: 18px;
+}
+
+.decision-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.execution-path {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.execution-step {
+  padding: 10px;
+  border: 1px dashed var(--line-2);
+  border-radius: 10px;
+  background: var(--surface-2);
+}
+
+.execution-step.done {
+  border-style: solid;
+  border-color: rgba(74, 63, 168, .2);
+  background: var(--instructor-soft);
+}
+
+.execution-step span {
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 8px;
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--instructor-ink);
+  font-size: 11px;
+  font-weight: 850;
+}
+
+.execution-step strong,
+.execution-step small {
+  display: block;
+}
+
+.execution-step strong {
+  font-size: 12px;
+}
+
+.execution-step small {
+  margin-top: 2px;
+  color: var(--ink-3);
+  font-size: 10.5px;
+}
+
+.heatmap {
+  display: grid;
+  grid-template-columns: repeat(14, minmax(0, 1fr));
+  gap: 3px;
+  margin-top: 12px;
+}
+
+.heat-cell {
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: var(--surface-2);
+}
+
+.heat-cell.l1 { background: #e7eee8; }
+.heat-cell.l2 { background: #bedbc9; }
+.heat-cell.l3 { background: #86bd9b; }
+.heat-cell.l4 { background: #4e9b70; }
+.heat-cell.l5 { background: var(--student); }
+
+.gate-grid,
+.provenance-list {
+  display: grid;
+  gap: 8px;
+}
+
+.gate-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.gate-card,
+.trace-row {
+  display: grid;
+  gap: 8px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+}
+
+.gate-card {
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  padding: 10px;
+}
+
+.gate-card span,
+.trace-row span {
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--surface-2);
+  color: var(--ink-3);
+  font-size: 11px;
+  font-weight: 850;
+}
+
+.gate-card strong {
+  color: var(--ink);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.gate-card small {
+  color: var(--student);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.trace-row {
+  grid-template-columns: 30px minmax(0, 1fr);
+  padding: 9px 10px;
+}
+
+.trace-row strong,
+.trace-row small {
+  display: block;
+}
+
+.trace-row strong {
+  color: var(--ink-2);
+  font-size: 11.5px;
+}
+
+.trace-row small {
+  margin-top: 2px;
+  color: var(--ink-4);
+  font-size: 10.5px;
+}
+
 .main::-webkit-scrollbar,
 .aside::-webkit-scrollbar,
 .nav::-webkit-scrollbar {
@@ -1287,15 +1804,39 @@ button {
 
   .stats-grid,
   .split-2,
+  .lecture-signal-grid,
+  .decision-board,
   .evidence-card-grid,
   .metric-grid,
+  .gate-grid,
   .co-variant-meta {
     grid-template-columns: 1fr;
   }
 
   .path-item-main,
-  .pace-block {
+  .pace-block,
+  .control-plane,
+  .transcript-row {
     grid-template-columns: 1fr;
+  }
+
+  .control-metrics,
+  .control-actions {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .control-metrics {
+    flex-direction: column;
+  }
+
+  .command-palette {
+    top: 18px;
+  }
+
+  .cue-heatmap,
+  .execution-path {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .path-actions,

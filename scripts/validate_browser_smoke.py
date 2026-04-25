@@ -30,9 +30,10 @@ def main() -> None:
         return
     file_url = APP.resolve().as_uri()
     smoke_targets = [
-        (file_url, ["Claritas", "오늘의 학습 경로", "근거 패널", "학습 동반자", "데이터 마이닝"]),
-        (file_url + "#instructor", ["교수자", "AI Co-Creation Studio", "승인하고 게시 예약", "수업 신호"]),
-        (file_url + "#studio", ["교수자", "AI Co-Creation Studio", "approval · measurement · impact"]),
+        (file_url, ["Claritas", "Adaptive Study Control", "오늘의 학습 경로", "Provenance Trace", "데이터 마이닝"]),
+        (file_url + "#lecture", ["구간별 학습 신호", "Transcript + Checkpoint", "교수자 큐에서 보기"]),
+        (file_url + "#instructor", ["교수자", "Decision Queue", "AI Co-Creation Studio", "수업 신호"]),
+        (file_url + "#studio", ["교수자", "AI Co-Creation Studio", "approval · measurement · impact", "LMS에 게시"]),
     ]
     for target_url, required_text in smoke_targets:
         command = [

@@ -19,7 +19,7 @@
           </div>
         </div>
 
-        <div class="search-bar" role="search">
+        <div class="search-bar" role="search" tabindex="0" data-action="toggle-command">
           <span aria-hidden="true">⌕</span>
           <span>강의·주제·학생·과제를 물어보세요 — “왜 Gini/Entropy 구간에서 멈췄지?”</span>
           <span class="kbd"><span>⌘</span><span>K</span></span>
@@ -44,6 +44,7 @@
       </main>
 
       <aside class="aside" id="rightAside" aria-live="polite"></aside>
+      <div id="commandLayer"></div>
     </div>
 
     <script src="./data/runtime.js"></script>
