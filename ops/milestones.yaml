@@ -73,3 +73,14 @@ milestones:
       - "GitHub Actions CI exists."
       - "Evidence UX screenshot snapshot exists."
       - "S11/S12/S13 fixtures validate."
+
+  - id: "M7"
+    name: "Product-Level AI LMS UX Recovery"
+    status: "completed"
+    purpose: "Rebuild the first browser surface as a learner/instructor AI-assisted LMS product instead of an operator console."
+    exit_criteria:
+      - "Learner Home is the first screen."
+      - "Instructor Studio supports aggregate signals, AI drafts, approval, rollback, and measurement."
+      - "AI coach and xAI evidence drawer are visible product surfaces."
+      - "Dynamic UX interactions are present for learner plans, AI prompts, instructor variants, approval, and Meiwaku feedback."
+      - "Static UI and browser smoke validation require product-level learner/instructor concepts."

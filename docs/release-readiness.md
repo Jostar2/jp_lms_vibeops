@@ -10,7 +10,7 @@ JP LMS VibeOps is now a repo-managed product foundation with:
 - control plane skeleton
 - pilot governance packet
 - LMS adapter boundary
-- Evidence UX static surface
+- learner/instructor AI LMS product UX surface
 - project, contract, governance, UI, browser smoke, runtime tests, and GitHub Actions CI
 
 ## Completed Milestones
@@ -24,6 +24,7 @@ JP LMS VibeOps is now a repo-managed product foundation with:
 | M4 Integration Boundary | complete |
 | M5 Evidence UX | complete |
 | M6 Runtime Packaging And CI Hardening | complete |
+| M7 Product-Level AI LMS UX Recovery | complete |
 
 ## Validation Commands
 
@@ -44,7 +45,7 @@ python -m unittest discover -s tests
 python scripts\validate_project.py
 ```
 
-## Evidence UX Entry Point
+## AI LMS Product UX Entry Point
 
 Open:
 
@@ -52,7 +53,7 @@ Open:
 app/evidence-ux/index.html
 ```
 
-The app is static and uses `app/evidence-ux/data/runtime.js`, exported from control-plane fixtures.
+The app is static-file deployable, but the UX itself is dynamic client-side: learners can change study time, complete tasks, ask the AI coach for rationale or hints, challenge a recommendation, and instructors can change AI draft variants and approve a course draft. It uses `app/evidence-ux/data/runtime.js`, exported from control-plane fixtures.
 
 ## What Is Still Not Claimed
 
@@ -74,4 +75,4 @@ The next work should focus on:
 1. S15 Teaching Profile fixture and runtime coverage
 2. release artifact workflow and PR template
 3. stricter schema enforcement through full JSON Schema or Pydantic
-4. Evidence UX packaging decision
+4. package the AI LMS UX as a real web app surface after this product-level recovery

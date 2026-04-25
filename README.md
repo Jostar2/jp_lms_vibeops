@@ -24,8 +24,8 @@ This repository starts from design, not from the legacy prototype implementation
 | Build roadmap | [docs/05-build-roadmap.md](docs/05-build-roadmap.md) |
 | Control-plane-first plan | [docs/06-control-plane-first-implementation.md](docs/06-control-plane-first-implementation.md) |
 | Pilot governance packet | [docs/pilot/](docs/pilot/) |
-| Evidence UX readiness | [docs/evidence-ux/](docs/evidence-ux/) |
-| Evidence UX app | [app/evidence-ux/index.html](app/evidence-ux/index.html) |
+| AI LMS product UX readiness | [docs/evidence-ux/](docs/evidence-ux/) |
+| AI LMS product UX app | [app/evidence-ux/index.html](app/evidence-ux/index.html) |
 | Release readiness | [docs/release-readiness.md](docs/release-readiness.md) |
 | Project reset decision | [docs/decisions/ADR-0001-project-reset.md](docs/decisions/ADR-0001-project-reset.md) |
 | Control-plane-first decision | [docs/decisions/ADR-0002-control-plane-first.md](docs/decisions/ADR-0002-control-plane-first.md) |
@@ -47,7 +47,13 @@ This repository starts from design, not from the legacy prototype implementation
 
 ## Current Status
 
-This is a design-first project skeleton. There is no application runtime yet.
+This is now a repo-managed product foundation with a Python control-plane runtime and a browser-rendered AI LMS product UX.
+
+The current UX is not an operator console. It starts from learner and instructor workflows:
+
+- learner home with an AI-adjusted study plan, lecture timeline marker, AI hint, evidence access, and Meiwaku feedback
+- instructor studio with aggregate struggle signals, AI co-creation drafts, approval-gated publishing, rollback context, and measured outcomes
+- shared xAI evidence drawer showing model, evidence, uncertainty, action, approval, measurement, and impact
 
 Project management currently happens inside this repository through [PROJECT.md](PROJECT.md), [ops/status.md](ops/status.md), [ops/milestones.yaml](ops/milestones.yaml), and [ops/backlog.yaml](ops/backlog.yaml).
 
@@ -94,18 +100,16 @@ Package CLI smoke:
 $env:PYTHONPATH="src"; python -m jp_lms_vibeops run-s01 --json
 ```
 
-Refresh Evidence UX screenshot snapshot:
+Refresh AI LMS product UX screenshot snapshot:
 
 ```powershell
 python scripts\capture_evidence_ux_snapshot.py
 ```
 
-The next implementation step is not a UI prototype. It is an executable control-plane foundation:
+The next implementation step is product hardening beyond the static-file shell:
 
-1. Contract validators for xAI cards, events, approvals, and measurement plans.
-2. AI operation state machine.
-3. Approval routing and blocking behavior.
-4. Policy/privacy gates.
-5. Measurement and impact ledger records.
-6. LMS adapter boundary.
-7. Evidence UX after the above contracts are stable.
+1. Package the AI LMS UX as a real web app surface.
+2. Add richer dynamic flows for learner AI chat, instructor approval, and rollback execution.
+3. Add S15 Teaching Profile runtime coverage.
+4. Move schema validation toward full JSON Schema or Pydantic enforcement.
+5. Prepare release artifact workflow and GitHub PR templates.

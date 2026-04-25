@@ -29,25 +29,30 @@ def main() -> None:
         print("JP LMS VibeOps browser smoke skipped: no Edge/Chrome binary found.")
         return
     file_url = APP.resolve().as_uri()
-    command = [
-        str(browser),
-        "--headless=new",
-        "--disable-gpu",
-        "--no-first-run",
-        "--disable-extensions",
-        "--dump-dom",
-        file_url,
+    smoke_targets = [
+        (file_url, ["학습자 홈", "오늘의 학습 플랜", "AI 코치", "근거 보기", "교수자 스튜디오"]),
+        (file_url + "#instructor", ["교수자 스튜디오", "AI Co-Creation Studio", "승인하고 게시 예약", "효과 측정"]),
     ]
-    result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, timeout=30)
-    if result.returncode != 0:
-        print(result.stdout)
-        print(result.stderr, file=sys.stderr)
-        raise SystemExit(result.returncode)
-    dom = result.stdout
-    for required in ["Operations", "Control Plane State", "Operation Queue", "Pilot Gate Evidence"]:
-        if required not in dom:
-            print(dom[:2000])
-            raise SystemExit(f"browser smoke missing rendered text: {required}")
+    for target_url, required_text in smoke_targets:
+        command = [
+            str(browser),
+            "--headless=new",
+            "--disable-gpu",
+            "--no-first-run",
+            "--disable-extensions",
+            "--dump-dom",
+            target_url,
+        ]
+        result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, timeout=30)
+        if result.returncode != 0:
+            print(result.stdout)
+            print(result.stderr, file=sys.stderr)
+            raise SystemExit(result.returncode)
+        dom = result.stdout
+        for required in required_text:
+            if required not in dom:
+                print(dom[:2000])
+                raise SystemExit(f"browser smoke missing rendered text: {required}")
     print("JP LMS VibeOps browser smoke passed.")
 
 

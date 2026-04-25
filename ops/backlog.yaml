@@ -145,12 +145,13 @@ backlog:
       - "python scripts\\validate_evidence_ux.py"
 
   - id: "JLV-0012"
-    title: "Implement first Evidence UX static surface"
+    title: "Implement first runtime-backed Evidence UX surface"
     milestone: "M5"
     status: "completed"
     type: "evidence_ux"
     acceptance:
-      - "Evidence UX app renders Operations Home, S01 Closed Loop, Evidence Detail, and Integration Readiness."
+      - "Evidence UX app renders runtime-backed views over xAI cards, approvals, measurement, impact, and integration data."
+      - "Initial operator-console framing is superseded by JLV-0018 learner/instructor product UX recovery."
       - "UI data is exported from control-plane fixtures."
       - "Static UI validation checks runtime payload and required concepts."
       - "UI keeps APPI/IRB and pilot blockers visible."
@@ -219,3 +220,20 @@ backlog:
     validation:
       - "python scripts\\validate_contracts.py"
       - "python scripts\\run_scenario_matrix.py"
+
+  - id: "JLV-0018"
+    title: "Recover UX as learner/instructor AI LMS product"
+    milestone: "M7"
+    status: "completed"
+    type: "product_ux"
+    acceptance:
+      - "First screen is Learner Home, not an operator console."
+      - "Learner flow includes AI-adjusted study plan, lecture marker, AI hint, evidence access, and Meiwaku feedback."
+      - "Instructor flow includes aggregate signal summary, AI co-creation draft variants, approval action, rollback note, and measurement result."
+      - "Evidence drawer shows xAI judgment, evidence, uncertainty, recommended action, approval, measurement, model, and impact."
+      - "Static and browser smoke validators reject the old operations-console route labels."
+      - "Screenshot snapshot is refreshed with the learner/instructor product UX."
+    validation:
+      - "python scripts\\validate_static_ui.py"
+      - "python scripts\\validate_browser_smoke.py"
+      - "python scripts\\validate_screenshots.py"

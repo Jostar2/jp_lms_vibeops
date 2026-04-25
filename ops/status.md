@@ -39,15 +39,15 @@ see `git log --oneline -1`
 
 ## Current Correction
 
-The project is not a UI prototype project.
+The product UX must serve professors and learners directly, not operators.
 
-The next build track is:
+The build track remains:
 
 ```text
-contracts -> event ledger -> approval workflow -> policy gate -> measurement loop -> integration boundary -> evidence UX
+contracts -> event ledger -> approval workflow -> policy gate -> measurement loop -> integration boundary -> learner/instructor AI LMS UX
 ```
 
-UI work is downstream of these contracts.
+UI work is downstream of these contracts, but it must now render as a usable LMS product surface rather than an evidence console.
 
 ## Current Milestone
 
@@ -66,6 +66,8 @@ Evidence UX browser smoke is complete.
 `M6 Runtime Packaging And CI Hardening` is complete.
 
 Next milestone: `M7 Productization Hardening`.
+
+M7 product-level AI LMS UX recovery is complete for the current static-file surface.
 
 Completed in this pass:
 
@@ -97,7 +99,7 @@ Completed in this pass:
 - CSV fixture to internal event conversion.
 - Evidence UX readiness review.
 - Evidence UX route spec.
-- Evidence UX static app.
+- AI LMS product UX app.
 - Runtime data exporter.
 - Static UI validator.
 - Browser smoke validator.
@@ -111,6 +113,12 @@ Completed in this pass:
 - Screenshot snapshot validator.
 - S11/S12/S13 contract fixtures.
 - Scenario matrix runtime summary.
+- Learner Home product surface.
+- Instructor Studio product surface.
+- AI coach prompt interactions.
+- Dynamic study-time, task completion, draft variant, approval, and Meiwaku feedback interactions.
+- Product UX validators replacing operator-console checks.
+- Updated product UX screenshot snapshot.
 
 ## Immediate Next Step
 
@@ -119,4 +127,4 @@ Next hardening track:
 - add S15 Teaching Profile fixture and runtime coverage
 - move schema validation toward full JSON Schema or Pydantic enforcement
 - add release artifact workflow and PR template
-- decide whether Evidence UX should become a packaged web app
+- package the AI LMS product UX as a real web app surface

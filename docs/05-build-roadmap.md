@@ -101,6 +101,9 @@ Goal: build UI and prepare for a constrained real pilot only after contracts and
 
 Outputs:
 
+- learner home with AI-adjusted study plan, lecture marker, xAI evidence, and Meiwaku feedback
+- instructor studio with aggregate struggle signals, AI co-creation drafts, approval, rollback, and measurement
+- shared AI coach and xAI evidence drawer
 - tenant isolation plan
 - data processing agreement checklist
 - native copy signoff
@@ -109,6 +112,9 @@ Outputs:
 
 Exit criteria:
 
+- first screen serves learners, not operators
+- instructor flow proves professor-controlled AI assistance
+- dynamic browser interactions cover plan adjustment, task completion, AI prompts, draft variants, approval, and recommendation challenge
 - legal/IT review packet complete
 - pilot success/failure criteria pre-registered
 - rollback and data deletion tested

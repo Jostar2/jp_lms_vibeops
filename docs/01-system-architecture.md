@@ -69,13 +69,16 @@ Purpose: make AI judgment visible, disputable, and actionable.
 
 UX primitives:
 
-- Decision Queue
+- Learner Home
 - Focus AI Panel
 - xAI Card
 - Intervention Draft
 - Co-Creation Studio
+- Instructor Approval Queue
 - Impact Ledger
 - Meiwaku feedback control
+
+Design rule: the first UX surface must look like an AI-assisted LMS that learners and professors can use in-course, not a back-office operator console.
 
 The UX must answer three questions on every AI-touched surface:
 

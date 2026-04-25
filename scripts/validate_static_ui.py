@@ -17,10 +17,10 @@ REQUIRED_FILES = [
 ]
 
 REQUIRED_ROUTES = [
-    "Operations",
-    "Closed Loop",
-    "Evidence",
-    "Integration",
+    "학습자 홈",
+    "교수자 스튜디오",
+    "AI 근거",
+    "수업 설정",
 ]
 
 
@@ -48,7 +48,24 @@ def main() -> None:
     for route in REQUIRED_ROUTES:
         if route not in html + js:
             fail(f"Evidence UX missing route label: {route}")
-    for required in ["Event Timeline", "approval", "measurement", "impact", "pilot"]:
+    required_concepts = [
+        "AI 코치",
+        "오늘의 학습 플랜",
+        "교수자",
+        "xAI",
+        "Meiwaku",
+        "approval",
+        "measurement",
+        "impact",
+        "pilot",
+        "set-minutes",
+        "toggle-task",
+        "approve-draft",
+        "set-variant",
+        "challenge",
+        "routeFromHash",
+    ]
+    for required in required_concepts:
         if not re.search(required, js, flags=re.IGNORECASE):
             fail(f"Evidence UX JS missing required concept: {required}")
     if "letter-spacing: 0;" not in css:

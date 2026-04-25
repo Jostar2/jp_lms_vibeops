@@ -19,9 +19,9 @@ There is no external GitHub Project or Jira board connected yet. Project state i
 | LMS adapter sample | [scripts/run_adapter_sample.py](scripts/run_adapter_sample.py) |
 | Pilot governance packet | [docs/pilot/](docs/pilot/) |
 | Pilot gate spec | [specs/governance/pilot-gates.yaml](specs/governance/pilot-gates.yaml) |
-| Evidence UX readiness | [docs/evidence-ux/](docs/evidence-ux/) |
-| Evidence UX route spec | [specs/evidence-ux/routes.yaml](specs/evidence-ux/routes.yaml) |
-| Evidence UX static app | [app/evidence-ux/index.html](app/evidence-ux/index.html) |
+| AI LMS product UX readiness | [docs/evidence-ux/](docs/evidence-ux/) |
+| AI LMS product UX route spec | [specs/evidence-ux/routes.yaml](specs/evidence-ux/routes.yaml) |
+| AI LMS product UX app | [app/evidence-ux/index.html](app/evidence-ux/index.html) |
 | Release readiness | [docs/release-readiness.md](docs/release-readiness.md) |
 
 ## Git Status
@@ -70,4 +70,4 @@ Recommended branch policy once connected:
 - `jp-lms/contracts/*`: schemas and contract changes.
 - `jp-lms/control-plane/*`: event ledger, approval, policy, measurement runtime.
 - `jp-lms/integration/*`: LMS adapter and pilot integration work.
-- `jp-lms/evidence-ux/*`: UI once control plane contracts are stable.
+- `jp-lms/product-ux/*`: learner/instructor AI LMS UX work.
