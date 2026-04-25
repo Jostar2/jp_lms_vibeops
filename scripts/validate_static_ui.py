@@ -17,10 +17,10 @@ REQUIRED_FILES = [
 ]
 
 REQUIRED_ROUTES = [
-    "Operations Home",
-    "S01 Closed Loop",
-    "Evidence Detail",
-    "Integration Readiness",
+    "Operations",
+    "Closed Loop",
+    "Evidence",
+    "Integration",
 ]
 
 

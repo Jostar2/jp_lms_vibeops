@@ -44,7 +44,7 @@ def main() -> None:
         print(result.stderr, file=sys.stderr)
         raise SystemExit(result.returncode)
     dom = result.stdout
-    for required in ["Operations Home", "Current Operation", "AI Learning Operations Chain", "Pilot Blockers"]:
+    for required in ["Operations", "Control Plane State", "Operation Queue", "Pilot Gate Evidence"]:
         if required not in dom:
             print(dom[:2000])
             raise SystemExit(f"browser smoke missing rendered text: {required}")

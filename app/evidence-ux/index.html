@@ -3,43 +3,55 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>JP LMS VibeOps Evidence UX</title>
+    <title>JP LMS VibeOps Control Plane</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="app-shell">
-      <aside class="sidebar">
+    <div class="shell">
+      <aside class="rail">
         <div class="brand">
-          <div class="brand-mark">JP</div>
+          <div class="mark">JP</div>
           <div>
             <h1>JP LMS VibeOps</h1>
-            <p>AI Learning Operations</p>
+            <p>Learning Operations OS</p>
           </div>
         </div>
-        <nav class="nav" aria-label="Evidence UX routes">
-          <button class="nav-item active" data-route="home">Operations Home</button>
-          <button class="nav-item" data-route="s01">S01 Closed Loop</button>
-          <button class="nav-item" data-route="evidence">Evidence Detail</button>
-          <button class="nav-item" data-route="integration">Integration Readiness</button>
+
+        <nav class="nav" aria-label="Control plane routes">
+          <button class="nav-item active" data-route="home">
+            <span>01</span>
+            Operations
+          </button>
+          <button class="nav-item" data-route="s01">
+            <span>02</span>
+            Closed Loop
+          </button>
+          <button class="nav-item" data-route="evidence">
+            <span>03</span>
+            Evidence
+          </button>
+          <button class="nav-item" data-route="integration">
+            <span>04</span>
+            Integration
+          </button>
         </nav>
-        <div class="sidebar-footer">
-          <span class="status-dot"></span>
-          Runtime data from control plane fixtures
+
+        <div class="rail-note">
+          <strong>Source</strong>
+          <span>control-plane fixtures</span>
+          <span>runtime export</span>
+          <span>browser smoke passed</span>
         </div>
       </aside>
 
-      <main class="main">
+      <main class="workspace">
         <header class="topbar">
           <div>
-            <p class="eyebrow">Evidence UX Surface</p>
-            <h2 id="routeTitle">Operations Home</h2>
+            <p class="context">Runtime-backed Evidence UX</p>
+            <h2 id="routeTitle">Operations</h2>
           </div>
-          <div class="topbar-actions">
-            <span class="pill" id="operationState">loading</span>
-            <span class="pill warn">APPI/IRB pending</span>
-          </div>
+          <div class="status-strip" id="statusStrip"></div>
         </header>
-
         <section id="view" class="view" aria-live="polite"></section>
       </main>
     </div>
