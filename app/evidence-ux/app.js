@@ -25,6 +25,10 @@ const state = {
   sessionStarted: false,
   activeCueIdx: 1,
   selectedDecisionId: 'S01',
+  generatedQuiz: false,
+  generatedObjectId: 'concept',
+  explanationMode: 'bridge',
+  agentRunOpen: true,
   meiwakuStatus: '',
   chat: [
     {
@@ -34,6 +38,73 @@ const state = {
     },
   ],
 };
+
+const agentMesh = [
+  {
+    id: 'tutor',
+    name: 'Tutor Agent',
+    job: '힌트 강도 조절',
+    status: 'observing',
+    latency: '1.2s',
+    guardrail: '정답 직접 생성 차단',
+  },
+  {
+    id: 'planner',
+    name: 'Planning Agent',
+    job: '오늘 플랜 재정렬',
+    status: 'ready',
+    latency: '0.8s',
+    guardrail: '학생 수락 후 저장',
+  },
+  {
+    id: 'assessment',
+    name: 'Assessment Agent',
+    job: '확인 문제 생성',
+    status: 'drafting',
+    latency: '2.4s',
+    guardrail: '채점 분리',
+  },
+  {
+    id: 'governance',
+    name: 'Governance Agent',
+    job: '승인·개인정보 게이트',
+    status: 'blocking',
+    latency: '0.3s',
+    guardrail: 'G2/G4 실행 잠금',
+  },
+];
+
+const generatedObjects = {
+  concept: {
+    title: '개념 카드 · Entropy',
+    type: 'micro lesson',
+    body: 'Entropy는 선택지가 섞여 있을수록 커지는 불확실성 지표입니다. 분할 뒤 Entropy가 낮아지면 노드가 더 순수해진 것입니다.',
+    next: '1문장 자기 설명',
+    cardId: 'xai_s01_student_hint_001',
+  },
+  quiz: {
+    title: 'AI 생성 확인 문제',
+    type: 'checkpoint',
+    body: '두 분할 A/B 중 Entropy 감소가 더 큰 쪽을 고르고, 선택 이유를 한 문장으로 남기세요.',
+    next: '힌트 강도 자동 조절',
+    cardId: 'xai_s01_student_hint_001',
+  },
+  scaffold: {
+    title: '과제 시작 스캐폴드',
+    type: 'assignment plan',
+    body: 'Titanic 과제는 결측치 확인, 기준 모델, 평가 지표 선택 순서로 시작합니다. AI는 제출문을 대신 작성하지 않습니다.',
+    next: '30분 계획에 추가',
+    cardId: 'xai_s12_pace_agent_001',
+  },
+};
+
+const agentTrace = [
+  ['Observe', 'video.pause + checkpoint.answer', 'complete'],
+  ['Retrieve', 'W6 조건부 확률, W7 entropy transcript', 'complete'],
+  ['Generate', 'hint, checkpoint, assignment scaffold', 'draft'],
+  ['Guardrail', '정답 생성 차단, 승인 게이트 확인', 'active'],
+  ['Execute', '학생 수락 또는 교수자 승인 후 반영', 'waiting'],
+];
 
 const lectureCues = [
   {
@@ -125,6 +196,15 @@ const commandItems = [
     persona: 'student',
     route: 'lecture',
     cueIdx: 1,
+    cardId: 'xai_s01_student_hint_001',
+  },
+  {
+    id: 'generate-checkpoint',
+    title: '확인 문제 생성',
+    detail: '강의 병목 구간에서 AI가 짧은 formative checkpoint를 만듭니다.',
+    persona: 'student',
+    route: 'student',
+    action: 'generate-quiz',
     cardId: 'xai_s01_student_hint_001',
   },
   {
@@ -374,6 +454,71 @@ function renderAdaptiveCoach() {
   `;
 }
 
+function renderAiOperatingLayer() {
+  const headline = state.persona === 'instructor'
+    ? 'Claritas가 수업 신호, 초안 생성, 승인 게이트를 함께 점검합니다.'
+    : 'Claritas가 학습 객체를 생성하고 실행 경계를 점검합니다.';
+  return `
+    <section class="ai-os-panel">
+      <div class="ai-os-head">
+        <div>
+          <div class="page-eyebrow">AI Operating Layer</div>
+          <h3>${headline}</h3>
+        </div>
+        ${tag('Agent Mesh', 'tag-xai')}
+      </div>
+      <div class="agent-grid">
+        ${agentMesh.map((agent) => `
+          <button class="agent-card ${agent.status}" data-action="toggle-agent-run">
+            <span class="agent-card-head"><strong>${esc(agent.name)}</strong><em>${esc(agent.status)}</em></span>
+            <span>${esc(agent.job)}</span>
+            <small>${esc(agent.guardrail)} · ${esc(agent.latency)}</small>
+          </button>
+        `).join('')}
+      </div>
+    </section>
+  `;
+}
+
+function renderGeneratedLearningObjects() {
+  return `
+    <section class="card generated-lab">
+      <div class="card-head">
+        <div><div class="card-title">AI 생성 학습 객체</div><div class="card-sub">강의 병목에서 바로 쓰는 마이크로 레슨, 확인 문제, 과제 스캐폴드입니다.</div></div>
+        ${tag(state.generatedQuiz ? '생성됨' : 'draft ready', state.generatedQuiz ? 'tag-ok' : 'tag-xai')}
+      </div>
+      <div class="object-tabs">
+        ${Object.entries(generatedObjects).map(([id, item]) => `
+          <button class="${state.generatedObjectId === id ? 'active' : ''}" data-action="select-object" data-object-id="${id}">
+            <strong>${esc(item.title)}</strong>
+            <small>${esc(item.type)}</small>
+          </button>
+        `).join('')}
+      </div>
+      ${renderGeneratedObjectPreview()}
+    </section>
+  `;
+}
+
+function renderGeneratedObjectPreview() {
+  const item = generatedObjects[state.generatedObjectId] || generatedObjects.concept;
+  return `
+    <div class="object-preview">
+      <div>
+        <div class="page-eyebrow">${esc(item.type)}</div>
+        <h3>${esc(item.title)}</h3>
+        <p>${esc(item.body)}</p>
+        <div class="object-next"><span class="ai-dot"></span>${esc(item.next)}</div>
+      </div>
+      <div class="object-actions">
+        ${button('생성', 'generate-quiz', '', 'btn-student')}
+        ${button('근거', 'select-card', `data-card-id="${esc(item.cardId)}"`, 'btn-ghost')}
+        ${button('플랜에 반영', 'accept-object', '', 'btn-ghost')}
+      </div>
+    </div>
+  `;
+}
+
 function renderSessionRail() {
   const plan = currentPlan();
   return `
@@ -507,6 +652,7 @@ function renderStudentDashboard() {
     </section>
 
     ${renderAdaptiveCoach()}
+    ${renderAiOperatingLayer()}
 
     <div class="stats-grid">
       ${stat('오늘 AI가 남긴 실행', '3개', '강의 · 과제 · 복습')}
@@ -523,6 +669,10 @@ function renderStudentDashboard() {
       ${learningPathCard('▷', '데이터 마이닝 · 7주차 · Lec 2 — 의사결정 트리의 불순도 지표', '52분 · 이속현 교수 · 30% 시청 완료', '이 강의는 AI가 근거를 열고 순서를 다시 계산할 수 있습니다', '이어서보기', 'xai_s01_student_hint_001', 'active')}
       ${learningPathCard('✎', '머신러닝 기초 · 과제 3 — Titanic 데이터셋 분류 모델', '마감 2일 · 제출률 62% · 평균 4시간 소요', '과제 전에 W6 조건부 확률을 먼저 보는 편이 안전합니다', '열기', 'xai_s12_pace_agent_001')}
       ${learningPathCard('✦', '맞춤 복습 · 통계 기초 — 조건부 확률 (5분)', '지난주 퀴즈 오답 3문항을 바탕으로 자동 생성된 간격 반복', '복습 큐는 예상 학습효과와 부담 리스크를 함께 봅니다', '시작', 'xai_s12_pace_agent_001')}
+    </div>
+
+    <div style="margin-top:22px">
+      ${renderGeneratedLearningObjects()}
     </div>
 
     <div class="split-2" style="margin-top:22px">
@@ -643,18 +793,6 @@ function renderLecture() {
         `).join('')}
       </div>
     </section>
-    <section class="card" style="margin-top:14px">
-      <div class="card-head"><div><div class="card-title">Pilot Gate Checklist</div><div class="card-sub">운영 전 승인 문서와 통합 준비 상태를 한 번에 점검합니다.</div></div>${tag('readiness', 'tag-xai')}</div>
-      <div class="gate-grid">
-        ${(data.pilot_gates || []).map((gate, index) => `
-          <div class="gate-card">
-            <span>${String(index + 1).padStart(2, '0')}</span>
-            <strong>${esc(gate.split('/').pop().replace('.md', '').replaceAll('-', ' '))}</strong>
-            <small>${index < 4 ? 'ready' : 'review'}</small>
-          </div>
-        `).join('')}
-      </div>
-    </section>
   `;
 }
 
@@ -711,6 +849,7 @@ function renderInstructorDashboard() {
       <h1 class="page-title">이번 주 수업에서 <em>18:12 구간</em>이 가장 큰 병목입니다.</h1>
       <p class="page-sub">집계 신호 기준으로 학생 개인 목록 없이 수업 개선 결정을 돕습니다. AI 초안은 승인 전까지 학생에게 공개되지 않습니다.</p>
     </section>
+    ${renderAiOperatingLayer()}
     <div class="stats-grid">
       ${stat('평균 진도율', '67%', '4% vs 지난 학기')}
       ${stat('미채점', '24', '마감 72h 내')}
@@ -802,6 +941,18 @@ function renderCourseSetup() {
         ${source(`${s13?.scenario_id || 'S13'} · ${s13?.state || 'awaiting_approval'}`, 'G4 locked', 'var(--warn)')}
       </div>
     </section>
+    <section class="card" style="margin-top:14px">
+      <div class="card-head"><div><div class="card-title">Pilot Gate Checklist</div><div class="card-sub">운영 전 승인 문서와 통합 준비 상태를 한 번에 점검합니다.</div></div>${tag('readiness', 'tag-xai')}</div>
+      <div class="gate-grid">
+        ${(data.pilot_gates || []).map((gate, index) => `
+          <div class="gate-card">
+            <span>${String(index + 1).padStart(2, '0')}</span>
+            <strong>${esc(gate.split('/').pop().replace('.md', '').replaceAll('-', ' '))}</strong>
+            <small>${index < 4 ? 'ready' : 'review'}</small>
+          </div>
+        `).join('')}
+      </div>
+    </section>
   `;
 }
 
@@ -872,6 +1023,27 @@ function renderProvenance(item) {
   `;
 }
 
+function renderAgentRunTrace() {
+  return `
+    <div class="agent-run">
+      <button class="agent-run-head" data-action="toggle-agent-run">
+        <span><strong>Agent Run</strong><small>${state.agentRunOpen ? 'tool trace open' : 'tool trace folded'}</small></span>
+        <em>${state.agentRunOpen ? '접기' : '열기'}</em>
+      </button>
+      ${state.agentRunOpen ? `
+        <div class="agent-run-steps">
+          ${agentTrace.map(([label, detail, status]) => `
+            <div class="agent-run-step ${status}">
+              <span></span>
+              <div><strong>${esc(label)}</strong><small>${esc(detail)} · ${esc(status)}</small></div>
+            </div>
+          `).join('')}
+        </div>
+      ` : ''}
+    </div>
+  `;
+}
+
 function renderAside() {
   const item = activeCard();
   const result = resultFor(item.scenario_id);
@@ -895,6 +1067,7 @@ function renderAside() {
     <div class="source-list">
       ${item.evidence.map((evidence) => source(evidence.claim, `w ${evidence.weight}`, 'var(--xai)')).join('')}
     </div>
+    ${renderAgentRunTrace()}
     <div class="aside-head">
       <div><div class="aside-title">Provenance Trace</div><div class="aside-sub">event → model → action</div></div>
       ${tag(item.governance?.approval_gate || 'G?', 'tag-line')}
@@ -968,6 +1141,8 @@ function askAi(prompt) {
     return;
   }
   if (prompt === 'quiz') {
+    state.generatedQuiz = true;
+    state.generatedObjectId = 'quiz';
     state.activeCardId = 'xai_s01_student_hint_001';
     pushChat('Student', '정답 말고 힌트만 줘.', 'checkpoint');
     pushChat('Claritas', '힌트: Entropy가 낮아졌다는 것은 분할 뒤 불확실성이 줄었다는 뜻입니다. 어느 노드가 더 한 클래스에 모였는지 먼저 보세요.', 'xai_s01_student_hint_001');
@@ -1001,6 +1176,7 @@ function runCommand(commandId) {
   if (command.cardId) state.activeCardId = command.cardId;
   if (command.action === 'start-session') askAi('start');
   if (command.action === 'adjust') askAi('adjust');
+  if (command.action === 'generate-quiz') askAi('quiz');
   state.commandOpen = false;
 }
 
@@ -1014,10 +1190,23 @@ function handleAction(buttonEl) {
     state.navCollapsed = !state.navCollapsed;
   } else if (action === 'toggle-command') {
     state.commandOpen = !state.commandOpen;
+  } else if (action === 'toggle-agent-run') {
+    state.agentRunOpen = !state.agentRunOpen;
   } else if (action === 'run-command') {
     runCommand(buttonEl.dataset.commandId || '');
   } else if (action === 'start-session') {
     askAi('start');
+  } else if (action === 'generate-quiz') {
+    askAi('quiz');
+  } else if (action === 'select-object') {
+    state.generatedObjectId = buttonEl.dataset.objectId || 'concept';
+    state.activeCardId = generatedObjects[state.generatedObjectId]?.cardId || state.activeCardId;
+  } else if (action === 'accept-object') {
+    state.sessionStarted = true;
+    state.completedTaskIds.add('warmup');
+    state.activeCardId = generatedObjects[state.generatedObjectId]?.cardId || state.activeCardId;
+    pushChat('Student', '이 학습 객체를 오늘 계획에 넣어줘.', 'accept generated object');
+    pushChat('Claritas', '플랜에 반영했습니다. 다음 단계는 확인 문제이며, 채점과 성적 판단에는 직접 연결하지 않습니다.', state.activeCardId);
   } else if (action === 'jump-cue') {
     state.activeCueIdx = Number(buttonEl.dataset.cueIdx) || 0;
     state.activeCardId = selectedCue().cardId;

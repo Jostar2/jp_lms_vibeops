@@ -167,6 +167,34 @@ button {
   font-size: 10.5px;
 }
 
+.agent-status {
+  min-width: 132px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 10px;
+  border: 1px solid rgba(109, 77, 189, .18);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #fff, var(--xai-soft));
+  color: var(--ink-2);
+  font-size: 11.5px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.agent-status strong {
+  color: var(--xai);
+  font-size: 11px;
+}
+
+.agent-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--student);
+  box-shadow: 0 0 0 4px rgba(47, 122, 90, .13);
+}
+
 .view-switch {
   display: flex;
   gap: 2px;
@@ -1403,6 +1431,176 @@ button {
   font-size: 12px;
 }
 
+.ai-os-panel {
+  margin-bottom: 18px;
+  padding: 18px;
+  border: 1px solid rgba(109, 77, 189, .18);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(135deg, rgba(236, 230, 249, .62), rgba(255, 255, 255, .92)),
+    var(--surface);
+  box-shadow: var(--shadow-1);
+}
+
+.ai-os-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.ai-os-head h3 {
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: 18px;
+  line-height: 1.35;
+  word-break: keep-all;
+}
+
+.agent-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.agent-card {
+  min-height: 118px;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .86);
+  text-align: left;
+  box-shadow: var(--shadow-1);
+}
+
+.agent-card:hover {
+  border-color: rgba(109, 77, 189, .3);
+}
+
+.agent-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.agent-card strong {
+  color: var(--ink);
+  font-size: 12.5px;
+}
+
+.agent-card em {
+  color: var(--xai);
+  font-size: 10.5px;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.agent-card > span:not(.agent-card-head) {
+  color: var(--ink-2);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.agent-card small {
+  color: var(--ink-3);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.agent-card.blocking {
+  border-color: rgba(180, 69, 44, .2);
+  background: linear-gradient(180deg, #fff, var(--danger-soft));
+}
+
+.agent-card.drafting {
+  border-color: rgba(193, 95, 60, .18);
+  background: linear-gradient(180deg, #fff, var(--claude-soft));
+}
+
+.generated-lab {
+  overflow: hidden;
+}
+
+.object-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.object-tabs button {
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface-2);
+  text-align: left;
+}
+
+.object-tabs button.active {
+  border-color: rgba(47, 122, 90, .3);
+  background: var(--student-soft);
+}
+
+.object-tabs strong,
+.object-tabs small {
+  display: block;
+}
+
+.object-tabs strong {
+  color: var(--ink);
+  font-size: 12.5px;
+}
+
+.object-tabs small {
+  margin-top: 3px;
+  color: var(--ink-3);
+  font-size: 11px;
+}
+
+.object-preview {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: start;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: linear-gradient(180deg, #fff, #fbfaf6);
+}
+
+.object-preview h3 {
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: 18px;
+  line-height: 1.32;
+}
+
+.object-preview p {
+  margin-top: 8px;
+  color: var(--ink-2);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.object-next {
+  margin-top: 12px;
+  color: var(--ink-3);
+  font-size: 12px;
+}
+
+.object-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  max-width: 220px;
+}
+
 .lecture-signal-grid,
 .decision-board {
   display: grid;
@@ -1699,6 +1897,98 @@ button {
   font-size: 10.5px;
 }
 
+.agent-run {
+  border: 1px solid rgba(109, 77, 189, .18);
+  border-radius: 12px;
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.agent-run-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px;
+  text-align: left;
+}
+
+.agent-run-head strong,
+.agent-run-head small {
+  display: block;
+}
+
+.agent-run-head strong {
+  color: var(--ink);
+  font-size: 12.5px;
+}
+
+.agent-run-head small {
+  margin-top: 2px;
+  color: var(--ink-4);
+  font-size: 10.5px;
+}
+
+.agent-run-head em {
+  color: var(--xai);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.agent-run-steps {
+  display: grid;
+  gap: 0;
+  padding: 0 12px 12px;
+}
+
+.agent-run-step {
+  display: grid;
+  grid-template-columns: 14px minmax(0, 1fr);
+  gap: 9px;
+  padding: 9px 0;
+  border-top: 1px solid var(--line);
+}
+
+.agent-run-step span {
+  width: 9px;
+  height: 9px;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: var(--line-2);
+}
+
+.agent-run-step.complete span {
+  background: var(--student);
+}
+
+.agent-run-step.draft span {
+  background: var(--claude);
+}
+
+.agent-run-step.active span {
+  background: var(--xai);
+  box-shadow: 0 0 0 4px var(--xai-soft);
+}
+
+.agent-run-step strong,
+.agent-run-step small {
+  display: block;
+}
+
+.agent-run-step strong {
+  color: var(--ink-2);
+  font-size: 12px;
+}
+
+.agent-run-step small {
+  margin-top: 2px;
+  color: var(--ink-4);
+  font-size: 10.5px;
+  line-height: 1.4;
+}
+
 .main::-webkit-scrollbar,
 .aside::-webkit-scrollbar,
 .nav::-webkit-scrollbar {
@@ -1750,6 +2040,7 @@ button {
 
   .brand,
   .search-bar,
+  .agent-status,
   .view-switch {
     width: 100%;
     min-width: 0;
@@ -1804,11 +2095,13 @@ button {
 
   .stats-grid,
   .split-2,
+  .agent-grid,
   .lecture-signal-grid,
   .decision-board,
   .evidence-card-grid,
   .metric-grid,
   .gate-grid,
+  .object-tabs,
   .co-variant-meta {
     grid-template-columns: 1fr;
   }
@@ -1816,12 +2109,14 @@ button {
   .path-item-main,
   .pace-block,
   .control-plane,
+  .object-preview,
   .transcript-row {
     grid-template-columns: 1fr;
   }
 
   .control-metrics,
-  .control-actions {
+  .control-actions,
+  .object-actions {
     align-items: flex-start;
     justify-content: flex-start;
   }
