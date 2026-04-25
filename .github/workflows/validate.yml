@@ -20,6 +20,15 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "npm"
+
+      - name: Install web dependencies
+        run: npm ci
+
       - name: Contract validation
         run: python scripts\validate_contracts.py
 
@@ -43,6 +52,9 @@ jobs:
 
       - name: Browser smoke
         run: python scripts\validate_browser_smoke.py
+
+      - name: Web app validation
+        run: python scripts\validate_web_app.py
 
       - name: Packaging validation
         run: python scripts\validate_packaging.py

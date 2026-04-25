@@ -52,6 +52,7 @@ def build_payload() -> dict[str, object]:
 
 def main() -> None:
     out = ROOT / "app" / "evidence-ux" / "data" / "runtime.js"
+    web_out = ROOT / "apps" / "web" / "src" / "data" / "runtime.json"
     payload = build_payload()
     out.write_text(
         "window.JP_LMS_VIBEOPS_DATA = "
@@ -59,7 +60,13 @@ def main() -> None:
         + ";\n",
         encoding="utf-8",
     )
+    web_out.parent.mkdir(parents=True, exist_ok=True)
+    web_out.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
     print(f"wrote {out.relative_to(ROOT)}")
+    print(f"wrote {web_out.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":

@@ -119,3 +119,24 @@ Exit criteria:
 - pilot success/failure criteria pre-registered
 - rollback and data deletion tested
 - browser verification passes for selected evidence UX flows
+
+## Phase 6: Production Web App Foundation
+
+Goal: move the AI LMS product surface from static Evidence UX artifact to typed production web app.
+
+Outputs:
+
+- Next.js and TypeScript workspace under `apps/web`
+- control-plane payload export to web app JSON
+- AI Learning Session product slice
+- generated learning object model
+- agent run trace in the product UI
+- API route for session data
+- CI web app validation
+
+Exit criteria:
+
+- `npm run web:validate` passes.
+- `python scripts\validate_web_app.py` passes.
+- the first production page connects xAI evidence, generated learning objects, learner acceptance, instructor approval boundary, measurement, and impact.
+- the static Evidence UX remains available as a visual and evidence reference.

@@ -23,9 +23,11 @@ This repository starts from design, not from the legacy prototype implementation
 | Governance and risk | [docs/04-governance-and-risk.md](docs/04-governance-and-risk.md) |
 | Build roadmap | [docs/05-build-roadmap.md](docs/05-build-roadmap.md) |
 | Control-plane-first plan | [docs/06-control-plane-first-implementation.md](docs/06-control-plane-first-implementation.md) |
+| Production web app foundation | [docs/07-production-web-app-foundation.md](docs/07-production-web-app-foundation.md) |
 | Pilot governance packet | [docs/pilot/](docs/pilot/) |
 | AI LMS product UX readiness | [docs/evidence-ux/](docs/evidence-ux/) |
 | AI LMS product UX app | [app/evidence-ux/index.html](app/evidence-ux/index.html) |
+| Production AI Learning Session app | [apps/web/src/app/page.tsx](apps/web/src/app/page.tsx) |
 | Release readiness | [docs/release-readiness.md](docs/release-readiness.md) |
 | Project reset decision | [docs/decisions/ADR-0001-project-reset.md](docs/decisions/ADR-0001-project-reset.md) |
 | Control-plane-first decision | [docs/decisions/ADR-0002-control-plane-first.md](docs/decisions/ADR-0002-control-plane-first.md) |
@@ -65,7 +67,13 @@ https://github.com/Jostar2/jp_lms_vibeops.git
 
 ## Validation
 
-Run the lightweight design repository check:
+Install web dependencies before the full repository check:
+
+```powershell
+npm ci
+```
+
+Run the full repository check:
 
 ```powershell
 python scripts\validate_project.py
@@ -94,6 +102,13 @@ python scripts\validate_formal_schemas.py
 python -m unittest discover -s tests
 ```
 
+Validate the production web app foundation directly:
+
+```powershell
+npm run web:validate
+python scripts\validate_web_app.py
+```
+
 Package CLI smoke:
 
 ```powershell
@@ -106,10 +121,10 @@ Refresh AI LMS product UX screenshot snapshot:
 python scripts\capture_evidence_ux_snapshot.py
 ```
 
-The next implementation step is product hardening beyond the static-file shell:
+The next implementation step is product hardening beyond the first production web app slice:
 
-1. Package the AI LMS UX as a real web app surface.
-2. Add richer dynamic flows for learner AI chat, instructor approval, and rollback execution.
+1. Add persistent storage for AI learning sessions, agent runs, generated learning objects, approvals, and impact ledgers.
+2. Add authentication and role routing for learner/instructor surfaces.
 3. Add S15 Teaching Profile runtime coverage.
 4. Move schema validation toward full JSON Schema or Pydantic enforcement.
 5. Prepare release artifact workflow and GitHub PR templates.

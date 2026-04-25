@@ -65,9 +65,11 @@ Evidence UX browser smoke is complete.
 
 `M6 Runtime Packaging And CI Hardening` is complete.
 
-Next milestone: `M7 Productization Hardening`.
+Next milestone: `M8 Production Web App Foundation`.
 
 M7 product-level AI LMS UX recovery is complete for the current static-file surface.
+
+M8 production web app foundation is complete for the first AI Learning Session slice.
 
 Completed in this pass:
 
@@ -121,12 +123,18 @@ Completed in this pass:
 - Updated product UX screenshot snapshot.
 - Course-room visual system with top course bar, compact route switcher, learning canvas, and AI dock.
 - Manual desktop and mobile visual review after UI/UX overhaul.
+- Next.js and TypeScript workspace under `apps/web`.
+- Runtime payload export to `apps/web/src/data/runtime.json`.
+- Production AI Learning Session page.
+- Session API route at `/api/learning-session`.
+- Web app validation script and CI Node setup.
 
 ## Immediate Next Step
 
 Next hardening track:
 
+- add persistent storage for AI learning sessions, agent runs, generated learning objects, approvals, and impact ledgers
+- add authentication and learner/instructor role routing
 - add S15 Teaching Profile fixture and runtime coverage
 - move schema validation toward full JSON Schema or Pydantic enforcement
 - add release artifact workflow and PR template
-- package the AI LMS product UX as a real web app surface

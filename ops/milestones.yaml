@@ -84,3 +84,14 @@ milestones:
       - "AI coach and xAI evidence drawer are visible product surfaces."
       - "Dynamic UX interactions are present for learner plans, AI prompts, instructor variants, approval, and Meiwaku feedback."
       - "Static UI and browser smoke validation require product-level learner/instructor concepts."
+
+  - id: "M8"
+    name: "Production Web App Foundation"
+    status: "completed"
+    purpose: "Move beyond the static Evidence UX artifact into a typed production web app surface."
+    exit_criteria:
+      - "Next.js and TypeScript workspace exists under apps/web."
+      - "Control-plane fixture payload is exported as JSON for the web app."
+      - "AI Learning Session slice renders learner action, generated learning objects, xAI evidence, agent run, approval boundary, measurement, and impact."
+      - "Web typecheck and production build pass."
+      - "CI includes Node dependency installation and web validation."

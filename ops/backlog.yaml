@@ -253,3 +253,18 @@ backlog:
       - "python scripts\\validate_static_ui.py"
       - "python scripts\\validate_browser_smoke.py"
       - "python scripts\\validate_screenshots.py"
+
+  - id: "JLV-0020"
+    title: "Build production web app foundation and AI Learning Session slice"
+    milestone: "M8"
+    status: "completed"
+    type: "product_runtime"
+    acceptance:
+      - "A Next.js and TypeScript web app exists under apps/web."
+      - "The app reads control-plane fixture data from apps/web/src/data/runtime.json."
+      - "The first page renders an AI Learning Session with generated learning objects, xAI evidence, agent run trace, learner acceptance, instructor approval boundary, measurement, and impact."
+      - "A web app validation script checks files, package scripts, runtime payload, typecheck, and production build."
+      - "CI installs Node dependencies and runs web app validation."
+    validation:
+      - "npm run web:validate"
+      - "python scripts\\validate_web_app.py"

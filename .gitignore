@@ -1,5 +1,7 @@
 # Dependencies
 node_modules/
+.next/
+*.tsbuildinfo
 .venv/
 __pycache__/
 
