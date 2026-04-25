@@ -22,7 +22,10 @@ This repository starts from design, not from the legacy prototype implementation
 | Demo and pilot plan | [docs/03-demo-and-pilot-plan.md](docs/03-demo-and-pilot-plan.md) |
 | Governance and risk | [docs/04-governance-and-risk.md](docs/04-governance-and-risk.md) |
 | Build roadmap | [docs/05-build-roadmap.md](docs/05-build-roadmap.md) |
+| Control-plane-first plan | [docs/06-control-plane-first-implementation.md](docs/06-control-plane-first-implementation.md) |
 | Project reset decision | [docs/decisions/ADR-0001-project-reset.md](docs/decisions/ADR-0001-project-reset.md) |
+| Control-plane-first decision | [docs/decisions/ADR-0002-control-plane-first.md](docs/decisions/ADR-0002-control-plane-first.md) |
+| Project management | [PROJECT.md](PROJECT.md) |
 | Scenario seed spec | [specs/scenarios.yaml](specs/scenarios.yaml) |
 | xAI card schema | [specs/xai-card.schema.yaml](specs/xai-card.schema.yaml) |
 | Event catalog seed | [specs/event-catalog.yaml](specs/event-catalog.yaml) |
@@ -42,6 +45,14 @@ This repository starts from design, not from the legacy prototype implementation
 
 This is a design-first project skeleton. There is no application runtime yet.
 
+Project management currently happens inside this repository through [PROJECT.md](PROJECT.md), [ops/status.md](ops/status.md), [ops/milestones.yaml](ops/milestones.yaml), and [ops/backlog.yaml](ops/backlog.yaml).
+
+The local Git repository is connected to:
+
+```text
+https://github.com/Jostar2/jp_lms_vibeops.git
+```
+
 ## Validation
 
 Run the lightweight design repository check:
@@ -50,10 +61,12 @@ Run the lightweight design repository check:
 python scripts\validate_project.py
 ```
 
-The next implementation step is to convert these docs into a minimal app and verification harness:
+The next implementation step is not a UI prototype. It is an executable control-plane foundation:
 
-1. Route and scenario manifest.
-2. xAI card renderer.
-3. Playwright visual/console verification.
-4. Demo A/B/C scripted flows.
-5. Pilot readiness packet.
+1. Contract validators for xAI cards, events, approvals, and measurement plans.
+2. AI operation state machine.
+3. Approval routing and blocking behavior.
+4. Policy/privacy gates.
+5. Measurement and impact ledger records.
+6. LMS adapter boundary.
+7. Evidence UX after the above contracts are stable.

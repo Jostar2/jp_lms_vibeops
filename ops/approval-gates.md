@@ -40,6 +40,6 @@ An action must be blocked when:
 
 ## First Implementation Target
 
-Implement G0-G2 in the first clickable product skeleton.
+Implement G0-G2 in the first control plane skeleton.
 
-G3-G4 can be represented as locked gates in the UI and fully specified in pilot packet documents before real deployment.
+G3-G4 can be represented as blocked gate results and fully specified in pilot packet documents before real deployment. UI can display those states later.

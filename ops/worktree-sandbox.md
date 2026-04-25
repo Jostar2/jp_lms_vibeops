@@ -22,14 +22,17 @@ main project
 
 ```text
 jp-lms/design/<topic>
-jp-lms/prototype/<topic>
+jp-lms/contracts/<topic>
+jp-lms/control-plane/<topic>
+jp-lms/integration/<topic>
+jp-lms/evidence-ux/<topic>
 jp-lms/gate/<topic>
 ```
 
 ## Sandbox Rules
 
 1. Do not edit copied reference files unless intentionally updating the source manifest.
-2. Prototype experiments should write under `app/`, `src/`, or `prototype/`, not inside `references/`.
+2. Runtime experiments should write under future `packages/`, `src/`, or `fixtures/`, not inside `references/`.
 3. Generated screenshots and videos stay out of git unless explicitly selected for presentation.
 4. Every UI change that affects demo flow must include Playwright verification once the app exists.
 5. Every governance/schema change must include an updated example.

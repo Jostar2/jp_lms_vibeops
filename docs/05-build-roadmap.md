@@ -19,34 +19,45 @@ Exit criteria:
 - Every AI output maps to the 5-part xAI card structure.
 - No critical APPI or integration assumption is unstated.
 
-## Phase 1: Clickable Product Skeleton
+## Phase 1: Executable Contracts
 
-Goal: rebuild the prototype as maintainable app structure.
-
-Recommended stack:
-
-- Vite or Next.js for UI.
-- TypeScript for schema contracts.
-- Playwright for visual and console verification.
-- Static JSON/YAML scenario fixtures before API integration.
+Goal: turn the design contracts into machine-checkable artifacts.
 
 Outputs:
 
-- route manifest
-- scenario fixture loader
-- xAI card component
-- Focus AI panel
-- instructor decision queue
-- impact ledger screen
-- Playwright screenshot harness
+- xAI card examples and validator.
+- event ledger examples and validator.
+- approval request/result examples and validator.
+- measurement plan examples and validator.
+- forbidden student-facing language check.
 
 Exit criteria:
 
-- Demo A runs from static fixture data.
-- All routes have screenshots and no console errors.
-- xAI card fixtures validate against schema.
+- `S01` can be represented as event, AI operation, approval, and measurement records.
+- Missing measurement plan blocks action-grade recommendations.
+- Missing approval blocks execution.
 
-## Phase 2: Pilot Packet And Integration Mock
+## Phase 2: Control Plane Skeleton
+
+Goal: create the first runtime boundary without UI-first assumptions.
+
+Outputs:
+
+- event ledger append/read boundary
+- AI operation state machine
+- approval router
+- policy/privacy gate
+- measurement planner
+- impact ledger record generator
+
+Exit criteria:
+
+- No UI framework is required.
+- Every AI operation has evidence and model metadata.
+- Unsafe action attempts are blocked with a structured reason.
+- Measurement records update an impact ledger object.
+
+## Phase 3: Pilot Packet And Integration Mock
 
 Goal: make the product credible to NetLearning and a university pilot committee.
 
@@ -65,9 +76,9 @@ Exit criteria:
 - LTI/OneRoster/SSO assumptions are documented.
 - Monthly report template exists.
 
-## Phase 3: Runtime Prototype
+## Phase 4: Integration Runtime Prototype
 
-Goal: replace static fixture decisions with bounded AI operation records.
+Goal: connect the control plane to bounded LMS adapter mocks.
 
 Outputs:
 
@@ -84,9 +95,9 @@ Exit criteria:
 - Sensitive actions are blocked without approval.
 - Measurement records update the Impact Ledger.
 
-## Phase 4: External Pilot Candidate
+## Phase 5: Evidence UX And External Pilot Candidate
 
-Goal: prepare for a constrained real pilot.
+Goal: build UI and prepare for a constrained real pilot only after contracts and governance are stable.
 
 Outputs:
 
@@ -101,3 +112,4 @@ Exit criteria:
 - legal/IT review packet complete
 - pilot success/failure criteria pre-registered
 - rollback and data deletion tested
+- browser verification passes for selected evidence UX flows

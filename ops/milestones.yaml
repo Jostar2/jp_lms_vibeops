@@ -1,0 +1,50 @@
+milestones:
+  - id: "M0"
+    name: "Design Reset And Project Control"
+    status: "in_progress"
+    purpose: "Make JP LMS VibeOps a clean, repo-managed product design project."
+    exit_criteria:
+      - "Project management files exist in-repo."
+      - "Git remote status is explicit."
+      - "Control-plane-first direction is documented."
+      - "Validation command passes."
+
+  - id: "M1"
+    name: "Executable Contracts"
+    status: "planned"
+    purpose: "Turn design contracts into machine-checkable artifacts."
+    exit_criteria:
+      - "xAI card examples validate."
+      - "event catalog examples validate."
+      - "approval workflow examples validate."
+      - "measurement plan examples validate."
+
+  - id: "M2"
+    name: "Control Plane Skeleton"
+    status: "planned"
+    purpose: "Create the first runtime boundary without UI-first assumptions."
+    exit_criteria:
+      - "event ledger append/read contract exists."
+      - "AI operation state machine exists."
+      - "approval router blocks unsafe actions."
+      - "measurement planner attaches to action cards."
+
+  - id: "M3"
+    name: "Pilot Governance Packet"
+    status: "planned"
+    purpose: "Prepare NetLearning and university approval materials."
+    exit_criteria:
+      - "APPI readiness checklist exists."
+      - "IRB/pre-registration draft exists."
+      - "integration fit brief exists."
+      - "90-day pilot measurement protocol exists."
+
+  - id: "M4"
+    name: "Evidence UX"
+    status: "planned"
+    purpose: "Build UI only after contracts and approval flows are stable."
+    exit_criteria:
+      - "xAI card renderer uses contract fixtures."
+      - "instructor decision queue uses approval state."
+      - "impact ledger uses measurement records."
+      - "browser verification passes."

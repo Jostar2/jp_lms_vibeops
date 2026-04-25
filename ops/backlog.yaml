@@ -1,0 +1,61 @@
+backlog:
+  - id: "JLV-0001"
+    title: "Make project management explicit in repo"
+    milestone: "M0"
+    status: "in_progress"
+    type: "project_control"
+    acceptance:
+      - "PROJECT.md explains where project management happens."
+      - "ops/status.md records Git remote status."
+      - "ops/milestones.yaml and ops/backlog.yaml exist."
+    validation:
+      - "python scripts\\validate_project.py"
+
+  - id: "JLV-0002"
+    title: "Replace UI-prototype-first roadmap with control-plane-first roadmap"
+    milestone: "M0"
+    status: "in_progress"
+    type: "architecture"
+    acceptance:
+      - "ADR records control-plane-first decision."
+      - "README no longer says Vite/Next.js is the next implementation step."
+      - "roadmap starts with executable contracts."
+    validation:
+      - "python scripts\\validate_project.py"
+
+  - id: "JLV-0003"
+    title: "Add executable xAI card examples"
+    milestone: "M1"
+    status: "planned"
+    type: "contract"
+    acceptance:
+      - "At least one student-facing and one instructor-facing xAI card example exist."
+      - "Examples include evidence, model version, uncertainty, action, measurement plan."
+      - "Student-facing examples avoid stigmatizing risk terms."
+    validation:
+      - "future contract validator"
+
+  - id: "JLV-0004"
+    title: "Define AI operation state machine"
+    milestone: "M1"
+    status: "planned"
+    type: "runtime_contract"
+    acceptance:
+      - "Allowed states and blocked states are explicit."
+      - "Approval requirements are tied to transitions."
+      - "Rollback and measurement transitions are represented."
+    validation:
+      - "future state-machine tests"
+
+  - id: "JLV-0005"
+    title: "Create pilot governance packet skeleton"
+    milestone: "M3"
+    status: "planned"
+    type: "pilot_ops"
+    acceptance:
+      - "APPI checklist exists."
+      - "IRB/pre-registration outline exists."
+      - "NetLearning integration fit brief exists."
+      - "Decision Brief ask is explicit."
+    validation:
+      - "document review"
