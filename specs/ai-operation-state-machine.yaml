@@ -1,0 +1,67 @@
+state_machine:
+  id: "jp-lms-vibeops.ai-operation.v0"
+  version: "0.1.0"
+  status: "draft"
+
+states:
+  allowed:
+    - drafted
+    - evidence_attached
+    - policy_checked
+    - awaiting_approval
+    - approved
+    - executed
+    - measuring
+    - measured
+    - retained
+    - revised
+    - rolled_back
+  blocked:
+    - insufficient_sample
+    - missing_consent
+    - policy_rejected
+    - high_uncertainty
+    - native_copy_review_required
+    - legal_review_required
+    - missing_measurement_plan
+    - missing_approval
+
+transitions:
+  - from: "drafted"
+    to: "evidence_attached"
+    requires: ["evidence"]
+  - from: "evidence_attached"
+    to: "policy_checked"
+    requires: ["policy_gate_result"]
+  - from: "policy_checked"
+    to: "awaiting_approval"
+    requires: ["approval_required"]
+  - from: "policy_checked"
+    to: "executed"
+    requires: ["approval_not_required", "measurement_plan"]
+  - from: "awaiting_approval"
+    to: "approved"
+    requires: ["approval_granted"]
+  - from: "approved"
+    to: "executed"
+    requires: ["rollback_note", "measurement_plan"]
+  - from: "executed"
+    to: "measuring"
+    requires: ["measurement_window_open"]
+  - from: "measuring"
+    to: "measured"
+    requires: ["measurement_result"]
+  - from: "measured"
+    to: "retained"
+    requires: ["positive_or_neutral_review"]
+  - from: "measured"
+    to: "revised"
+    requires: ["needs_adjustment"]
+  - from: "executed"
+    to: "rolled_back"
+    requires: ["rollback_trigger"]
+
+invariants:
+  - "Action-grade recommendations cannot skip measurement_plan."
+  - "G1-G4 actions cannot execute before approval."
+  - "Student-facing operation payloads cannot contain forbidden risk language."

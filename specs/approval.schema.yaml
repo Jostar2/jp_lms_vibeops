@@ -1,0 +1,47 @@
+schema:
+  id: "jp-lms-vibeops.approval.v0"
+  version: "0.1.0"
+  status: "draft"
+
+approval_states:
+  - requested
+  - approved
+  - rejected
+  - expired
+  - revoked
+
+gates:
+  G0:
+    name: "informational"
+    approval_required: false
+  G1:
+    name: "personal_planning"
+    approval_required: true
+    approver_roles: ["student"]
+  G2:
+    name: "instructor_content_action"
+    approval_required: true
+    approver_roles: ["instructor"]
+  G3:
+    name: "sensitive_learner_support"
+    approval_required: true
+    approver_roles: ["instructor", "student_support_policy_owner"]
+  G4:
+    name: "institutional_policy"
+    approval_required: true
+    approver_roles: ["academic_admin", "legal_it"]
+
+required_fields:
+  - approval_id
+  - scenario_id
+  - gate
+  - state
+  - requested_action
+  - source_card_id
+  - approver_role
+  - requested_at
+
+blocking_rules:
+  - "G1-G4 actions cannot execute while state is requested, rejected, expired, or revoked."
+  - "Approved G2 content actions require rollback_note."
+  - "G3 and G4 require APPI purpose and audit event before real deployment."

@@ -1,0 +1,29 @@
+schema:
+  id: "jp-lms-vibeops.measurement-plan.v0"
+  version: "0.1.0"
+  status: "draft"
+
+required_fields:
+  - measurement_id
+  - scenario_id
+  - linked_action_id
+  - metric
+  - method
+  - baseline
+  - target
+  - reevaluate_at
+  - owner
+  - publish_rule
+
+methods:
+  - cluster_rct
+  - switchback
+  - pre_post
+  - calibration_review
+  - qualitative_survey
+  - audit_review
+
+publish_rules:
+  - "A measurement claim cannot be published before reevaluate_at."
+  - "Outcome claims require method, baseline, and uncertainty or limitation note."
+  - "Student-facing measurement summaries must avoid stigmatizing risk language."

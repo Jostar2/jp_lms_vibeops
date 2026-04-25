@@ -1,0 +1,51 @@
+{
+  "case_id": "neg_student_forbidden_language",
+  "fixture_type": "xai_card",
+  "expected_errors": [
+    "student-facing card contains forbidden term"
+  ],
+  "fixture": {
+    "card_id": "xai_negative_student_001",
+    "scenario_id": "S01",
+    "audience": "student",
+    "judgment": {
+      "summary": "중도 이탈 위험이 있어 즉시 조치가 필요합니다.",
+      "decision_type": "recommend",
+      "confidence": 0.7
+    },
+    "evidence": [
+      {
+        "source_event": "evt_s01_video_pause_001",
+        "claim": "학습 행동 신호가 흔들렸습니다.",
+        "weight": 0.5
+      }
+    ],
+    "model": {
+      "name": "negative_fixture",
+      "version": "0.0.0",
+      "run_id": "run_negative_student_001"
+    },
+    "uncertainty": {
+      "summary": "negative fixture",
+      "interval_or_reason": "negative fixture"
+    },
+    "recommended_action": {
+      "action_id": "act_negative_student",
+      "label": "negative fixture",
+      "owner": "student",
+      "requires_approval": true
+    },
+    "measurement_plan": {
+      "measurement_id": "measure_negative_student",
+      "metric": "negative_fixture",
+      "method": "pre_post",
+      "reevaluate_at": "2026-04-10T10:35:00+09:00"
+    },
+    "governance": {
+      "data_scope": ["video.segment.pause"],
+      "privacy_level": "pseudonymous",
+      "approval_gate": "G1",
+      "appeal_control": "meiwaku_feedback"
+    }
+  }
+}

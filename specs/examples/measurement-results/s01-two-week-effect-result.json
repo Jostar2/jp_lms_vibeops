@@ -1,0 +1,19 @@
+{
+  "result_id": "result_s01_intervention_effect_001",
+  "measurement_id": "measure_s01_intervention_effect_001",
+  "scenario_id": "S01",
+  "observed": {
+    "segment_rewatch_rate_delta": -0.22,
+    "checkpoint_correct_rate_delta": 0.1
+  },
+  "uncertainty": {
+    "summary": "효과 방향은 일관되지만 표본은 단일 강의 단위입니다.",
+    "interval": {
+      "segment_rewatch_rate_delta": [-0.32, -0.12],
+      "checkpoint_correct_rate_delta": [0.05, 0.15]
+    }
+  },
+  "limitation_note": "파일럿 중간 측정 결과이며, 다른 강의와 학기에는 재검증이 필요합니다.",
+  "publish_status": "publishable",
+  "impact_decision": "retain"
+}

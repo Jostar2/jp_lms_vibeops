@@ -1,7 +1,7 @@
 milestones:
   - id: "M0"
     name: "Design Reset And Project Control"
-    status: "in_progress"
+    status: "completed"
     purpose: "Make JP LMS VibeOps a clean, repo-managed product design project."
     exit_criteria:
       - "Project management files exist in-repo."
@@ -11,13 +11,15 @@ milestones:
 
   - id: "M1"
     name: "Executable Contracts"
-    status: "planned"
+    status: "completed"
     purpose: "Turn design contracts into machine-checkable artifacts."
     exit_criteria:
       - "xAI card examples validate."
       - "event catalog examples validate."
       - "approval workflow examples validate."
       - "measurement plan examples validate."
+      - "measurement result and impact ledger examples validate."
+      - "negative guardrail examples validate expected failures."
 
   - id: "M2"
     name: "Control Plane Skeleton"

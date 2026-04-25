@@ -1,0 +1,44 @@
+{
+  "operation_id": "op_s01_closed_loop_001",
+  "scenario_id": "S01",
+  "current_state": "approved",
+  "event_ids": [
+    "evt_s01_video_pause_001",
+    "evt_s01_checkpoint_submit_001",
+    "evt_s01_inference_001"
+  ],
+  "xai_card_ids": [
+    "xai_s01_student_hint_001",
+    "xai_s01_instructor_intervention_001"
+  ],
+  "approval_ids": [
+    "approval_s01_entropy_bridge_001"
+  ],
+  "measurement_plan_id": "measure_s01_intervention_effect_001",
+  "transitions": [
+    {
+      "from": "drafted",
+      "to": "evidence_attached",
+      "at": "2026-04-10T10:25:00+09:00",
+      "evidence": ["evt_s01_video_pause_001", "evt_s01_checkpoint_submit_001"]
+    },
+    {
+      "from": "evidence_attached",
+      "to": "policy_checked",
+      "at": "2026-04-10T10:26:00+09:00",
+      "policy_gate_result": "G2_requires_instructor_approval"
+    },
+    {
+      "from": "policy_checked",
+      "to": "awaiting_approval",
+      "at": "2026-04-10T10:27:00+09:00",
+      "approval_required": "G2"
+    },
+    {
+      "from": "awaiting_approval",
+      "to": "approved",
+      "at": "2026-04-10T11:08:00+09:00",
+      "approval_granted": "approval_s01_entropy_bridge_001"
+    }
+  ]
+}

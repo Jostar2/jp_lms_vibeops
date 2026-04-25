@@ -35,13 +35,13 @@ packages/
 
 The first slice should be non-visual:
 
-1. Load scenario fixture `S01`.
-2. Append learning event records.
-3. Produce an AI operation draft.
-4. Validate an xAI card.
-5. Route action to an approval gate.
+1. Load scenario fixture `S01`. Current seed: [../specs/scenarios.yaml](../specs/scenarios.yaml).
+2. Append learning event records. Current examples: [../specs/examples/events/](../specs/examples/events/).
+3. Produce an AI operation draft. Current example: [../specs/examples/ai-operations/s01-closed-loop-operation.json](../specs/examples/ai-operations/s01-closed-loop-operation.json).
+4. Validate xAI cards. Current examples: [../specs/examples/xai-cards/](../specs/examples/xai-cards/).
+5. Route action to an approval gate. Current example: [../specs/examples/approvals/s01-instructor-content-approval.json](../specs/examples/approvals/s01-instructor-content-approval.json).
 6. Block execution until approval exists.
-7. Register measurement plan.
+7. Register measurement plan. Current example: [../specs/examples/measurements/s01-two-week-effect-plan.json](../specs/examples/measurements/s01-two-week-effect-plan.json).
 8. Emit an impact ledger placeholder.
 
 ## Acceptance Criteria
@@ -52,6 +52,16 @@ The first slice should be non-visual:
 - Student-facing text passes forbidden-language checks.
 - Missing approval blocks execution.
 - Missing measurement plan downgrades the object to informational insight.
+
+## Current Validator
+
+The first local validator is:
+
+```powershell
+python scripts\validate_contracts.py
+```
+
+It checks required fields, cross references, approval/action matching, operation transition chain, measurement linkage, and forbidden student-facing language.
 
 ## Why This Comes Before UI
 

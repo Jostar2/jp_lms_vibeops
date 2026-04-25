@@ -1,0 +1,31 @@
+schema:
+  id: "jp-lms-vibeops.measurement-result.v0"
+  version: "0.1.0"
+  status: "draft"
+
+required_fields:
+  - result_id
+  - measurement_id
+  - scenario_id
+  - observed
+  - uncertainty
+  - limitation_note
+  - publish_status
+  - impact_decision
+
+publish_statuses:
+  - draft
+  - publishable
+  - withheld
+  - withdrawn
+
+impact_decisions:
+  - retain
+  - revise
+  - rollback
+  - insufficient_evidence
+
+rules:
+  - "A publishable result must include uncertainty and limitation_note."
+  - "A rollback decision must point to an approval or action rollback note."
+  - "Student-facing summaries must avoid stigmatizing risk language."

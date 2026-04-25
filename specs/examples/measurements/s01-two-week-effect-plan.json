@@ -1,0 +1,18 @@
+{
+  "measurement_id": "measure_s01_intervention_effect_001",
+  "scenario_id": "S01",
+  "linked_action_id": "act_s01_entropy_bridge_publish",
+  "metric": "segment_rewatch_rate_and_checkpoint_delta",
+  "method": "switchback",
+  "baseline": {
+    "segment_rewatch_rate": 0.42,
+    "checkpoint_correct_rate": 0.61
+  },
+  "target": {
+    "segment_rewatch_rate_delta": -0.15,
+    "checkpoint_correct_rate_delta": 0.08
+  },
+  "reevaluate_at": "2026-04-24T10:00:00+09:00",
+  "owner": "course_instructor",
+  "publish_rule": "Publish only as aggregate course-level effect with uncertainty or limitation note."
+}

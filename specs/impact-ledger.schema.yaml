@@ -1,0 +1,26 @@
+schema:
+  id: "jp-lms-vibeops.impact-ledger.v0"
+  version: "0.1.0"
+  status: "draft"
+
+required_fields:
+  - ledger_id
+  - scenario_id
+  - action_id
+  - approval_id
+  - measurement_id
+  - result_id
+  - decision
+  - summary
+  - next_review_at
+
+decisions:
+  - retained
+  - revised
+  - rolled_back
+  - inconclusive
+
+rules:
+  - "Impact ledger entries are aggregate by default."
+  - "Impact ledger entries cannot overclaim beyond measurement result uncertainty."
+  - "Every retained action must remain rollback-addressable until pilot close."

@@ -61,6 +61,12 @@ Run the lightweight design repository check:
 python scripts\validate_project.py
 ```
 
+Run contract checks directly:
+
+```powershell
+python scripts\validate_contracts.py
+```
+
 The next implementation step is not a UI prototype. It is an executable control-plane foundation:
 
 1. Contract validators for xAI cards, events, approvals, and measurement plans.

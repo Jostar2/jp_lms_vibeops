@@ -2,7 +2,7 @@ backlog:
   - id: "JLV-0001"
     title: "Make project management explicit in repo"
     milestone: "M0"
-    status: "in_progress"
+    status: "completed"
     type: "project_control"
     acceptance:
       - "PROJECT.md explains where project management happens."
@@ -14,7 +14,7 @@ backlog:
   - id: "JLV-0002"
     title: "Replace UI-prototype-first roadmap with control-plane-first roadmap"
     milestone: "M0"
-    status: "in_progress"
+    status: "completed"
     type: "architecture"
     acceptance:
       - "ADR records control-plane-first decision."
@@ -26,26 +26,55 @@ backlog:
   - id: "JLV-0003"
     title: "Add executable xAI card examples"
     milestone: "M1"
-    status: "planned"
+    status: "completed"
     type: "contract"
     acceptance:
       - "At least one student-facing and one instructor-facing xAI card example exist."
       - "Examples include evidence, model version, uncertainty, action, measurement plan."
       - "Student-facing examples avoid stigmatizing risk terms."
     validation:
-      - "future contract validator"
+      - "python scripts\\validate_contracts.py"
 
   - id: "JLV-0004"
     title: "Define AI operation state machine"
     milestone: "M1"
-    status: "planned"
+    status: "completed"
     type: "runtime_contract"
     acceptance:
       - "Allowed states and blocked states are explicit."
       - "Approval requirements are tied to transitions."
       - "Rollback and measurement transitions are represented."
     validation:
-      - "future state-machine tests"
+      - "python scripts\\validate_contracts.py"
+
+  - id: "JLV-0006"
+    title: "Validate S01 closed-loop contract fixtures"
+    milestone: "M1"
+    status: "completed"
+    type: "contract_validation"
+    acceptance:
+      - "S01 event examples exist."
+      - "S01 xAI card examples cross-reference event ids."
+      - "S01 approval example matches the instructor action id."
+      - "S01 measurement plan links to the approved action id."
+      - "S01 AI operation transition chain validates."
+      - "S01 measurement result and impact ledger examples validate."
+      - "Negative guardrail examples prove forbidden language and missing approval are blocked."
+    validation:
+      - "python scripts\\validate_contracts.py"
+
+  - id: "JLV-0007"
+    title: "Add measurement result and impact ledger contracts"
+    milestone: "M1"
+    status: "completed"
+    type: "contract"
+    acceptance:
+      - "Measurement result schema seed exists."
+      - "Impact ledger schema seed exists."
+      - "S01 result links to the S01 measurement plan."
+      - "S01 impact ledger links action, approval, measurement, and result."
+    validation:
+      - "python scripts\\validate_contracts.py"
 
   - id: "JLV-0005"
     title: "Create pilot governance packet skeleton"

@@ -4,6 +4,8 @@ import re
 import sys
 from pathlib import Path
 
+from validate_contracts import run_checks as run_contract_checks
+
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -30,6 +32,22 @@ REQUIRED_FILES = [
     "specs/event-catalog.yaml",
     "specs/scenarios.yaml",
     "specs/xai-card.schema.yaml",
+    "specs/approval.schema.yaml",
+    "specs/measurement-plan.schema.yaml",
+    "specs/measurement-result.schema.yaml",
+    "specs/impact-ledger.schema.yaml",
+    "specs/ai-operation-state-machine.yaml",
+    "specs/examples/events/s01-lecture-struggle-events.json",
+    "specs/examples/xai-cards/s01-student-hint-card.json",
+    "specs/examples/xai-cards/s01-instructor-intervention-card.json",
+    "specs/examples/approvals/s01-instructor-content-approval.json",
+    "specs/examples/measurements/s01-two-week-effect-plan.json",
+    "specs/examples/measurement-results/s01-two-week-effect-result.json",
+    "specs/examples/impact-ledgers/s01-impact-ledger-entry.json",
+    "specs/examples/ai-operations/s01-closed-loop-operation.json",
+    "specs/examples/negative/student-card-forbidden-language.json",
+    "specs/examples/negative/operation-executes-without-approval.json",
+    "scripts/validate_contracts.py",
 ]
 
 LINK_RE = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
@@ -106,6 +124,9 @@ def main() -> None:
     check_local_markdown_links()
     check_yaml_seed_files()
     check_no_large_legacy_artifacts()
+    contract_errors = run_contract_checks()
+    if contract_errors:
+        fail("contract validation failed: " + "; ".join(contract_errors))
     print("JP LMS VibeOps project validation passed.")
 
 

@@ -10,7 +10,6 @@ JP LMS VibeOps exists as a clean local Git repository at:
 C:\dev\jp_lms_vibeops
 ```
 
-Remote Git repository: none.
 Remote Git repository:
 
 ```text
@@ -20,7 +19,7 @@ origin https://github.com/Jostar2/jp_lms_vibeops.git
 Latest committed baseline:
 
 ```text
-5551d58 Add project management and control plane plan
+see `git log --oneline -1`
 ```
 
 ## What Is Managed Here
@@ -50,12 +49,27 @@ contracts -> event ledger -> approval workflow -> policy gate -> measurement loo
 
 UI work is downstream of these contracts.
 
+## Current Milestone
+
+`M1 Executable Contracts` is complete.
+
+Next milestone: `M2 Control Plane Skeleton`.
+
+Completed in this pass:
+
+- S01 learning event fixture.
+- Student and instructor xAI card fixtures.
+- Instructor approval fixture.
+- Two-week measurement plan fixture.
+- AI operation transition fixture.
+- Negative guardrail fixtures for forbidden student language and execution without approval.
+- Measurement result fixture.
+- Impact ledger fixture.
+- Local contract validator.
+
 ## Immediate Next Step
 
-Lock the control-plane-first plan and start a minimal contract/runtime package only after:
+Start the next control-plane slice only after:
 
-- xAI card schema has an executable validator.
-- event catalog has examples.
-- approval workflow has a state machine.
-- measurement plan has acceptance rules.
-- pilot governance has explicit blockers.
+- contract validation remains green
+- pilot governance blockers are represented as machine-checkable gates

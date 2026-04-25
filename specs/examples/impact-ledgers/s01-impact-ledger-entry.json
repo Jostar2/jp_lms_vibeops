@@ -1,0 +1,11 @@
+{
+  "ledger_id": "impact_s01_entropy_bridge_001",
+  "scenario_id": "S01",
+  "action_id": "act_s01_entropy_bridge_publish",
+  "approval_id": "approval_s01_entropy_bridge_001",
+  "measurement_id": "measure_s01_intervention_effect_001",
+  "result_id": "result_s01_intervention_effect_001",
+  "decision": "retained",
+  "summary": "W7 Lecture 2 앞에 추가한 엔트로피 브리지 설명은 집계 기준 재시청률을 낮추고 확인 문제 정답률을 올린 것으로 측정되어 유지합니다.",
+  "next_review_at": "2026-05-08T10:00:00+09:00"
+}

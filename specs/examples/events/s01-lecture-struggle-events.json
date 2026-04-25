@@ -1,0 +1,40 @@
+{
+  "events": [
+    {
+      "event_id": "evt_s01_video_pause_001",
+      "tenant_id": "tenant_demo_university",
+      "actor_role": "student",
+      "occurred_at": "2026-04-10T10:18:12+09:00",
+      "event_type": "video.segment.pause",
+      "purpose": "learning_support_signal",
+      "privacy_level": "pseudonymous",
+      "source_system": "lms_video_player",
+      "payload_ref": "aggregate:course_dm_w7_segment_22",
+      "retention_policy": "pilot_duration_plus_90_days"
+    },
+    {
+      "event_id": "evt_s01_checkpoint_submit_001",
+      "tenant_id": "tenant_demo_university",
+      "actor_role": "student",
+      "occurred_at": "2026-04-10T10:23:40+09:00",
+      "event_type": "checkpoint.answer.submit",
+      "purpose": "learning_support_signal",
+      "privacy_level": "pseudonymous",
+      "source_system": "lms_quiz",
+      "payload_ref": "aggregate:entropy_definition_checkpoint",
+      "retention_policy": "pilot_duration_plus_90_days"
+    },
+    {
+      "event_id": "evt_s01_inference_001",
+      "tenant_id": "tenant_demo_university",
+      "actor_role": "system",
+      "occurred_at": "2026-04-10T10:25:00+09:00",
+      "event_type": "inference.struggle.detect",
+      "purpose": "course_improvement_recommendation",
+      "privacy_level": "aggregate",
+      "source_system": "jp_lms_vibeops_ai_kernel",
+      "payload_ref": "ai_run:run_s01_struggle_detect_001",
+      "retention_policy": "pilot_duration_plus_1_year"
+    }
+  ]
+}

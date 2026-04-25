@@ -1,0 +1,61 @@
+{
+  "case_id": "neg_operation_executes_without_approval",
+  "fixture_type": "ai_operation_bundle",
+  "expected_errors": [
+    "execution requires an approved approval"
+  ],
+  "fixture": {
+    "approvals": [
+      {
+        "approval_id": "approval_negative_requested_001",
+        "scenario_id": "S01",
+        "gate": "G2",
+        "state": "requested",
+        "requested_action": {
+          "action_id": "act_s01_entropy_bridge_publish",
+          "label": "negative fixture"
+        },
+        "source_card_id": "xai_s01_instructor_intervention_001",
+        "approver_role": "instructor",
+        "requested_at": "2026-04-10T11:00:00+09:00"
+      }
+    ],
+    "operation": {
+      "operation_id": "op_negative_execute_without_approval",
+      "scenario_id": "S01",
+      "current_state": "executed",
+      "event_ids": [
+        "evt_s01_video_pause_001",
+        "evt_s01_checkpoint_submit_001",
+        "evt_s01_inference_001"
+      ],
+      "xai_card_ids": [
+        "xai_s01_instructor_intervention_001"
+      ],
+      "approval_ids": [
+        "approval_negative_requested_001"
+      ],
+      "measurement_plan_id": "measure_s01_intervention_effect_001",
+      "transitions": [
+        {
+          "from": "drafted",
+          "to": "evidence_attached",
+          "at": "2026-04-10T10:25:00+09:00",
+          "evidence": ["evt_s01_video_pause_001"]
+        },
+        {
+          "from": "evidence_attached",
+          "to": "policy_checked",
+          "at": "2026-04-10T10:26:00+09:00",
+          "policy_gate_result": "G2_requires_instructor_approval"
+        },
+        {
+          "from": "policy_checked",
+          "to": "executed",
+          "at": "2026-04-10T10:27:00+09:00",
+          "approval_granted": "approval_negative_requested_001"
+        }
+      ]
+    }
+  }
+}

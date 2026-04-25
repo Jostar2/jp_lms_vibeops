@@ -13,6 +13,7 @@ There is no external GitHub Project or Jira board connected yet. Project state i
 | Product and system docs | [docs/](docs/) |
 | Contract specs | [specs/](specs/) |
 | Validation | [scripts/validate_project.py](scripts/validate_project.py) |
+| Contract validation | [scripts/validate_contracts.py](scripts/validate_contracts.py) |
 
 ## Git Status
 
