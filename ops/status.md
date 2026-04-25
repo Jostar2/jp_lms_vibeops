@@ -20,7 +20,7 @@ origin https://github.com/Jostar2/jp_lms_vibeops.git
 Latest committed baseline:
 
 ```text
-Initial JP LMS VibeOps design
+5551d58 Add project management and control plane plan
 ```
 
 ## What Is Managed Here
