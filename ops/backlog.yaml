@@ -116,3 +116,17 @@ backlog:
       - "Project validation runs governance validation."
     validation:
       - "python scripts\\validate_governance.py"
+
+  - id: "JLV-0010"
+    title: "Add LMS adapter boundary before Evidence UX"
+    milestone: "M4"
+    status: "completed"
+    type: "integration"
+    acceptance:
+      - "LMS adapter schema seed exists."
+      - "NetLearning CSV fallback adapter example exists."
+      - "CSV fixture maps into internal event catalog objects."
+      - "Adapter sample runs without UI dependencies."
+    validation:
+      - "python scripts\\run_adapter_sample.py"
+      - "python -m unittest discover -s tests"

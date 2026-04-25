@@ -57,7 +57,9 @@ UI work is downstream of these contracts.
 
 `M3 Pilot Governance Packet` is complete.
 
-Next milestone: `M4 Evidence UX readiness review`.
+`M4 Integration Boundary` is complete.
+
+Next milestone: `M5 Evidence UX readiness review`.
 
 Completed in this pass:
 
@@ -84,6 +86,9 @@ Completed in this pass:
 - Pilot risk register.
 - Term sheet outline.
 - Machine-checkable pilot gates.
+- LMS adapter schema seed.
+- NetLearning CSV fallback adapter example.
+- CSV fixture to internal event conversion.
 
 ## Immediate Next Step
 

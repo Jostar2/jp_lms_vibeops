@@ -16,6 +16,7 @@ There is no external GitHub Project or Jira board connected yet. Project state i
 | Contract validation | [scripts/validate_contracts.py](scripts/validate_contracts.py) |
 | Control-plane runtime | [src/jp_lms_vibeops/](src/jp_lms_vibeops/) |
 | Runtime tests | [tests/test_control_plane.py](tests/test_control_plane.py) |
+| LMS adapter sample | [scripts/run_adapter_sample.py](scripts/run_adapter_sample.py) |
 | Pilot governance packet | [docs/pilot/](docs/pilot/) |
 | Pilot gate spec | [specs/governance/pilot-gates.yaml](specs/governance/pilot-gates.yaml) |
 

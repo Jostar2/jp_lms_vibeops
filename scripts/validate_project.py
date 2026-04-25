@@ -51,7 +51,9 @@ REQUIRED_FILES = [
     "scripts/validate_contracts.py",
     "scripts/validate_governance.py",
     "scripts/run_control_plane.py",
+    "scripts/run_adapter_sample.py",
     "src/jp_lms_vibeops/__init__.py",
+    "src/jp_lms_vibeops/adapters.py",
     "src/jp_lms_vibeops/models.py",
     "src/jp_lms_vibeops/fixtures.py",
     "src/jp_lms_vibeops/event_ledger.py",
@@ -61,6 +63,7 @@ REQUIRED_FILES = [
     "src/jp_lms_vibeops/measurement.py",
     "src/jp_lms_vibeops/control_plane.py",
     "tests/test_control_plane.py",
+    "tests/test_adapter.py",
     "docs/pilot/decision-brief.md",
     "docs/pilot/appi-readiness-checklist.md",
     "docs/pilot/irb-preregistration-draft.md",
@@ -69,6 +72,9 @@ REQUIRED_FILES = [
     "docs/pilot/pilot-risk-register.md",
     "docs/pilot/term-sheet-outline.md",
     "specs/governance/pilot-gates.yaml",
+    "specs/lms-adapter.schema.yaml",
+    "specs/examples/adapters/netlearning-csv-s01-map.json",
+    "fixtures/adapters/s01_lms_activity.csv",
 ]
 
 LINK_RE = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
@@ -143,6 +149,7 @@ def check_no_large_legacy_artifacts() -> None:
 def run_runtime_checks() -> None:
     commands = [
         [sys.executable, "scripts/run_control_plane.py", "--json"],
+        [sys.executable, "scripts/run_adapter_sample.py"],
         [sys.executable, "scripts/validate_governance.py"],
         [sys.executable, "-m", "unittest", "discover", "-s", "tests"],
     ]

@@ -1,0 +1,20 @@
+{
+  "adapter_id": "adapter_netlearning_csv_s01",
+  "source_system": "netlearning_csv_export",
+  "mode": "csv_fallback",
+  "supported_event_types": [
+    "video.segment.pause",
+    "checkpoint.answer.submit"
+  ],
+  "field_map": {
+    "tenant_id": "tenant_id",
+    "actor_role": "actor_role",
+    "occurred_at": "occurred_at",
+    "event_type": "event_type",
+    "purpose": "purpose",
+    "privacy_level": "privacy_level",
+    "payload_ref": "payload_ref"
+  },
+  "privacy_default": "pseudonymous",
+  "failure_mode": "block_ai_operation_creation"
+}

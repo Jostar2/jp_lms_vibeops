@@ -72,6 +72,7 @@ Run the current control-plane skeleton:
 
 ```powershell
 python scripts\run_control_plane.py --json
+python scripts\run_adapter_sample.py
 python scripts\validate_governance.py
 python -m unittest discover -s tests
 ```

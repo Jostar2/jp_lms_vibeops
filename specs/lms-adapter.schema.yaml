@@ -1,0 +1,25 @@
+schema:
+  id: "jp-lms-vibeops.lms-adapter.v0"
+  version: "0.1.0"
+  status: "draft"
+
+required_fields:
+  - adapter_id
+  - source_system
+  - mode
+  - supported_event_types
+  - field_map
+  - privacy_default
+  - failure_mode
+
+modes:
+  - csv_fallback
+  - lti_launch
+  - oneroster_sync
+  - api_connector
+
+rules:
+  - "CSV fallback adapters must declare exact source columns."
+  - "Adapters must map into the internal event catalog, not UI-specific data."
+  - "Adapters cannot emit identified_sensitive events without purpose and audit handling."
+  - "Adapter failure must block downstream AI operation creation."

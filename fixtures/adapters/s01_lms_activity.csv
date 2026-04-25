@@ -1,0 +1,3 @@
+tenant_id,actor_role,occurred_at,event_type,purpose,privacy_level,payload_ref
+tenant_demo_university,student,2026-04-10T10:18:12+09:00,video.segment.pause,learning_support_signal,pseudonymous,aggregate:course_dm_w7_segment_22
+tenant_demo_university,student,2026-04-10T10:23:40+09:00,checkpoint.answer.submit,learning_support_signal,pseudonymous,aggregate:entropy_definition_checkpoint

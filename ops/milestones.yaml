@@ -43,9 +43,18 @@ milestones:
       - "pilot gate validation passes."
 
   - id: "M4"
+    name: "Integration Boundary"
+    status: "completed"
+    purpose: "Create the LMS adapter boundary before UI work."
+    exit_criteria:
+      - "LMS adapter contract exists."
+      - "CSV fallback sample maps to event catalog."
+      - "adapter sample validates."
+
+  - id: "M5"
     name: "Evidence UX"
     status: "planned"
-    purpose: "Build UI only after contracts and approval flows are stable."
+    purpose: "Build UI only after contracts, approval flows, and adapter boundary are stable."
     exit_criteria:
       - "xAI card renderer uses contract fixtures."
       - "instructor decision queue uses approval state."
