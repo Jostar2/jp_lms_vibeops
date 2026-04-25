@@ -67,6 +67,13 @@ Run contract checks directly:
 python scripts\validate_contracts.py
 ```
 
+Run the current control-plane skeleton:
+
+```powershell
+python scripts\run_control_plane.py --json
+python -m unittest discover -s tests
+```
+
 The next implementation step is not a UI prototype. It is an executable control-plane foundation:
 
 1. Contract validators for xAI cards, events, approvals, and measurement plans.

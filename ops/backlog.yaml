@@ -88,3 +88,18 @@ backlog:
       - "Decision Brief ask is explicit."
     validation:
       - "document review"
+
+  - id: "JLV-0008"
+    title: "Implement M2 control plane skeleton"
+    milestone: "M2"
+    status: "completed"
+    type: "runtime"
+    acceptance:
+      - "Event ledger append/read contract exists."
+      - "Policy gate checks xAI card action readiness."
+      - "Approval router blocks unapproved execution."
+      - "Measurement planner resolves measurement plans from action cards."
+      - "ControlPlane runs S01 closed loop without UI."
+    validation:
+      - "python scripts\\run_control_plane.py --json"
+      - "python -m unittest discover -s tests"

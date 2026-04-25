@@ -53,7 +53,9 @@ UI work is downstream of these contracts.
 
 `M1 Executable Contracts` is complete.
 
-Next milestone: `M2 Control Plane Skeleton`.
+`M2 Control Plane Skeleton` is complete.
+
+Next milestone: `M3 Pilot Governance Packet`.
 
 Completed in this pass:
 
@@ -66,10 +68,19 @@ Completed in this pass:
 - Measurement result fixture.
 - Impact ledger fixture.
 - Local contract validator.
+- In-memory event ledger.
+- Policy gate.
+- Approval router.
+- Measurement planner.
+- ControlPlane S01 closed-loop runtime.
+- Runtime unit tests.
 
 ## Immediate Next Step
 
-Start the next control-plane slice only after:
+Start the pilot governance slice with:
 
-- contract validation remains green
-- pilot governance blockers are represented as machine-checkable gates
+- APPI readiness checklist
+- IRB/pre-registration draft
+- NetLearning integration fit brief
+- 90-day measurement protocol
+- pilot blocker validation

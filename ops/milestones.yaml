@@ -23,7 +23,7 @@ milestones:
 
   - id: "M2"
     name: "Control Plane Skeleton"
-    status: "planned"
+    status: "completed"
     purpose: "Create the first runtime boundary without UI-first assumptions."
     exit_criteria:
       - "event ledger append/read contract exists."

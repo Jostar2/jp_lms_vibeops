@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -48,6 +49,17 @@ REQUIRED_FILES = [
     "specs/examples/negative/student-card-forbidden-language.json",
     "specs/examples/negative/operation-executes-without-approval.json",
     "scripts/validate_contracts.py",
+    "scripts/run_control_plane.py",
+    "src/jp_lms_vibeops/__init__.py",
+    "src/jp_lms_vibeops/models.py",
+    "src/jp_lms_vibeops/fixtures.py",
+    "src/jp_lms_vibeops/event_ledger.py",
+    "src/jp_lms_vibeops/policy.py",
+    "src/jp_lms_vibeops/approval.py",
+    "src/jp_lms_vibeops/state_machine.py",
+    "src/jp_lms_vibeops/measurement.py",
+    "src/jp_lms_vibeops/control_plane.py",
+    "tests/test_control_plane.py",
 ]
 
 LINK_RE = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
@@ -119,6 +131,18 @@ def check_no_large_legacy_artifacts() -> None:
         fail("large binary legacy artifacts should not be committed: " + ", ".join(blocked))
 
 
+def run_runtime_checks() -> None:
+    commands = [
+        [sys.executable, "scripts/run_control_plane.py", "--json"],
+        [sys.executable, "-m", "unittest", "discover", "-s", "tests"],
+    ]
+    for command in commands:
+        result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
+        if result.returncode != 0:
+            output = (result.stdout + result.stderr).strip()
+            fail(f"runtime check failed: {' '.join(command)}\n{output}")
+
+
 def main() -> None:
     check_required_files()
     check_local_markdown_links()
@@ -127,6 +151,7 @@ def main() -> None:
     contract_errors = run_contract_checks()
     if contract_errors:
         fail("contract validation failed: " + "; ".join(contract_errors))
+    run_runtime_checks()
     print("JP LMS VibeOps project validation passed.")
 
 

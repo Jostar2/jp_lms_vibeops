@@ -14,6 +14,8 @@ There is no external GitHub Project or Jira board connected yet. Project state i
 | Contract specs | [specs/](specs/) |
 | Validation | [scripts/validate_project.py](scripts/validate_project.py) |
 | Contract validation | [scripts/validate_contracts.py](scripts/validate_contracts.py) |
+| Control-plane runtime | [src/jp_lms_vibeops/](src/jp_lms_vibeops/) |
+| Runtime tests | [tests/test_control_plane.py](tests/test_control_plane.py) |
 
 ## Git Status
 

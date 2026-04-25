@@ -63,6 +63,19 @@ python scripts\validate_contracts.py
 
 It checks required fields, cross references, approval/action matching, operation transition chain, measurement linkage, and forbidden student-facing language.
 
+## Current Runtime Skeleton
+
+The first non-visual runtime slice is implemented under [../src/jp_lms_vibeops/](../src/jp_lms_vibeops/).
+
+Run it with:
+
+```powershell
+python scripts\run_control_plane.py --json
+python -m unittest discover -s tests
+```
+
+It loads the S01 fixtures, appends events to an in-memory ledger, checks xAI cards through the policy gate, requires approved instructor action, resolves the measurement plan, and emits a runtime impact ledger result.
+
 ## Why This Comes Before UI
 
 The UI should display product truth, not invent it.
