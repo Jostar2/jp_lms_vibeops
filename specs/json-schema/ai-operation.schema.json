@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jp-lms-vibeops.local/schemas/ai-operation.schema.json",
+  "title": "JP LMS VibeOps AI Operation",
+  "type": "object",
+  "required": ["operation_id", "scenario_id", "current_state", "event_ids", "xai_card_ids", "approval_ids", "measurement_plan_id", "transitions"],
+  "properties": {
+    "operation_id": { "type": "string" },
+    "scenario_id": { "type": "string" },
+    "current_state": { "type": "string" },
+    "event_ids": { "type": "array", "items": { "type": "string" } },
+    "xai_card_ids": { "type": "array", "items": { "type": "string" } },
+    "approval_ids": { "type": "array", "items": { "type": "string" } },
+    "measurement_plan_id": { "type": "string" },
+    "transitions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to", "at"],
+        "properties": {
+          "from": { "type": "string" },
+          "to": { "type": "string" },
+          "at": { "type": "string" }
+        }
+      }
+    }
+  }
+}

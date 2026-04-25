@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jp-lms-vibeops.local/schemas/event.schema.json",
+  "title": "JP LMS VibeOps Event",
+  "type": "object",
+  "required": [
+    "event_id",
+    "tenant_id",
+    "actor_role",
+    "occurred_at",
+    "event_type",
+    "purpose",
+    "privacy_level",
+    "source_system",
+    "payload_ref",
+    "retention_policy"
+  ],
+  "properties": {
+    "event_id": { "type": "string" },
+    "tenant_id": { "type": "string" },
+    "actor_role": { "type": "string" },
+    "occurred_at": { "type": "string" },
+    "event_type": { "type": "string" },
+    "purpose": { "type": "string" },
+    "privacy_level": { "type": "string", "enum": ["aggregate", "pseudonymous", "identified_sensitive"] },
+    "source_system": { "type": "string" },
+    "payload_ref": { "type": "string" },
+    "retention_policy": { "type": "string" }
+  }
+}

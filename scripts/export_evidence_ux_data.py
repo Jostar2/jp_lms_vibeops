@@ -18,7 +18,9 @@ from jp_lms_vibeops.fixtures import load_fixture_store, load_json  # noqa: E402
 
 def build_payload() -> dict[str, object]:
     store = load_fixture_store()
-    control_plane_run = asdict(ControlPlane(store).run_s01_closed_loop())
+    control_plane = ControlPlane(store)
+    control_plane_run = asdict(control_plane.run_s01_closed_loop())
+    scenario_matrix = [asdict(summary) for summary in control_plane.summarize_operations()]
     adapter_spec = load_json(ROOT / "specs" / "examples" / "adapters" / "netlearning-csv-s01-map.json")
     adapter_events = CsvFallbackAdapter(adapter_spec).read_events(
         ROOT / "fixtures" / "adapters" / "s01_lms_activity.csv",
@@ -33,6 +35,7 @@ def build_payload() -> dict[str, object]:
     return {
         "generated_from": "JP LMS VibeOps control plane fixtures",
         "control_plane_run": control_plane_run,
+        "scenario_matrix": scenario_matrix,
         "events": list(store.events.values()),
         "xai_cards": list(store.cards.values()),
         "approvals": list(store.approvals.values()),

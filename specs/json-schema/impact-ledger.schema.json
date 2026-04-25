@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jp-lms-vibeops.local/schemas/impact-ledger.schema.json",
+  "title": "JP LMS VibeOps Impact Ledger",
+  "type": "object",
+  "required": ["ledger_id", "scenario_id", "action_id", "approval_id", "measurement_id", "result_id", "decision", "summary", "next_review_at"],
+  "properties": {
+    "ledger_id": { "type": "string" },
+    "scenario_id": { "type": "string" },
+    "action_id": { "type": "string" },
+    "approval_id": { "type": "string" },
+    "measurement_id": { "type": "string" },
+    "result_id": { "type": "string" },
+    "decision": { "type": "string", "enum": ["retained", "revised", "rolled_back", "inconclusive"] },
+    "summary": { "type": "string" },
+    "next_review_at": { "type": "string" }
+  }
+}

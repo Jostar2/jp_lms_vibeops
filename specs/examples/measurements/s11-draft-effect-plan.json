@@ -1,0 +1,16 @@
+{
+  "measurement_id": "measure_s11_draft_effect_001",
+  "scenario_id": "S11",
+  "linked_action_id": "act_s11_publish_bridge_variant",
+  "metric": "checkpoint_correct_rate_delta",
+  "method": "pre_post",
+  "baseline": {
+    "checkpoint_correct_rate": 0.61
+  },
+  "target": {
+    "checkpoint_correct_rate_delta": 0.06
+  },
+  "reevaluate_at": "2026-04-25T09:00:00+09:00",
+  "owner": "course_instructor",
+  "publish_rule": "Publish only as aggregate course-level effect with limitation note."
+}

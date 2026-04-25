@@ -1,0 +1,11 @@
+{
+  "ledger_id": "impact_s13_support_policy_001",
+  "scenario_id": "S13",
+  "action_id": "act_s13_select_support_policy",
+  "approval_id": "approval_s13_support_policy_001",
+  "measurement_id": "measure_s13_policy_uplift_001",
+  "result_id": "result_s13_policy_uplift_001",
+  "decision": "inconclusive",
+  "summary": "Counterfactual policy 후보는 G4 승인과 APPI/IRB 검토 전이므로 실행 효과로 유지하지 않습니다.",
+  "next_review_at": "2026-05-01T14:00:00+09:00"
+}

@@ -75,13 +75,29 @@ Run the current control-plane skeleton:
 
 ```powershell
 python scripts\run_control_plane.py --json
+python scripts\run_scenario_matrix.py
 python scripts\run_adapter_sample.py
 python scripts\validate_governance.py
 python scripts\validate_evidence_ux.py
 python scripts\export_evidence_ux_data.py
 python scripts\validate_static_ui.py
 python scripts\validate_browser_smoke.py
+python scripts\validate_screenshots.py
+python scripts\validate_packaging.py
+python scripts\validate_formal_schemas.py
 python -m unittest discover -s tests
+```
+
+Package CLI smoke:
+
+```powershell
+$env:PYTHONPATH="src"; python -m jp_lms_vibeops run-s01 --json
+```
+
+Refresh Evidence UX screenshot snapshot:
+
+```powershell
+python scripts\capture_evidence_ux_snapshot.py
 ```
 
 The next implementation step is not a UI prototype. It is an executable control-plane foundation:

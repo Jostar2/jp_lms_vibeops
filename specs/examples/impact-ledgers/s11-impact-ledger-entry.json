@@ -1,0 +1,11 @@
+{
+  "ledger_id": "impact_s11_bridge_variant_001",
+  "scenario_id": "S11",
+  "action_id": "act_s11_publish_bridge_variant",
+  "approval_id": "approval_s11_bridge_variant_001",
+  "measurement_id": "measure_s11_draft_effect_001",
+  "result_id": "result_s11_draft_effect_001",
+  "decision": "retained",
+  "summary": "Co-Creation 초안은 집계 기준 확인 문제 정답률 개선 신호를 보여 유지합니다.",
+  "next_review_at": "2026-05-09T09:00:00+09:00"
+}

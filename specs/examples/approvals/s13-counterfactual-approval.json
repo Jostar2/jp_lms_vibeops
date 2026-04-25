@@ -1,0 +1,13 @@
+{
+  "approval_id": "approval_s13_support_policy_001",
+  "scenario_id": "S13",
+  "gate": "G4",
+  "state": "requested",
+  "requested_action": {
+    "action_id": "act_s13_select_support_policy",
+    "label": "개념 보강 자료 배포 정책을 파일럿 후보로 선택합니다."
+  },
+  "source_card_id": "xai_s13_counterfactual_001",
+  "approver_role": "academic_admin",
+  "requested_at": "2026-04-13T14:08:00+09:00"
+}

@@ -55,7 +55,7 @@ def main() -> None:
         fail("styles.css must keep body-facing letter spacing stable")
 
     payload = runtime_payload()
-    for key in ["control_plane_run", "events", "xai_cards", "approvals", "measurements", "measurement_results", "impact_ledgers", "adapter", "pilot_gates"]:
+    for key in ["control_plane_run", "scenario_matrix", "events", "xai_cards", "approvals", "measurements", "measurement_results", "impact_ledgers", "adapter", "pilot_gates"]:
         if key not in payload:
             fail(f"runtime payload missing key: {key}")
     if not payload["events"] or not payload["xai_cards"]:

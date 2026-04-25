@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jp-lms-vibeops.local/schemas/xai-card.schema.json",
+  "title": "JP LMS VibeOps xAI Card",
+  "type": "object",
+  "required": [
+    "card_id",
+    "scenario_id",
+    "audience",
+    "judgment",
+    "evidence",
+    "model",
+    "uncertainty",
+    "recommended_action",
+    "measurement_plan",
+    "governance"
+  ],
+  "properties": {
+    "card_id": { "type": "string" },
+    "scenario_id": { "type": "string" },
+    "audience": { "type": "string", "enum": ["student", "instructor", "academic_admin", "legal_it", "platform_operator"] },
+    "judgment": {
+      "type": "object",
+      "required": ["summary", "decision_type", "confidence"],
+      "properties": {
+        "summary": { "type": "string" },
+        "decision_type": { "type": "string" },
+        "confidence": { "type": "number" }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source_event", "claim", "weight"],
+        "properties": {
+          "source_event": { "type": "string" },
+          "claim": { "type": "string" },
+          "weight": { "type": "number" }
+        }
+      }
+    },
+    "model": {
+      "type": "object",
+      "required": ["name", "version", "run_id"],
+      "properties": {
+        "name": { "type": "string" },
+        "version": { "type": "string" },
+        "run_id": { "type": "string" }
+      }
+    },
+    "uncertainty": {
+      "type": "object",
+      "required": ["summary", "interval_or_reason"],
+      "properties": {
+        "summary": { "type": "string" },
+        "interval_or_reason": { "type": "string" }
+      }
+    },
+    "recommended_action": {
+      "type": "object",
+      "required": ["action_id", "label", "owner", "requires_approval"],
+      "properties": {
+        "action_id": { "type": "string" },
+        "label": { "type": "string" },
+        "owner": { "type": "string" },
+        "requires_approval": { "type": "boolean" }
+      }
+    },
+    "measurement_plan": {
+      "type": "object",
+      "required": ["measurement_id", "metric", "method", "reevaluate_at"],
+      "properties": {
+        "measurement_id": { "type": "string" },
+        "metric": { "type": "string" },
+        "method": { "type": "string" },
+        "reevaluate_at": { "type": "string" }
+      }
+    },
+    "governance": {
+      "type": "object",
+      "required": ["data_scope", "privacy_level", "approval_gate", "appeal_control"],
+      "properties": {
+        "data_scope": { "type": "array", "items": { "type": "string" } },
+        "privacy_level": { "type": "string", "enum": ["aggregate", "pseudonymous", "identified_sensitive"] },
+        "approval_gate": { "type": "string" },
+        "appeal_control": { "type": "string" }
+      }
+    }
+  }
+}

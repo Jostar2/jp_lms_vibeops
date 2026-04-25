@@ -377,7 +377,7 @@ def validate_impact_ledgers(
             errors.append(f"{path.relative_to(ROOT)} unknown measurement_id: {ledger.get('measurement_id')}")
         if ledger.get("result_id") not in results:
             errors.append(f"{path.relative_to(ROOT)} unknown result_id: {ledger.get('result_id')}")
-        if ledger.get("action_id") not in approved_action_ids:
+        if ledger.get("action_id") not in approved_action_ids and ledger.get("decision") != "inconclusive":
             errors.append(f"{path.relative_to(ROOT)} action_id is not approved: {ledger.get('action_id')}")
 
     if not ledgers:

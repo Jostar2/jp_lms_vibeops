@@ -1,0 +1,28 @@
+{
+  "events": [
+    {
+      "event_id": "evt_s12_pace_signal_001",
+      "tenant_id": "tenant_demo_university",
+      "actor_role": "student",
+      "occurred_at": "2026-04-12T08:40:00+09:00",
+      "event_type": "pace.plan.request",
+      "purpose": "personal_learning_planning",
+      "privacy_level": "pseudonymous",
+      "source_system": "evidence_ux",
+      "payload_ref": "student_opt_in:pace_plan_week8",
+      "retention_policy": "pilot_duration_plus_90_days"
+    },
+    {
+      "event_id": "evt_s12_plan_generate_001",
+      "tenant_id": "tenant_demo_university",
+      "actor_role": "system",
+      "occurred_at": "2026-04-12T08:41:00+09:00",
+      "event_type": "inference.pace_plan.generate",
+      "purpose": "personal_learning_planning",
+      "privacy_level": "pseudonymous",
+      "source_system": "jp_lms_vibeops_ai_kernel",
+      "payload_ref": "ai_run:run_s12_pace_plan_001",
+      "retention_policy": "pilot_duration_plus_90_days"
+    }
+  ]
+}

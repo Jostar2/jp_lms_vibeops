@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jp-lms-vibeops.local/schemas/measurement-plan.schema.json",
+  "title": "JP LMS VibeOps Measurement Plan",
+  "type": "object",
+  "required": ["measurement_id", "scenario_id", "linked_action_id", "metric", "method", "baseline", "target", "reevaluate_at", "owner", "publish_rule"],
+  "properties": {
+    "measurement_id": { "type": "string" },
+    "scenario_id": { "type": "string" },
+    "linked_action_id": { "type": "string" },
+    "metric": { "type": "string" },
+    "method": { "type": "string" },
+    "baseline": { "type": "object" },
+    "target": { "type": "object" },
+    "reevaluate_at": { "type": "string" },
+    "owner": { "type": "string" },
+    "publish_rule": { "type": "string" }
+  }
+}

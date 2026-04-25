@@ -51,6 +51,17 @@ class ControlPlaneTests(unittest.TestCase):
         self.assertFalse(decision.allowed)
         self.assertEqual(decision.reason, "approval is not approved: requested")
 
+    def test_scenario_matrix_covers_s11_s12_s13(self) -> None:
+        matrix = ControlPlane().summarize_operations()
+        by_scenario = {item.scenario_id: item for item in matrix}
+        self.assertIn("S11", by_scenario)
+        self.assertIn("S12", by_scenario)
+        self.assertIn("S13", by_scenario)
+        self.assertTrue(by_scenario["S11"].executable)
+        self.assertTrue(by_scenario["S12"].executable)
+        self.assertFalse(by_scenario["S13"].executable)
+        self.assertEqual(by_scenario["S13"].approval_state, "requested")
+
 
 if __name__ == "__main__":
     unittest.main()

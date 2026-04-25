@@ -65,6 +65,19 @@ function metric(label, value, note = '') {
 function renderHome() {
   const run = data.control_plane_run;
   const blockers = data.pilot_gates.slice(0, 4).map((gate) => `<li>${esc(gate)}</li>`).join('');
+  const matrixRows = data.scenario_matrix
+    .map(
+      (item) => `
+      <tr>
+        <td>${esc(item.scenario_id)}</td>
+        <td>${esc(item.state)}</td>
+        <td>${esc(item.approval_state)}</td>
+        <td>${item.executable ? '<span class="tag ok">ready</span>' : '<span class="tag warn">blocked</span>'}</td>
+        <td>${esc(item.reason)}</td>
+      </tr>
+    `,
+    )
+    .join('');
   return `
     ${section(
       'Current Operation',
@@ -92,6 +105,14 @@ function renderHome() {
       'These remain gates, not completed approvals.',
       `<ul>${blockers}</ul>`,
       '<span class="tag warn">external review required</span>',
+    )}
+    ${section(
+      'Scenario Matrix',
+      'S11 and S12 can execute in controlled form; S13 remains blocked until G4 review.',
+      `<table class="table">
+        <thead><tr><th>Scenario</th><th>State</th><th>Approval</th><th>Runtime</th><th>Reason</th></tr></thead>
+        <tbody>${matrixRows}</tbody>
+      </table>`,
     )}
   `;
 }

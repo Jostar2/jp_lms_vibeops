@@ -62,3 +62,14 @@ milestones:
       - "instructor decision queue uses approval state."
       - "impact ledger uses measurement records."
       - "static UI validation passes."
+
+  - id: "M6"
+    name: "Runtime Packaging And CI Hardening"
+    status: "completed"
+    purpose: "Package the runtime, formalize schemas, add CI, and add UI snapshot validation."
+    exit_criteria:
+      - "runtime package metadata exists."
+      - "formal schema validation passes."
+      - "GitHub Actions CI exists."
+      - "Evidence UX screenshot snapshot exists."
+      - "S11/S12/S13 fixtures validate."

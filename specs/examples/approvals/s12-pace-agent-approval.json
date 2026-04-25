@@ -1,0 +1,14 @@
+{
+  "approval_id": "approval_s12_pace_plan_001",
+  "scenario_id": "S12",
+  "gate": "G1",
+  "state": "approved",
+  "requested_action": {
+    "action_id": "act_s12_accept_pace_plan",
+    "label": "오늘의 30분 학습 계획을 저장합니다."
+  },
+  "source_card_id": "xai_s12_pace_agent_001",
+  "approver_role": "student",
+  "requested_at": "2026-04-12T08:42:00+09:00",
+  "approved_at": "2026-04-12T08:43:00+09:00"
+}

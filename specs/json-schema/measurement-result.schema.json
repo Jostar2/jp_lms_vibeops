@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jp-lms-vibeops.local/schemas/measurement-result.schema.json",
+  "title": "JP LMS VibeOps Measurement Result",
+  "type": "object",
+  "required": ["result_id", "measurement_id", "scenario_id", "observed", "uncertainty", "limitation_note", "publish_status", "impact_decision"],
+  "properties": {
+    "result_id": { "type": "string" },
+    "measurement_id": { "type": "string" },
+    "scenario_id": { "type": "string" },
+    "observed": { "type": "object" },
+    "uncertainty": { "type": "object" },
+    "limitation_note": { "type": "string" },
+    "publish_status": { "type": "string", "enum": ["draft", "publishable", "withheld", "withdrawn"] },
+    "impact_decision": { "type": "string", "enum": ["retain", "revise", "rollback", "insufficient_evidence"] }
+  }
+}

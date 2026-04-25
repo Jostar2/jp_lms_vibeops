@@ -1,0 +1,18 @@
+{
+  "result_id": "result_s12_plan_completion_001",
+  "measurement_id": "measure_s12_plan_completion_001",
+  "scenario_id": "S12",
+  "observed": {
+    "plan_completion_delta": 0.09,
+    "perceived_support_score": 4.0
+  },
+  "uncertainty": {
+    "summary": "개인 계획 수락 이후 단기 자기보고와 실행 로그를 함께 봅니다.",
+    "interval": {
+      "plan_completion_delta": [0.03, 0.14]
+    }
+  },
+  "limitation_note": "학생 자기보고 편향이 있을 수 있어 장기 효과로 일반화하지 않습니다.",
+  "publish_status": "publishable",
+  "impact_decision": "retain"
+}

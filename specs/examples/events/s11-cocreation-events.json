@@ -1,0 +1,28 @@
+{
+  "events": [
+    {
+      "event_id": "evt_s11_content_gap_001",
+      "tenant_id": "tenant_demo_university",
+      "actor_role": "system",
+      "occurred_at": "2026-04-11T09:00:00+09:00",
+      "event_type": "content.gap.detect",
+      "purpose": "course_content_improvement",
+      "privacy_level": "aggregate",
+      "source_system": "jp_lms_vibeops_ai_kernel",
+      "payload_ref": "aggregate:course_dm_w7_entropy_bridge_gap",
+      "retention_policy": "pilot_duration_plus_1_year"
+    },
+    {
+      "event_id": "evt_s11_draft_generate_001",
+      "tenant_id": "tenant_demo_university",
+      "actor_role": "system",
+      "occurred_at": "2026-04-11T09:03:00+09:00",
+      "event_type": "content.draft.generate",
+      "purpose": "instructor_content_drafting",
+      "privacy_level": "aggregate",
+      "source_system": "jp_lms_vibeops_ai_kernel",
+      "payload_ref": "draft:entropy_bridge_variant_a",
+      "retention_policy": "pilot_duration_plus_1_year"
+    }
+  ]
+}

@@ -63,7 +63,9 @@ UI work is downstream of these contracts.
 
 Evidence UX browser smoke is complete.
 
-Next milestone: runtime packaging, formal schemas, and CI hardening.
+`M6 Runtime Packaging And CI Hardening` is complete.
+
+Next milestone: `M7 Productization Hardening`.
 
 Completed in this pass:
 
@@ -100,12 +102,21 @@ Completed in this pass:
 - Static UI validator.
 - Browser smoke validator.
 - Release readiness summary.
+- Python runtime packaging metadata.
+- Module CLI.
+- Formal JSON Schema files.
+- Formal schema fixture validator.
+- GitHub Actions validation workflow.
+- Evidence UX screenshot snapshot.
+- Screenshot snapshot validator.
+- S11/S12/S13 contract fixtures.
+- Scenario matrix runtime summary.
 
 ## Immediate Next Step
 
 Next hardening track:
 
-- package the Python runtime
-- replace schema seeds with formal JSON Schema or Pydantic models
-- add GitHub Actions CI
-- add Evidence UX screenshot snapshots
+- add S15 Teaching Profile fixture and runtime coverage
+- move schema validation toward full JSON Schema or Pydantic enforcement
+- add release artifact workflow and PR template
+- decide whether Evidence UX should become a packaged web app

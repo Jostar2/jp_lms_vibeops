@@ -1,0 +1,19 @@
+{
+  "measurement_id": "measure_s13_policy_uplift_001",
+  "scenario_id": "S13",
+  "linked_action_id": "act_s13_select_support_policy",
+  "metric": "uplift_ppv_calibration_perceived_surveillance",
+  "method": "calibration_review",
+  "baseline": {
+    "prior_ppv": 0.42,
+    "perceived_surveillance_score": 2.1
+  },
+  "target": {
+    "ppv_min": 0.45,
+    "calibration_error_max": 0.08,
+    "perceived_surveillance_score_max": 2.4
+  },
+  "reevaluate_at": "2026-05-01T14:00:00+09:00",
+  "owner": "academic_admin",
+  "publish_rule": "Withhold until policy approval and APPI/IRB gates are complete."
+}

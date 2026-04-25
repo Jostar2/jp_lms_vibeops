@@ -49,3 +49,14 @@ class ControlPlaneRun:
     impact_ledger_id: str
     execution_allowed: bool
     execution_reason: str
+
+
+@dataclass(frozen=True)
+class OperationSummary:
+    operation_id: str
+    scenario_id: str
+    state: str
+    action_id: str
+    approval_state: str
+    executable: bool
+    reason: str

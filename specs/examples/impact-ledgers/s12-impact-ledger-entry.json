@@ -1,0 +1,11 @@
+{
+  "ledger_id": "impact_s12_pace_plan_001",
+  "scenario_id": "S12",
+  "action_id": "act_s12_accept_pace_plan",
+  "approval_id": "approval_s12_pace_plan_001",
+  "measurement_id": "measure_s12_plan_completion_001",
+  "result_id": "result_s12_plan_completion_001",
+  "decision": "retained",
+  "summary": "학습 계획 에이전트는 학생 수락 기반의 단기 실행률과 지원감에서 긍정 신호를 보여 유지합니다.",
+  "next_review_at": "2026-04-19T22:00:00+09:00"
+}

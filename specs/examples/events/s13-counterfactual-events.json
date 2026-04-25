@@ -1,0 +1,28 @@
+{
+  "events": [
+    {
+      "event_id": "evt_s13_policy_candidates_001",
+      "tenant_id": "tenant_demo_university",
+      "actor_role": "system",
+      "occurred_at": "2026-04-13T14:00:00+09:00",
+      "event_type": "intervention.candidates.rank",
+      "purpose": "academic_support_policy_review",
+      "privacy_level": "aggregate",
+      "source_system": "jp_lms_vibeops_ai_kernel",
+      "payload_ref": "aggregate:support_policy_candidates_week8",
+      "retention_policy": "pilot_duration_plus_1_year"
+    },
+    {
+      "event_id": "evt_s13_fairness_review_001",
+      "tenant_id": "tenant_demo_university",
+      "actor_role": "system",
+      "occurred_at": "2026-04-13T14:05:00+09:00",
+      "event_type": "fairness.review.prepare",
+      "purpose": "academic_support_policy_review",
+      "privacy_level": "aggregate",
+      "source_system": "jp_lms_vibeops_ai_kernel",
+      "payload_ref": "audit:support_policy_fairness_week8",
+      "retention_policy": "pilot_duration_plus_1_year"
+    }
+  ]
+}

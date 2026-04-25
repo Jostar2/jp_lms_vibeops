@@ -1,0 +1,49 @@
+{
+  "card_id": "xai_s12_pace_agent_001",
+  "scenario_id": "S12",
+  "audience": "student",
+  "judgment": {
+    "summary": "오늘은 복습 20분, 확인 문제 1개, 과제 계획 10분으로 나누면 부담을 줄이면서 학습 흐름을 유지할 수 있습니다.",
+    "decision_type": "recommend",
+    "confidence": 0.68
+  },
+  "evidence": [
+    {
+      "source_event": "evt_s12_pace_signal_001",
+      "claim": "학생이 개인 학습 계획 생성을 명시적으로 요청했습니다.",
+      "weight": 0.5
+    },
+    {
+      "source_event": "evt_s12_plan_generate_001",
+      "claim": "현재 주차 학습량과 마감 시간을 기준으로 계획을 생성했습니다.",
+      "weight": 0.5
+    }
+  ],
+  "model": {
+    "name": "pace_agent_policy",
+    "version": "0.1.0",
+    "run_id": "run_s12_pace_plan_001"
+  },
+  "uncertainty": {
+    "summary": "외부 일정과 컨디션은 직접 관측하지 않으므로 학생이 언제든 조정할 수 있어야 합니다.",
+    "interval_or_reason": "plan_fit_estimate=0.58-0.76"
+  },
+  "recommended_action": {
+    "action_id": "act_s12_accept_pace_plan",
+    "label": "오늘의 30분 학습 계획을 저장합니다.",
+    "owner": "student",
+    "requires_approval": true
+  },
+  "measurement_plan": {
+    "measurement_id": "measure_s12_plan_completion_001",
+    "metric": "plan_completion_and_perceived_support",
+    "method": "qualitative_survey",
+    "reevaluate_at": "2026-04-12T22:00:00+09:00"
+  },
+  "governance": {
+    "data_scope": ["pace.plan.request", "inference.pace_plan.generate"],
+    "privacy_level": "pseudonymous",
+    "approval_gate": "G1",
+    "appeal_control": "meiwaku_feedback"
+  }
+}

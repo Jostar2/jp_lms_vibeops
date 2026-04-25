@@ -1,0 +1,17 @@
+{
+  "result_id": "result_s11_draft_effect_001",
+  "measurement_id": "measure_s11_draft_effect_001",
+  "scenario_id": "S11",
+  "observed": {
+    "checkpoint_correct_rate_delta": 0.07
+  },
+  "uncertainty": {
+    "summary": "초안 효과는 단일 강의 자료 기준의 초기 신호입니다.",
+    "interval": {
+      "checkpoint_correct_rate_delta": [0.02, 0.12]
+    }
+  },
+  "limitation_note": "Teaching Profile 초안 품질과 강의 맥락의 영향을 분리하려면 추가 반복 측정이 필요합니다.",
+  "publish_status": "publishable",
+  "impact_decision": "retain"
+}

@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jp-lms-vibeops"
+version = "0.1.0"
+description = "JP LMS VibeOps control-plane foundation for AI learning operations."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "Proprietary" }
+authors = [{ name = "JP LMS VibeOps" }]
+dependencies = []
+
+[project.scripts]
+jp-lms-vibeops = "jp_lms_vibeops.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

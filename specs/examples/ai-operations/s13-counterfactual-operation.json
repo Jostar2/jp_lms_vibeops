@@ -1,0 +1,36 @@
+{
+  "operation_id": "op_s13_counterfactual_001",
+  "scenario_id": "S13",
+  "current_state": "awaiting_approval",
+  "event_ids": [
+    "evt_s13_policy_candidates_001",
+    "evt_s13_fairness_review_001"
+  ],
+  "xai_card_ids": [
+    "xai_s13_counterfactual_001"
+  ],
+  "approval_ids": [
+    "approval_s13_support_policy_001"
+  ],
+  "measurement_plan_id": "measure_s13_policy_uplift_001",
+  "transitions": [
+    {
+      "from": "drafted",
+      "to": "evidence_attached",
+      "at": "2026-04-13T14:05:00+09:00",
+      "evidence": ["evt_s13_policy_candidates_001", "evt_s13_fairness_review_001"]
+    },
+    {
+      "from": "evidence_attached",
+      "to": "policy_checked",
+      "at": "2026-04-13T14:06:00+09:00",
+      "policy_gate_result": "G4_requires_academic_admin_and_legal_review"
+    },
+    {
+      "from": "policy_checked",
+      "to": "awaiting_approval",
+      "at": "2026-04-13T14:08:00+09:00",
+      "approval_required": "G4"
+    }
+  ]
+}

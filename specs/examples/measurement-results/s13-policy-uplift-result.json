@@ -1,0 +1,18 @@
+{
+  "result_id": "result_s13_policy_uplift_001",
+  "measurement_id": "measure_s13_policy_uplift_001",
+  "scenario_id": "S13",
+  "observed": {
+    "expected_uplift": 0.07,
+    "calibration_error": 0.09
+  },
+  "uncertainty": {
+    "summary": "정책 적용 전 후보 비교 결과이며, 승인 전에는 실행 결과로 공개하지 않습니다.",
+    "interval": {
+      "expected_uplift": [0.04, 0.11]
+    }
+  },
+  "limitation_note": "G4 정책 승인과 파일럿 측정 프로토콜 확정 전까지 외부 효과 주장으로 사용할 수 없습니다.",
+  "publish_status": "withheld",
+  "impact_decision": "insufficient_evidence"
+}

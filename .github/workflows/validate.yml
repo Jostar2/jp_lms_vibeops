@@ -1,0 +1,57 @@
+name: validate
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Contract validation
+        run: python scripts\validate_contracts.py
+
+      - name: Control plane run
+        run: python scripts\run_control_plane.py --json
+
+      - name: Adapter sample
+        run: python scripts\run_adapter_sample.py
+
+      - name: Governance validation
+        run: python scripts\validate_governance.py
+
+      - name: Evidence UX validation
+        run: python scripts\validate_evidence_ux.py
+
+      - name: Export Evidence UX data
+        run: python scripts\export_evidence_ux_data.py
+
+      - name: Static UI validation
+        run: python scripts\validate_static_ui.py
+
+      - name: Browser smoke
+        run: python scripts\validate_browser_smoke.py
+
+      - name: Packaging validation
+        run: python scripts\validate_packaging.py
+
+      - name: Formal schema validation
+        run: python scripts\validate_formal_schemas.py
+
+      - name: Unit tests
+        run: python -m unittest discover -s tests
+
+      - name: Project validation
+        run: python scripts\validate_project.py

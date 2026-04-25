@@ -158,3 +158,64 @@ backlog:
       - "python scripts\\export_evidence_ux_data.py"
       - "python scripts\\validate_static_ui.py"
       - "python scripts\\validate_browser_smoke.py"
+
+  - id: "JLV-0013"
+    title: "Package Python runtime"
+    milestone: "M6"
+    status: "completed"
+    type: "packaging"
+    acceptance:
+      - "pyproject.toml exists."
+      - "Module CLI runs the S01 control-plane loop."
+      - "Packaging validation is part of project validation."
+    validation:
+      - "python scripts\\validate_packaging.py"
+
+  - id: "JLV-0014"
+    title: "Add formal JSON Schema validation"
+    milestone: "M6"
+    status: "completed"
+    type: "schema"
+    acceptance:
+      - "Formal JSON Schema files exist for core runtime objects."
+      - "Schema validation checks current fixtures."
+      - "Project validation runs formal schema validation."
+    validation:
+      - "python scripts\\validate_formal_schemas.py"
+
+  - id: "JLV-0015"
+    title: "Add GitHub Actions validation workflow"
+    milestone: "M6"
+    status: "completed"
+    type: "ci"
+    acceptance:
+      - "CI runs on push and pull request."
+      - "CI executes contract, runtime, governance, Evidence UX, browser smoke, schema, packaging, unit, and project validation."
+    validation:
+      - "python scripts\\validate_project.py"
+
+  - id: "JLV-0016"
+    title: "Add Evidence UX screenshot snapshot"
+    milestone: "M6"
+    status: "completed"
+    type: "browser_qa"
+    acceptance:
+      - "Evidence UX operations-home screenshot exists."
+      - "Snapshot validation checks PNG signature and size."
+      - "Snapshot capture script exists but does not run automatically in project validation."
+    validation:
+      - "python scripts\\validate_screenshots.py"
+
+  - id: "JLV-0017"
+    title: "Expand fixtures and runtime coverage to S11/S12/S13"
+    milestone: "M6"
+    status: "completed"
+    type: "scenario_expansion"
+    acceptance:
+      - "S11, S12, and S13 event fixtures exist."
+      - "S11, S12, and S13 xAI cards, approvals, measurements, results, ledgers, and operations validate."
+      - "Scenario matrix reports S13 as blocked while awaiting G4 approval."
+      - "Evidence UX data export includes scenario matrix."
+    validation:
+      - "python scripts\\validate_contracts.py"
+      - "python scripts\\run_scenario_matrix.py"

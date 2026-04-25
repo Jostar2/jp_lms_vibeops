@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jp-lms-vibeops.local/schemas/approval.schema.json",
+  "title": "JP LMS VibeOps Approval",
+  "type": "object",
+  "required": ["approval_id", "scenario_id", "gate", "state", "requested_action", "source_card_id", "approver_role", "requested_at"],
+  "properties": {
+    "approval_id": { "type": "string" },
+    "scenario_id": { "type": "string" },
+    "gate": { "type": "string", "enum": ["G0", "G1", "G2", "G3", "G4"] },
+    "state": { "type": "string", "enum": ["requested", "approved", "rejected", "expired", "revoked"] },
+    "requested_action": {
+      "type": "object",
+      "required": ["action_id", "label"],
+      "properties": {
+        "action_id": { "type": "string" },
+        "label": { "type": "string" }
+      }
+    },
+    "source_card_id": { "type": "string" },
+    "approver_role": { "type": "string" },
+    "requested_at": { "type": "string" },
+    "approved_at": { "type": "string" },
+    "rollback_note": { "type": "string" }
+  }
+}

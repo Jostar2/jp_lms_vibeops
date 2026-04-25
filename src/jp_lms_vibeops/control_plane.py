@@ -4,7 +4,7 @@ from .approval import ApprovalRouter
 from .event_ledger import EventLedger
 from .fixtures import FixtureStore, load_fixture_store
 from .measurement import ImpactLedgerBuilder, MeasurementPlanner
-from .models import ControlPlaneRun
+from .models import ControlPlaneRun, OperationSummary
 from .policy import PolicyGate
 from .state_machine import OperationStateMachine
 
@@ -60,3 +60,60 @@ class ControlPlane:
             execution_allowed=execution.allowed,
             execution_reason=execution.reason,
         )
+
+    def summarize_operations(self) -> list[OperationSummary]:
+        summaries: list[OperationSummary] = []
+        for operation_id in sorted(self.fixtures.operations):
+            operation = self.fixtures.operations[operation_id]
+            state_errors = self.state_machine.validate(operation)
+            if state_errors:
+                summaries.append(
+                    OperationSummary(
+                        operation_id=operation_id,
+                        scenario_id=operation.get("scenario_id", "unknown"),
+                        state=operation.get("current_state", "unknown"),
+                        action_id="unknown",
+                        approval_state="invalid",
+                        executable=False,
+                        reason="; ".join(state_errors),
+                    )
+                )
+                continue
+
+            cards = [self.fixtures.cards[card_id] for card_id in operation["xai_card_ids"]]
+            card = self._primary_action_card(cards)
+            gate = self.policy_gate.check_card(card)
+            action_id = card["recommended_action"]["action_id"]
+            approval = self.approval_router.approval_for_action(action_id, self.fixtures.approvals)
+            approval_state = approval.get("state") if approval else "missing"
+
+            if not gate.allowed:
+                executable = False
+                reason = gate.reason
+            elif operation["current_state"] == "awaiting_approval":
+                executable = False
+                reason = f"awaiting approval: {approval_state}"
+            else:
+                execution = self.approval_router.require_approved_action(action_id, self.fixtures.approvals)
+                executable = execution.allowed
+                reason = execution.reason
+
+            summaries.append(
+                OperationSummary(
+                    operation_id=operation_id,
+                    scenario_id=operation["scenario_id"],
+                    state=operation["current_state"],
+                    action_id=action_id,
+                    approval_state=approval_state,
+                    executable=executable,
+                    reason=reason,
+                )
+            )
+        return summaries
+
+    def _primary_action_card(self, cards: list[dict[str, object]]) -> dict[str, object]:
+        for card in cards:
+            action_id = card.get("recommended_action", {}).get("action_id")  # type: ignore[union-attr]
+            if action_id and self.approval_router.approval_for_action(str(action_id), self.fixtures.approvals):
+                return card
+        return cards[0]

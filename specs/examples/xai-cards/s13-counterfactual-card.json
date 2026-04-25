@@ -1,0 +1,49 @@
+{
+  "card_id": "xai_s13_counterfactual_001",
+  "scenario_id": "S13",
+  "audience": "academic_admin",
+  "judgment": {
+    "summary": "이번 주에는 전체 공지보다 특정 개념 보강 자료 배포가 기대 효과와 공정성 검토 측면에서 더 안정적입니다.",
+    "decision_type": "prioritize",
+    "confidence": 0.74
+  },
+  "evidence": [
+    {
+      "source_event": "evt_s13_policy_candidates_001",
+      "claim": "후보 개입의 기대 효과와 후회 비용을 비교했습니다.",
+      "weight": 0.52
+    },
+    {
+      "source_event": "evt_s13_fairness_review_001",
+      "claim": "집계 기준 공정성 검토 준비가 완료되었습니다.",
+      "weight": 0.48
+    }
+  ],
+  "model": {
+    "name": "counterfactual_intervention_policy",
+    "version": "0.1.0",
+    "run_id": "run_s13_counterfactual_001"
+  },
+  "uncertainty": {
+    "summary": "정책 후보 비교는 파일럿 전 검토 단계이며, 실제 적용 전 대학 정책 승인과 측정 계획이 필요합니다.",
+    "interval_or_reason": "uplift_delta_estimate=0.04-0.11"
+  },
+  "recommended_action": {
+    "action_id": "act_s13_select_support_policy",
+    "label": "개념 보강 자료 배포 정책을 파일럿 후보로 선택합니다.",
+    "owner": "academic_admin",
+    "requires_approval": true
+  },
+  "measurement_plan": {
+    "measurement_id": "measure_s13_policy_uplift_001",
+    "metric": "uplift_ppv_calibration_perceived_surveillance",
+    "method": "calibration_review",
+    "reevaluate_at": "2026-05-01T14:00:00+09:00"
+  },
+  "governance": {
+    "data_scope": ["intervention.candidates.rank", "fairness.review.prepare"],
+    "privacy_level": "aggregate",
+    "approval_gate": "G4",
+    "appeal_control": "policy_review_board"
+  }
+}

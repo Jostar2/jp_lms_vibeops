@@ -11,7 +11,7 @@ JP LMS VibeOps is now a repo-managed product foundation with:
 - pilot governance packet
 - LMS adapter boundary
 - Evidence UX static surface
-- project, contract, governance, UI, browser smoke, and runtime tests
+- project, contract, governance, UI, browser smoke, runtime tests, and GitHub Actions CI
 
 ## Completed Milestones
 
@@ -23,18 +23,23 @@ JP LMS VibeOps is now a repo-managed product foundation with:
 | M3 Pilot Governance Packet | complete |
 | M4 Integration Boundary | complete |
 | M5 Evidence UX | complete |
+| M6 Runtime Packaging And CI Hardening | complete |
 
 ## Validation Commands
 
 ```powershell
 python scripts\validate_contracts.py
 python scripts\run_control_plane.py --json
+python scripts\run_scenario_matrix.py
 python scripts\run_adapter_sample.py
 python scripts\validate_governance.py
 python scripts\validate_evidence_ux.py
 python scripts\export_evidence_ux_data.py
 python scripts\validate_static_ui.py
 python scripts\validate_browser_smoke.py
+python scripts\validate_screenshots.py
+python scripts\validate_packaging.py
+python scripts\validate_formal_schemas.py
 python -m unittest discover -s tests
 python scripts\validate_project.py
 ```
@@ -66,8 +71,7 @@ Those remain explicit gates.
 
 The next work should focus on:
 
-1. packaging the Python runtime as an installable module
-2. replacing YAML-like schema seeds with formal JSON Schema or Pydantic models
-3. adding CI on GitHub Actions
-4. adding snapshot screenshots for Evidence UX
-5. expanding from S01 to S11/S12/S13 after S01 remains green
+1. S15 Teaching Profile fixture and runtime coverage
+2. release artifact workflow and PR template
+3. stricter schema enforcement through full JSON Schema or Pydantic
+4. Evidence UX packaging decision

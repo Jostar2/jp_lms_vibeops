@@ -1,0 +1,17 @@
+{
+  "measurement_id": "measure_s12_plan_completion_001",
+  "scenario_id": "S12",
+  "linked_action_id": "act_s12_accept_pace_plan",
+  "metric": "plan_completion_and_perceived_support",
+  "method": "qualitative_survey",
+  "baseline": {
+    "previous_plan_completion": 0.54
+  },
+  "target": {
+    "plan_completion_delta": 0.08,
+    "perceived_support_score": 3.8
+  },
+  "reevaluate_at": "2026-04-12T22:00:00+09:00",
+  "owner": "student",
+  "publish_rule": "Keep student-level result private; aggregate only for pilot review."
+}

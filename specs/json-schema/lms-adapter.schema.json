@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jp-lms-vibeops.local/schemas/lms-adapter.schema.json",
+  "title": "JP LMS VibeOps LMS Adapter",
+  "type": "object",
+  "required": ["adapter_id", "source_system", "mode", "supported_event_types", "field_map", "privacy_default", "failure_mode"],
+  "properties": {
+    "adapter_id": { "type": "string" },
+    "source_system": { "type": "string" },
+    "mode": { "type": "string", "enum": ["csv_fallback", "lti_launch", "oneroster_sync", "api_connector"] },
+    "supported_event_types": { "type": "array", "items": { "type": "string" } },
+    "field_map": { "type": "object" },
+    "privacy_default": { "type": "string", "enum": ["aggregate", "pseudonymous", "identified_sensitive"] },
+    "failure_mode": { "type": "string" }
+  }
+}
