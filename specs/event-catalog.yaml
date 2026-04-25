@@ -1,0 +1,85 @@
+catalog:
+  id: "jp-lms-vibeops.event-catalog.v0"
+  version: "0.1.0"
+  status: "draft"
+
+event_families:
+  learning_activity:
+    examples:
+      - "video.segment.pause"
+      - "video.segment.rewatch"
+      - "checkpoint.answer.submit"
+      - "resource.open"
+    default_privacy: "pseudonymous"
+    retention_default: "pilot_duration_plus_90_days"
+  assessment:
+    examples:
+      - "assignment.submit"
+      - "rubric.score.apply"
+      - "grading.uncertainty.raise"
+      - "student.appeal.submit"
+    default_privacy: "identified_sensitive"
+    retention_default: "institution_policy"
+  instructor_action:
+    examples:
+      - "content.draft.generate"
+      - "content.publish.approve"
+      - "intervention.message.approve"
+      - "rubric.recalibrate.approve"
+    default_privacy: "identified_sensitive"
+    retention_default: "audit_5_years"
+  consent_privacy:
+    examples:
+      - "consent.grant"
+      - "consent.revoke"
+      - "data.export.request"
+      - "data.delete.request"
+      - "sensitive_view.open"
+    default_privacy: "identified_sensitive"
+    retention_default: "audit_5_years"
+  ai_inference:
+    examples:
+      - "inference.struggle.detect"
+      - "inference.uplift.estimate"
+      - "inference.content_draft.generate"
+      - "inference.policy.measure"
+    default_privacy: "pseudonymous"
+    retention_default: "pilot_duration_plus_1_year"
+  approval:
+    examples:
+      - "approval.requested"
+      - "approval.granted"
+      - "approval.rejected"
+      - "approval.expired"
+    default_privacy: "identified_sensitive"
+    retention_default: "audit_5_years"
+  measurement:
+    examples:
+      - "measurement.plan.register"
+      - "measurement.window.close"
+      - "measurement.result.publish"
+      - "measurement.claim.withdraw"
+    default_privacy: "aggregate"
+    retention_default: "pilot_duration_plus_1_year"
+
+minimum_event_fields:
+  - event_id
+  - tenant_id
+  - actor_role
+  - occurred_at
+  - event_type
+  - purpose
+  - privacy_level
+  - source_system
+  - payload_ref
+  - retention_policy
+
+privacy_levels:
+  - aggregate
+  - pseudonymous
+  - identified_sensitive
+
+open_questions:
+  - "Exact NetLearning/manaba source event availability."
+  - "Institution-specific retention policy."
+  - "Whether xAPI profile is used in pilot or mapped later."

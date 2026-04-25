@@ -1,0 +1,88 @@
+scenario_set:
+  id: "jp-lms-vibeops.scenarios.v0"
+  version: "0.1.0"
+  status: "draft"
+
+scenarios:
+  - id: "S01"
+    name: "Closed Loop Struggle Intervention"
+    priority: "P0"
+    thesis: "Detect a lecture struggle segment, route it to instructor-approved content improvement, and measure the effect after two weeks."
+    primary_personas: ["student", "instructor", "academic_admin"]
+    required_ai_outputs:
+      - "student hint xAI card"
+      - "instructor intervention card"
+      - "impact ledger measurement card"
+    approval_required:
+      - "instructor content approval"
+    measurement:
+      metric: "segment rewatch reduction and checkpoint improvement"
+      method: "cluster or switchback comparison where feasible"
+    demo: "Demo A"
+
+  - id: "S11"
+    name: "Course Co-Creation Studio"
+    priority: "P0"
+    thesis: "Use observed learning friction to draft safer course material variants under instructor teaching preferences."
+    primary_personas: ["instructor"]
+    required_ai_outputs:
+      - "content draft card"
+      - "governance gate card"
+      - "effect measurement plan"
+    approval_required:
+      - "instructor publish approval"
+    measurement:
+      metric: "post-release checkpoint delta"
+      method: "two-week post intervention review"
+    demo: "Demo A"
+
+  - id: "S12"
+    name: "Learning Companion Pace Agent"
+    priority: "P1"
+    thesis: "Help students plan learning workload without exposing stigmatizing risk labels."
+    primary_personas: ["student"]
+    required_ai_outputs:
+      - "pace plan card"
+      - "support explanation card"
+    approval_required:
+      - "student opt-in for personal planning data"
+    measurement:
+      metric: "plan completion and perceived support"
+      method: "usage plus survey"
+    demo: "Demo B"
+
+  - id: "S13"
+    name: "Counterfactual Intervention Simulator"
+    priority: "P1"
+    thesis: "Prioritize interventions by expected uplift, uncertainty, fairness, and regret."
+    primary_personas: ["instructor", "academic_admin"]
+    required_ai_outputs:
+      - "uplift comparison card"
+      - "fairness audit card"
+    approval_required:
+      - "academic support policy approval"
+    measurement:
+      metric: "uplift, PPV, calibration, perceived surveillance"
+      method: "pre-registered pilot analysis"
+    demo: "Demo C"
+
+  - id: "S15"
+    name: "Instructor AI Teaching Profile"
+    priority: "P1"
+    thesis: "Let instructors define teaching style constraints that govern AI drafts and feedback."
+    primary_personas: ["instructor"]
+    required_ai_outputs:
+      - "teaching profile card"
+      - "draft compliance card"
+    approval_required:
+      - "instructor profile confirmation"
+    measurement:
+      metric: "profile adherence and student mastery delta"
+      method: "LLM rubric audit plus outcome review"
+    demo: "Demo B"
+
+deferred:
+  - id: "AMBIENT_AI_EARPIECE"
+    reason: "hardware, privacy, and live-demo risk"
+  - id: "FULL_AUTONOMOUS_CONTENT_PUBLISHING"
+    reason: "requires stronger approval, rollback, and legal review"

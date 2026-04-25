@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+.venv/
+__pycache__/
+
+# Local environment
+.env
+.env.local
+
+# Generated artifacts
+generated/
+dist/
+coverage/
+review/visual_checks/
+
+# Large source artifacts kept out of the design repo by default
+*.pptx
+*.docx
+*.xlsx
+*.mp4
+*.mov
+
+# OS/editor junk
+Thumbs.db
+desktop.ini
+.DS_Store

@@ -1,0 +1,90 @@
+schema:
+  id: "jp-lms-vibeops.xai-card.v0"
+  version: "0.1.0"
+  status: "draft"
+
+required_fields:
+  - card_id
+  - scenario_id
+  - audience
+  - judgment
+  - evidence
+  - model
+  - uncertainty
+  - recommended_action
+  - measurement_plan
+  - governance
+
+audiences:
+  - student
+  - instructor
+  - academic_admin
+  - legal_it
+  - platform_operator
+
+fields:
+  card_id:
+    type: "string"
+    description: "Stable card identifier."
+  scenario_id:
+    type: "string"
+    description: "Scenario that produced this card."
+  audience:
+    type: "enum"
+    values: ["student", "instructor", "academic_admin", "legal_it", "platform_operator"]
+  judgment:
+    type: "object"
+    required: ["summary", "decision_type", "confidence"]
+    properties:
+      summary: "Human-readable AI judgment."
+      decision_type: "detect | prioritize | recommend | draft | verify | measure"
+      confidence: "0.0 to 1.0, not a substitute for uncertainty."
+  evidence:
+    type: "array"
+    item_required: ["source_event", "claim", "weight"]
+    properties:
+      source_event: "Event id or aggregate evidence reference."
+      claim: "What this evidence supports."
+      weight: "Relative evidence weight."
+  model:
+    type: "object"
+    required: ["name", "version", "run_id"]
+    properties:
+      name: "Model or policy name."
+      version: "Model or prompt/policy version."
+      run_id: "AI operation run id."
+  uncertainty:
+    type: "object"
+    required: ["summary", "interval_or_reason"]
+    properties:
+      summary: "Plain-language uncertainty."
+      interval_or_reason: "Confidence interval, calibration note, or reason for withholding."
+  recommended_action:
+    type: "object"
+    required: ["label", "owner", "requires_approval"]
+    properties:
+      label: "Action text."
+      owner: "Role responsible for execution."
+      requires_approval: "Boolean."
+      blocked_if: "Policy blockers."
+  measurement_plan:
+    type: "object"
+    required: ["metric", "method", "reevaluate_at"]
+    properties:
+      metric: "Outcome metric."
+      method: "RCT, switchback, pre/post, qualitative survey, or audit review."
+      reevaluate_at: "Date or duration."
+  governance:
+    type: "object"
+    required: ["data_scope", "privacy_level", "appeal_control"]
+    properties:
+      data_scope: "Fields or event families used."
+      privacy_level: "aggregate | pseudonymous | identified_sensitive"
+      approval_gate: "Gate id when required."
+      appeal_control: "Meiwaku/dispute/override mechanism."
+
+publish_rules:
+  - "Student-facing cards must avoid stigmatizing risk language."
+  - "Action cards require measurement_plan."
+  - "identified_sensitive privacy_level requires explicit access purpose and audit event."
+  - "Cards without model.version remain draft-only."

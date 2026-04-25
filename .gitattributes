@@ -1,0 +1,12 @@
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.pptx binary
+*.docx binary
+*.xlsx binary
+*.mp4 binary
+*.mov binary
