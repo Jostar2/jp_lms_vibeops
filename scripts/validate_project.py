@@ -50,6 +50,7 @@ REQUIRED_FILES = [
     "specs/examples/negative/operation-executes-without-approval.json",
     "scripts/validate_contracts.py",
     "scripts/validate_governance.py",
+    "scripts/validate_evidence_ux.py",
     "scripts/run_control_plane.py",
     "scripts/run_adapter_sample.py",
     "src/jp_lms_vibeops/__init__.py",
@@ -75,6 +76,9 @@ REQUIRED_FILES = [
     "specs/lms-adapter.schema.yaml",
     "specs/examples/adapters/netlearning-csv-s01-map.json",
     "fixtures/adapters/s01_lms_activity.csv",
+    "docs/evidence-ux/readiness-review.md",
+    "docs/evidence-ux/information-architecture.md",
+    "specs/evidence-ux/routes.yaml",
 ]
 
 LINK_RE = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
@@ -151,6 +155,7 @@ def run_runtime_checks() -> None:
         [sys.executable, "scripts/run_control_plane.py", "--json"],
         [sys.executable, "scripts/run_adapter_sample.py"],
         [sys.executable, "scripts/validate_governance.py"],
+        [sys.executable, "scripts/validate_evidence_ux.py"],
         [sys.executable, "-m", "unittest", "discover", "-s", "tests"],
     ]
     for command in commands:

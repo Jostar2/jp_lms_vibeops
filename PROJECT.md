@@ -19,6 +19,8 @@ There is no external GitHub Project or Jira board connected yet. Project state i
 | LMS adapter sample | [scripts/run_adapter_sample.py](scripts/run_adapter_sample.py) |
 | Pilot governance packet | [docs/pilot/](docs/pilot/) |
 | Pilot gate spec | [specs/governance/pilot-gates.yaml](specs/governance/pilot-gates.yaml) |
+| Evidence UX readiness | [docs/evidence-ux/](docs/evidence-ux/) |
+| Evidence UX route spec | [specs/evidence-ux/routes.yaml](specs/evidence-ux/routes.yaml) |
 
 ## Git Status
 

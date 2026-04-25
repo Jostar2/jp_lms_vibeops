@@ -59,7 +59,9 @@ UI work is downstream of these contracts.
 
 `M4 Integration Boundary` is complete.
 
-Next milestone: `M5 Evidence UX readiness review`.
+`M5 Evidence UX` is in progress.
+
+Evidence UX readiness review is complete. Next step: implement the first Evidence UX surface from runtime/exported data.
 
 Completed in this pass:
 
@@ -89,12 +91,14 @@ Completed in this pass:
 - LMS adapter schema seed.
 - NetLearning CSV fallback adapter example.
 - CSV fixture to internal event conversion.
+- Evidence UX readiness review.
+- Evidence UX route spec.
 
 ## Immediate Next Step
 
-Before UI rebuild, run an Evidence UX readiness review:
+Implement the first Evidence UX surface:
 
-- confirm control plane objects are enough for UI surfaces
-- identify missing adapter contracts
-- define Evidence UX information architecture from runtime state
-- only then choose the frontend implementation path
+- export runtime data for the UI
+- build Operations Home, S01 Closed Loop, Evidence Detail, Integration Readiness
+- keep APPI/IRB and native copy review visible as pending gates
+- validate static assets and links

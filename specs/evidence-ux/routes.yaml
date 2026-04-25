@@ -1,0 +1,58 @@
+routes:
+  - id: "operations_home"
+    path: "/"
+    title: "Operations Home"
+    source_objects:
+      - "ai_operation"
+      - "approval"
+      - "measurement_plan"
+      - "pilot_gates"
+    required_panels:
+      - "current_operation"
+      - "gate_status"
+      - "next_action"
+      - "pilot_blockers"
+
+  - id: "s01_closed_loop"
+    path: "/s01"
+    title: "S01 Closed Loop"
+    source_objects:
+      - "event_ledger"
+      - "xai_cards"
+      - "approval"
+      - "measurement_result"
+      - "impact_ledger"
+    required_panels:
+      - "event_timeline"
+      - "student_card"
+      - "instructor_card"
+      - "approval_record"
+      - "measurement_result"
+      - "impact_ledger"
+
+  - id: "evidence_detail"
+    path: "/evidence"
+    title: "Evidence Detail"
+    source_objects:
+      - "xai_card"
+      - "event_ledger"
+    required_panels:
+      - "judgment"
+      - "evidence"
+      - "model"
+      - "uncertainty"
+      - "recommended_action"
+      - "measurement_plan"
+
+  - id: "integration_readiness"
+    path: "/integration"
+    title: "Integration Readiness"
+    source_objects:
+      - "lms_adapter"
+      - "adapter_sample_events"
+      - "pilot_gates"
+    required_panels:
+      - "adapter_path"
+      - "event_mapping"
+      - "data_boundary"
+      - "pilot_gate_status"

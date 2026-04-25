@@ -53,9 +53,11 @@ milestones:
 
   - id: "M5"
     name: "Evidence UX"
-    status: "planned"
+    status: "in_progress"
     purpose: "Build UI only after contracts, approval flows, and adapter boundary are stable."
     exit_criteria:
+      - "Evidence UX readiness review passes."
+      - "route spec maps source objects to panels."
       - "xAI card renderer uses contract fixtures."
       - "instructor decision queue uses approval state."
       - "impact ledger uses measurement records."
