@@ -17,10 +17,12 @@ REQUIRED_FILES = [
 ]
 
 REQUIRED_ROUTES = [
-    "학습자 홈",
-    "교수자 스튜디오",
+    "대시보드",
+    "오늘의 학습",
+    "강의",
     "AI 근거",
     "수업 설정",
+    "Co-Creation",
 ]
 
 
@@ -49,8 +51,11 @@ def main() -> None:
         if route not in html + js:
             fail(f"Evidence UX missing route label: {route}")
     required_concepts = [
+        "Claritas",
         "AI 코치",
-        "오늘의 학습 플랜",
+        "오늘의 학습 경로",
+        "근거 패널",
+        "학습 동반자",
         "교수자",
         "xAI",
         "Meiwaku",
@@ -59,7 +64,9 @@ def main() -> None:
         "impact",
         "pilot",
         "set-minutes",
+        "toggle-focus",
         "toggle-task",
+        "nav-collapsed",
         "approve-draft",
         "set-variant",
         "challenge",

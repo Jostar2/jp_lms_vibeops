@@ -3,80 +3,47 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>JP LMS VibeOps Course Room</title>
+    <title>Claritas · JP LMS VibeOps</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-jp.css" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
-  <body>
-    <div class="product-shell">
-      <header class="app-bar">
-        <div class="brand-lockup">
-          <div class="brand-mark">JP</div>
+  <body class="s-mode">
+    <div class="app" id="app">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark">C</div>
           <div>
-            <h1>JP LMS VibeOps</h1>
-            <p>AI course room for university learning</p>
+            <div class="brand-name">Claritas</div>
+            <div class="brand-tag">Explainable University AI</div>
           </div>
         </div>
 
-        <div class="course-switcher" aria-label="Current course">
-          <span>Data Mining</span>
-          <strong>W7 · Decision Trees</strong>
+        <div class="search-bar" role="search">
+          <span aria-hidden="true">⌕</span>
+          <span>강의·주제·학생·과제를 물어보세요 — “왜 Gini/Entropy 구간에서 멈췄지?”</span>
+          <span class="kbd"><span>⌘</span><span>K</span></span>
         </div>
 
-        <div class="persona-switch" aria-label="Workspace routes">
-          <button class="route-pill active" data-route="student">학습</button>
-          <button class="route-pill" data-route="instructor">교수</button>
-          <button class="route-pill" data-route="evidence">근거</button>
-          <button class="route-pill" data-route="course">설정</button>
+        <div class="view-switch" role="tablist" aria-label="Persona switch">
+          <button class="active" data-action="set-persona" data-persona="student">
+            <span class="dot s"></span> 학습자
+          </button>
+          <button data-action="set-persona" data-persona="instructor">
+            <span class="dot i"></span> 교수자
+          </button>
         </div>
+
+        <div class="avatar" id="avatarInitial">S</div>
       </header>
 
-      <div class="workspace-grid">
-        <aside class="course-nav">
-          <div class="week-card">
-            <span>이번 주</span>
-            <strong>Gini와 Entropy</strong>
-            <p>AI가 강의, 체크포인트, 과제를 같은 흐름으로 묶습니다.</p>
-          </div>
+      <nav class="nav" id="leftNav" aria-label="Claritas navigation"></nav>
 
-          <nav class="nav-list" aria-label="Course navigation">
-            <button class="nav-item active" data-route="student">
-              <span>01</span>
-              <b>학습자 홈</b>
-            </button>
-            <button class="nav-item" data-route="instructor">
-              <span>02</span>
-              <b>교수자 스튜디오</b>
-            </button>
-            <button class="nav-item" data-route="evidence">
-              <span>03</span>
-              <b>AI 근거</b>
-            </button>
-            <button class="nav-item" data-route="course">
-              <span>04</span>
-              <b>수업 설정</b>
-            </button>
-          </nav>
+      <main class="main">
+        <div class="main-inner" id="mainContent" aria-live="polite"></div>
+      </main>
 
-          <div class="privacy-note">
-            <strong>학생 통제</strong>
-            <span>추천 수락, 숨김, 이의제기 가능</span>
-            <span>교수자는 집계 신호만 확인</span>
-          </div>
-        </aside>
-
-        <main class="stage">
-          <div class="stage-header">
-            <div>
-              <p id="routeContext">Learner workspace · AI assisted study</p>
-              <h2 id="routeTitle">학습자 홈</h2>
-            </div>
-            <div class="status-strip" id="statusStrip"></div>
-          </div>
-          <section id="view" class="stage-view" aria-live="polite"></section>
-        </main>
-
-        <aside class="ai-dock" id="aiDock" aria-live="polite"></aside>
-      </div>
+      <aside class="aside" id="rightAside" aria-live="polite"></aside>
     </div>
 
     <script src="./data/runtime.js"></script>
