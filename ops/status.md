@@ -55,7 +55,9 @@ UI work is downstream of these contracts.
 
 `M2 Control Plane Skeleton` is complete.
 
-Next milestone: `M3 Pilot Governance Packet`.
+`M3 Pilot Governance Packet` is complete.
+
+Next milestone: `M4 Evidence UX readiness review`.
 
 Completed in this pass:
 
@@ -74,13 +76,20 @@ Completed in this pass:
 - Measurement planner.
 - ControlPlane S01 closed-loop runtime.
 - Runtime unit tests.
+- Decision Brief.
+- APPI readiness checklist.
+- IRB/pre-registration draft.
+- NetLearning integration fit brief.
+- 90-day measurement protocol.
+- Pilot risk register.
+- Term sheet outline.
+- Machine-checkable pilot gates.
 
 ## Immediate Next Step
 
-Start the pilot governance slice with:
+Before UI rebuild, run an Evidence UX readiness review:
 
-- APPI readiness checklist
-- IRB/pre-registration draft
-- NetLearning integration fit brief
-- 90-day measurement protocol
-- pilot blocker validation
+- confirm control plane objects are enough for UI surfaces
+- identify missing adapter contracts
+- define Evidence UX information architecture from runtime state
+- only then choose the frontend implementation path

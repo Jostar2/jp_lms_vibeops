@@ -79,7 +79,7 @@ backlog:
   - id: "JLV-0005"
     title: "Create pilot governance packet skeleton"
     milestone: "M3"
-    status: "planned"
+    status: "completed"
     type: "pilot_ops"
     acceptance:
       - "APPI checklist exists."
@@ -87,7 +87,7 @@ backlog:
       - "NetLearning integration fit brief exists."
       - "Decision Brief ask is explicit."
     validation:
-      - "document review"
+      - "python scripts\\validate_governance.py"
 
   - id: "JLV-0008"
     title: "Implement M2 control plane skeleton"
@@ -103,3 +103,16 @@ backlog:
     validation:
       - "python scripts\\run_control_plane.py --json"
       - "python -m unittest discover -s tests"
+
+  - id: "JLV-0009"
+    title: "Add pilot governance gate validation"
+    milestone: "M3"
+    status: "completed"
+    type: "pilot_ops"
+    acceptance:
+      - "Pilot governance docs have required sections."
+      - "Pilot gates reference concrete evidence docs."
+      - "Blocking pilot gates are machine-checkable."
+      - "Project validation runs governance validation."
+    validation:
+      - "python scripts\\validate_governance.py"

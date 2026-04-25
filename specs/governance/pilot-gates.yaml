@@ -1,0 +1,40 @@
+pilot_gates:
+  id: "jp-lms-vibeops.pilot-gates.v0"
+  version: "0.1.0"
+  status: "draft"
+
+  gates:
+    - id: "PILOT_DATA_PURPOSE"
+      required: true
+      evidence_doc: "docs/pilot/appi-readiness-checklist.md"
+      blocks_if_missing: true
+
+    - id: "PILOT_RETENTION"
+      required: true
+      evidence_doc: "docs/pilot/appi-readiness-checklist.md"
+      blocks_if_missing: true
+
+    - id: "PILOT_IRB_PREREG"
+      required: true
+      evidence_doc: "docs/pilot/irb-preregistration-draft.md"
+      blocks_if_missing: true
+
+    - id: "PILOT_INTEGRATION_PATH"
+      required: true
+      evidence_doc: "docs/pilot/integration-fit-brief.md"
+      blocks_if_missing: true
+
+    - id: "PILOT_MEASUREMENT_PROTOCOL"
+      required: true
+      evidence_doc: "docs/pilot/ninety-day-measurement-protocol.md"
+      blocks_if_missing: true
+
+    - id: "PILOT_ROLLBACK"
+      required: true
+      evidence_doc: "docs/pilot/pilot-risk-register.md"
+      blocks_if_missing: true
+
+    - id: "PILOT_TERM_SHEET"
+      required: true
+      evidence_doc: "docs/pilot/term-sheet-outline.md"
+      blocks_if_missing: false

@@ -23,6 +23,7 @@ This repository starts from design, not from the legacy prototype implementation
 | Governance and risk | [docs/04-governance-and-risk.md](docs/04-governance-and-risk.md) |
 | Build roadmap | [docs/05-build-roadmap.md](docs/05-build-roadmap.md) |
 | Control-plane-first plan | [docs/06-control-plane-first-implementation.md](docs/06-control-plane-first-implementation.md) |
+| Pilot governance packet | [docs/pilot/](docs/pilot/) |
 | Project reset decision | [docs/decisions/ADR-0001-project-reset.md](docs/decisions/ADR-0001-project-reset.md) |
 | Control-plane-first decision | [docs/decisions/ADR-0002-control-plane-first.md](docs/decisions/ADR-0002-control-plane-first.md) |
 | Project management | [PROJECT.md](PROJECT.md) |
@@ -71,6 +72,7 @@ Run the current control-plane skeleton:
 
 ```powershell
 python scripts\run_control_plane.py --json
+python scripts\validate_governance.py
 python -m unittest discover -s tests
 ```
 

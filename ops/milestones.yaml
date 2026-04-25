@@ -33,13 +33,14 @@ milestones:
 
   - id: "M3"
     name: "Pilot Governance Packet"
-    status: "planned"
+    status: "completed"
     purpose: "Prepare NetLearning and university approval materials."
     exit_criteria:
       - "APPI readiness checklist exists."
       - "IRB/pre-registration draft exists."
       - "integration fit brief exists."
       - "90-day pilot measurement protocol exists."
+      - "pilot gate validation passes."
 
   - id: "M4"
     name: "Evidence UX"

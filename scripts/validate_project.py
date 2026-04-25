@@ -49,6 +49,7 @@ REQUIRED_FILES = [
     "specs/examples/negative/student-card-forbidden-language.json",
     "specs/examples/negative/operation-executes-without-approval.json",
     "scripts/validate_contracts.py",
+    "scripts/validate_governance.py",
     "scripts/run_control_plane.py",
     "src/jp_lms_vibeops/__init__.py",
     "src/jp_lms_vibeops/models.py",
@@ -60,6 +61,14 @@ REQUIRED_FILES = [
     "src/jp_lms_vibeops/measurement.py",
     "src/jp_lms_vibeops/control_plane.py",
     "tests/test_control_plane.py",
+    "docs/pilot/decision-brief.md",
+    "docs/pilot/appi-readiness-checklist.md",
+    "docs/pilot/irb-preregistration-draft.md",
+    "docs/pilot/integration-fit-brief.md",
+    "docs/pilot/ninety-day-measurement-protocol.md",
+    "docs/pilot/pilot-risk-register.md",
+    "docs/pilot/term-sheet-outline.md",
+    "specs/governance/pilot-gates.yaml",
 ]
 
 LINK_RE = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
@@ -134,6 +143,7 @@ def check_no_large_legacy_artifacts() -> None:
 def run_runtime_checks() -> None:
     commands = [
         [sys.executable, "scripts/run_control_plane.py", "--json"],
+        [sys.executable, "scripts/validate_governance.py"],
         [sys.executable, "-m", "unittest", "discover", "-s", "tests"],
     ]
     for command in commands:
